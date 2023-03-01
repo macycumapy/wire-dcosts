@@ -1,0 +1,21 @@
+
+/*Вот тут "разрешают" скрыть логотип, через CSS. https://github.com/pqina/filepond-docs/blob/master/content/patterns/API/filepond-instance.md*/
+.filepond--credits {
+    display: none;
+}
+
+.filepond--root .filepond--panel-root {
+    @apply bg-white border-2 border-gray-200 border-dashed rounded-xl cursor-pointer;
+}
+
+.filepond--root .filepond--drop-label {
+    @apply text-gray-500 text-sm cursor-pointer;
+}
+
+.filepond--root .filepond--drop-label label{
+    @apply cursor-pointer;
+}
+
+.filepond--root .filepond--label-action {
+    @apply text-sky-500 no-underline hover:underline decoration-sky-500;
+}
