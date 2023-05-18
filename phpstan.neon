@@ -1,0 +1,17 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    noUnnecessaryCollectionCall: false
+    paths:
+        - app
+
+    # The level 9 is the highest level
+    level: 2
+
+    ignoreErrors:
+
+    excludePaths:
+        - ./*/*/FileToBeExcluded.php
+
+    checkMissingIterableValueType: false
