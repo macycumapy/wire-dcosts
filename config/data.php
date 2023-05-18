@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     /*
      * The package will use this format when working with dates. If this option
@@ -25,6 +27,7 @@ return [
     'casts' => [
         DateTimeInterface::class => \App\Data\Casts\CarbonCast::class,
         BackedEnum::class => Spatie\LaravelData\Casts\EnumCast::class,
+        'string' => \App\Data\Casts\TrimCast::class,
     ],
 
     /*

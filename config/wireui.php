@@ -78,7 +78,7 @@ return [
             'alias' => 'color-picker',
         ],
         'input' => [
-            'class' => Components\Input::class,
+            'class' => \App\WireUI\Input::class,
             'alias' => 'input',
         ],
         'textarea' => [
@@ -126,7 +126,7 @@ return [
             'alias' => 'badge.circle',
         ],
         'button' => [
-            'class' => Components\Button::class,
+            'class' => \App\WireUI\Button::class,
             'alias' => 'button',
         ],
         'button.circle' => [

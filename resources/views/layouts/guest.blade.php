@@ -5,16 +5,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>
+            @hasSection('page-title')
+                @yield('page-title') -
+            @endif
+            {{ config('app.name', 'Laravel') }}
+        </title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
+        @wireUiScripts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireStyles
+        @livewireScripts
     </head>
-    <body>
+    <body class="bg-[url('/images/intro.jpg')]">
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
