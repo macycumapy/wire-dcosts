@@ -23,6 +23,14 @@
         @livewireScripts
     </head>
     <body class="bg-[url('/images/intro.jpg')]">
+        <div class="fixed flex gap-4 p-6 justify-end w-full">
+            @unless(request()->is('login'))
+                <x-button sm emerald flat href="{{ route('login') }}">Войти</x-button>
+            @endunless
+            @unless(request()->is('register'))
+                <x-button sm emerald flat href="{{ route('register') }}">Зарегистрироваться</x-button>
+            @endunless
+        </div>
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>

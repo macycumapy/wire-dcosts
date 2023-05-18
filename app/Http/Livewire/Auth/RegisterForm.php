@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Auth;
 
+use App\Actions\User\AuthUserAction;
 use App\Actions\User\CreateUserAction;
+use App\Actions\User\Data\AuthUserData;
 use App\Actions\User\Data\CreateUserData;
+use App\Providers\RouteServiceProvider;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -18,9 +21,15 @@ class RegisterForm extends Component
         $this->createUserData = new CreateUserData();
     }
 
-    public function register(CreateUserAction $createUserAction): void
+    public function register(CreateUserAction $createUserAction, AuthUserAction $authUserAction): void
     {
-        $createUserAction->exec(CreateUserData::validateAndCreate($this->createUserData));
+        if ($createUserAction->exec(CreateUserData::validateAndCreate($this->createUserData))) {
+            $authUserAction->exec(AuthUserData::validateAndCreate([
+                'email' => $this->createUserData->email,
+                'password' => $this->createUserData->password,
+            ]));
+            $this->redirect(RouteServiceProvider::HOME);
+        }
     }
 
     public function render(): View

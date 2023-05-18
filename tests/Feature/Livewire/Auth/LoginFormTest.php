@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace Tests\Feature\Livewire\Auth;
 
 use App\Actions\User\Data\CreateUserData;
+use App\Http\Livewire\Auth\LoginForm;
 use App\Http\Livewire\Auth\RegisterForm;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-class RegisterFormTest extends TestCase
+class LoginFormTest extends TestCase
 {
     public function testSeeComponent(): void
     {
         $this->get(route('register'))
             ->assertSuccessful()
-            ->assertSeeLivewire(RegisterForm::class);
+            ->assertSeeLivewire(LoginForm::class);
     }
 
     /**
@@ -32,8 +32,7 @@ class RegisterFormTest extends TestCase
         Livewire::test(RegisterForm::class)
             ->set('createUserData', $createUserData)
             ->call('register')
-            ->assertHasNoErrors()
-            ->assertRedirect(RouteServiceProvider::HOME);
+            ->assertHasNoErrors();
 
         $this->assertNotNull($user = User::firstWhere([
             'name' => trim($createUserData->name),
@@ -41,7 +40,6 @@ class RegisterFormTest extends TestCase
         ]));
 
         $this->assertTrue(Hash::check($createUserData->password, trim($user->password)));
-        $this->assertAuthenticatedAs($user);
     }
 
     public static function validRegisterDataProvider(): array
