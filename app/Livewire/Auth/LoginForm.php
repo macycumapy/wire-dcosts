@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Livewire\Auth;
+namespace App\Livewire\Auth;
 
 use App\Actions\User\AuthUserAction;
 use App\Actions\User\Data\AuthUserData;
@@ -11,7 +11,7 @@ use Livewire\Component;
 
 class LoginForm extends Component
 {
-    public AuthUserData $authUserData;
+    public AuthUserData|array $authUserData;
 
     public function mount(): void
     {
@@ -28,6 +28,6 @@ class LoginForm extends Component
     public function render(): View
     {
         return view('livewire.auth.login-form')
-            ->layout('layouts.guest');
+            ->layout('components.layouts.guest');
     }
 }

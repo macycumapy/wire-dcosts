@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Livewire\Auth;
+namespace App\Livewire\Auth;
 
 use App\Actions\User\AuthUserAction;
 use App\Actions\User\CreateUserAction;
@@ -35,6 +35,6 @@ class RegisterForm extends Component
     public function render(): View
     {
         return view('livewire.auth.register-form')
-            ->layout('layouts.guest');
+            ->layout('components.layouts.guest');
     }
 }

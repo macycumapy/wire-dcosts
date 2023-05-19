@@ -7,7 +7,7 @@
     style="display: none"
     x-cloak>
     <div class="fixed inset-0 bg-secondary-400 bg-opacity-60 transform transition-opacity
-        {{ $dialog }}-backdrop @if ($blur) {{ $blur }} @endif"
+        {{ $dialog }}-backdrop @if ($blur) {{ $blur }} @endif dark:bg-secondary-700 dark:bg-opacity-60"
         x-show="show"
         x-on:click="dismiss"
         x-transition:enter="ease-out duration-300"
@@ -28,12 +28,12 @@
         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         x-on:mouseenter="pauseTimeout"
         x-on:mouseleave="resumeTimeout">
-        <div class="relative shadow-md bg-white rounded-xl space-y-4 p-4"
+        <div class="relative shadow-md bg-white dark:bg-secondary-800 rounded-xl space-y-4 p-4"
             :class="{
                 'sm:p-5 sm:pt-7': style === 'center',
                 'sm:p-0 sm:pt-1': style === 'inline',
             }">
-            <div class="bg-secondary-300 rounded-full transition-all duration-150 ease-linear absolute top-0 left-0"
+            <div class="bg-secondary-300 dark:bg-secondary-600 rounded-full transition-all duration-150 ease-linear absolute top-0 left-0"
                 style="height: 2px; width: 100%;"
                 x-ref="progressbar"
                 x-show="dialog && dialog.progressbar && dialog.timeout">
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="mt-4 w-full" :class="{ 'sm:mt-5': style === 'center' }">
-                    <h3 class="text-lg leading-6 font-medium text-secondary-900 text-center"
+                    <h3 class="text-lg leading-6 font-medium text-secondary-900 dark:text-secondary-400 text-center"
                         :class="{ 'sm:text-left': style === 'inline' }"
                         @unless($title) x-ref="title" @endunless>
                         {{ $title }}

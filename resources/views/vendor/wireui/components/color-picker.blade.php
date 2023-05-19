@@ -3,7 +3,7 @@
 
     @if ($attributes->wire('model')->value())
         wireModifiers: @toJs($attributes->wireModifiers()),
-        wireModel: @entangle($attributes->wire('model')),
+        wireModel: @entangleable($attributes->wire('model')),
     @endif
 
     @if ($colors)
@@ -43,8 +43,8 @@
                     <x-dynamic-component
                         :component="WireUi::component('icon')"
                         class="
-                            w-4 h-4 group-focus:text-primary-700 text-gray-400
-                           
+                            w-4 h-4 group-focus:text-primary-700 text-gray-400 dark:text-gray-600
+                            dark:group-hover:text-gray-500 dark:group-focus:text-primary-500
                         "
                         :name="$rightIcon"
                     />
@@ -66,7 +66,7 @@
                 <button class="
                         w-6 h-6 rounded shadow-lg border hover:scale-125 transition-all ease-in-out duration-100 cursor-pointer
                         hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600 sdark:focus:ring-gray-400
-                       
+                        dark:border-0 dark:hover:ring-2 dark:hover:ring-gray-400
                     "
                     :style="{ 'background-color': color.value }"
                     x-on:click="select(color)"

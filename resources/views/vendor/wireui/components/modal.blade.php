@@ -19,7 +19,7 @@
     x-show="show"
     wireui-modal>
     <div @class([
-            'fixed inset-0 bg-secondary-400 bg-opacity-60',
+            'fixed inset-0 bg-secondary-400 dark:bg-secondary-700 bg-opacity-60',
             'dark:bg-opacity-60 transform transition-opacity',
             $blur => (bool) $blur
         ])

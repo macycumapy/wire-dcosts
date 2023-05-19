@@ -19,8 +19,7 @@
         <!-- Scripts -->
         @wireUiScripts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @livewireStyles
-        @livewireScripts
+        @livewireScriptConfig
     </head>
     <body class="bg-[url('/images/intro.jpg')]">
         <div class="fixed flex gap-4 p-6 justify-end w-full">

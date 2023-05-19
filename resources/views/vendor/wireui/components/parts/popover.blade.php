@@ -7,7 +7,7 @@
     x-ref="popover"
     x-on:click.outside="close"
     x-on:keydown.escape.window="handleEscape">
-    <div class="fixed inset-0 transition-opacity bg-secondary-400 bg-opacity-60 sm:hidden"
+    <div class="fixed inset-0 transition-opacity bg-secondary-400 bg-opacity-60 sm:hidden dark:bg-secondary-700 dark:bg-opacity-60"
         x-show="popover"
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0"
@@ -22,7 +22,7 @@
     <div
         {{ $attributes->class([
             'w-full rounded-t-md sm:rounded-xl border border-secondary-200 bg-white shadow-lg',
-            'dark:bg-secondary-800 transition-all relative overflow-hidden',
+            'dark:bg-secondary-800 dark:border-secondary-600 transition-all relative overflow-hidden',
         ]) }}
         x-show="popover"
         tabindex="-1"

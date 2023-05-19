@@ -9,7 +9,7 @@
         <x-label class="text-white">
             Email
             <x-input
-                wire:model.defer="authUserData.email"
+                wire:model="authUserData.email"
                 wire:keydown.enter="login"
                 name="email"
                 class="text-gray-800 font-semibold"
@@ -20,7 +20,7 @@
         <x-label class="text-white">
             Пароль
             <x-input
-                wire:model.defer="authUserData.password"
+                wire:model="authUserData.password"
                 wire:keydown.enter="login"
                 name="password"
                 class="text-gray-800 font-semibold"
@@ -31,7 +31,7 @@
 
         <x-label class="text-white flex gap-3">
             <x-checkbox
-                wire:model.defer="authUserData.remember"
+                wire:model="authUserData.remember"
                 name="remember"
                 class="font-semibold"
             ></x-checkbox>
@@ -42,9 +42,8 @@
         <x-button primary
                   wire:click="login"
                   wire:loading.attr="disabled"
-                  label="Войти"
                   spinner="login"
                   class="w-full"
-        ></x-button>
+        >Войти</x-button>
     </div>
 </div>

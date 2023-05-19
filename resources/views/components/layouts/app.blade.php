@@ -14,9 +14,8 @@
         <!-- Scripts -->
         @wireUiScripts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @livewireScripts
+        @livewireScriptConfig
         <!-- Styles -->
-        @livewireStyles
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-primary-900">

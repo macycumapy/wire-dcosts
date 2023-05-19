@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature\Livewire\Auth;
 
 use App\Actions\User\Data\CreateUserData;
-use App\Http\Livewire\Auth\LoginForm;
-use App\Http\Livewire\Auth\RegisterForm;
+use App\Livewire\Auth\LoginForm;
+use App\Livewire\Auth\RegisterForm;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Livewire;
@@ -16,7 +16,7 @@ class LoginFormTest extends TestCase
 {
     public function testSeeComponent(): void
     {
-        $this->get(route('register'))
+        $this->get(route('login'))
             ->assertSuccessful()
             ->assertSeeLivewire(LoginForm::class);
     }

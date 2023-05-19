@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Http\Livewire\Auth\LoginForm;
-use App\Http\Livewire\Auth\RegisterForm;
+use App\Livewire\Auth\LoginForm;
+use App\Livewire\Auth\RegisterForm;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {

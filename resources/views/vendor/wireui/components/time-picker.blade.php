@@ -1,8 +1,8 @@
 <div
     x-data="wireui_timepicker({
-        model: @entangle($attributes->wire('model')),
+        model: @entangleable($attributes->wire('model')),
         config: {
-            isLazy:   @boolean($attributes->wire('model')->hasModifier('lazy')),
+            isBlur:   @boolean($attributes->wire('model')->hasModifier('blur')),
             interval: @toJs($interval),
             format:   @toJs($format),
             is12H:    @boolean($format == '12'),
@@ -34,7 +34,7 @@
                 <div class="absolute inset-y-0 right-3 z-5 flex items-center justify-center">
                     <div @class([
                         'flex items-center gap-x-2 my-auto',
-                        'text-negative-400' => $name && $errors->has($name),
+                        'text-negative-400 dark:text-negative-600' => $name && $errors->has($name),
                         'text-secondary-400'                         => $name && $errors->has($name),
                     ])>
                         <x-dynamic-component
@@ -48,7 +48,7 @@
 
                         <x-dynamic-component
                             :component="WireUi::component('icon')"
-                            class="cursor-pointer w-5 h-5 text-gray-400"
+                            class="cursor-pointer w-5 h-5 text-gray-400 dark:text-gray-600"
                             name="clock"
                             x-show="!config.readonly && !config.disabled"
                             x-on:click="toggle"
@@ -81,10 +81,10 @@
             <template x-for="time in filteredTimes">
                 <li class="group rounded-md focus:outline-none focus:bg-primary-100 hover:text-white
                             hover:bg-primary-600 cursor-pointer select-none relative py-2 pl-2 pr-9
-                           "
+                            dark:hover:bg-secondary-700"
                     :class="{
-                        'text-primary-600':   input === time.value,
-                        'text-secondary-700': input !== time.value,
+                        'text-primary-600 dark:text-secondary-400':   input === time.value,
+                        'text-secondary-700 dark:text-secondary-400': input !== time.value,
                     }"
                     tabindex="0"
                     x-on:keydown.enter="selectTime(time)"
@@ -93,7 +93,7 @@
                     <span
                         class="
                             absolute text-primary-600 group-hover:text-white inset-y-0
-                            right-0 flex items-center pr-4
+                            right-0 flex items-center pr-4 dark:text-secondary-400
                         "
                         x-show="input === time.value">
                         <x-dynamic-component

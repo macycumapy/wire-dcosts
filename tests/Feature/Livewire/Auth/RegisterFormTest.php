@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Livewire\Auth;
 
 use App\Actions\User\Data\CreateUserData;
-use App\Http\Livewire\Auth\RegisterForm;
+use App\Livewire\Auth\RegisterForm;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Hash;

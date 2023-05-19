@@ -30,7 +30,6 @@
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
                                 <div class="flex" @click.prevent="$root.submit();">
-                                    <x-icon name="logout" class="w-4 h-4 text-gray-400 my-auto"></x-icon>
                                     <span class="ml-4 my-auto">{{ __('Log Out') }}</span>
                                 </div>
                             </form>
@@ -68,7 +67,6 @@
                 <form method="POST" action="{{ route('logout') }}" x-data class="cursor-pointer">
                     @csrf
                     <div class="flex" @click.prevent="$root.submit();">
-                        <x-icon name="logout" class="w-4 h-4 text-gray-400 my-auto"></x-icon>
                         <span class="ml-4 my-auto">{{ __('Log Out') }}</span>
                     </div>
                 </form>
