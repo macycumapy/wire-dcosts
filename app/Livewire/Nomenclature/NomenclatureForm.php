@@ -43,7 +43,7 @@ class NomenclatureForm extends Component
     {
         $action->exec(NomenclatureData::validateAndCreate($this->data));
         $this->dispatch(self::NOMENCLATURE_SAVED_EVENT);
-        $this->notification()->success('Номенклатура', 'Создана');
+        $this->notification()->success('Номенклатура', 'Добавлена');
         $this->resetData();
     }
 
@@ -54,7 +54,7 @@ class NomenclatureForm extends Component
             'nomenclature' => $this->nomenclature,
         ]));
         $this->dispatch(self::NOMENCLATURE_SAVED_EVENT);
-        $this->notification()->success('Номенклатура', 'Обновлена');
+        $this->notification()->success('Номенклатура', 'Изменена');
     }
 
     public function render(): View

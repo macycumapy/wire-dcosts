@@ -31,7 +31,7 @@
             <x-button
                 primary
                 wire:click="create"
-                label="Записать"
+                label="Создать"
             ></x-button>
         @endif
     </div>

@@ -6,7 +6,7 @@
     ></x-input>
 
     <div class="flex justify-end">
-        @if($nomenclatureType)
+        @if($partner)
             <x-button
                 primary
                 wire:click="update"

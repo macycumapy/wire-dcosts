@@ -43,7 +43,7 @@ class CategoryForm extends Component
     {
         $action->exec(CategoryData::validateAndCreate($this->data));
         $this->dispatch(self::CATEGORY_SAVED_EVENT);
-        $this->notification()->success('Категория', 'Создана');
+        $this->notification()->success('Категория', 'Добавлена');
         $this->resetData();
     }
 
@@ -54,7 +54,7 @@ class CategoryForm extends Component
             'category' => $this->category,
         ]));
         $this->dispatch(self::CATEGORY_SAVED_EVENT);
-        $this->notification()->success('Категория', 'Обновлена');
+        $this->notification()->success('Категория', 'Изменена');
     }
 
     public function render(): View

@@ -43,7 +43,7 @@ class NomenclatureTypeForm extends Component
     {
         $action->exec(NomenclatureTypeData::validateAndCreate($this->data));
         $this->dispatch(self::NOMENCLATURE_TYPE_SAVED_EVENT);
-        $this->notification()->success('Тип номенклатуры', 'Создан');
+        $this->notification()->success('Тип номенклатуры', 'Добавлен');
         $this->resetData();
     }
 
@@ -54,7 +54,7 @@ class NomenclatureTypeForm extends Component
             'nomenclatureType' => $this->nomenclatureType,
         ]));
         $this->dispatch(self::NOMENCLATURE_TYPE_SAVED_EVENT);
-        $this->notification()->success('Тип номенклатуры', 'Обновлен');
+        $this->notification()->success('Тип номенклатуры', 'Изменен');
     }
 
     public function render(): View
