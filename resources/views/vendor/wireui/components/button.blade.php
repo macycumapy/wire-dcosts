@@ -10,6 +10,8 @@
     $href === null
         ? $defaultAttributes['type'] = 'button'
         : $defaultAttributes['href'] = $href;
+
+    $attributes['class'] = str($attributes['class'])->replace(['outline-none'], '');
 @endphp
 
 <{{ $tag }} {{ $attributes->merge($defaultAttributes) }}>

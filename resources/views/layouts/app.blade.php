@@ -36,6 +36,9 @@
             </main>
         </div>
 
+        <x-notifications z-index="z-50"></x-notifications>
+        <x-dialog z-index="z-50" blur="md" align="center"></x-dialog>
+
         @stack('modals')
     </body>
 </html>

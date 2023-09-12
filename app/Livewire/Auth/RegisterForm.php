@@ -35,6 +35,6 @@ class RegisterForm extends Component
     public function render(): View
     {
         return view('livewire.auth.register-form')
-            ->layout('components.layouts.guest');
+            ->layout('layouts.guest');
     }
 }

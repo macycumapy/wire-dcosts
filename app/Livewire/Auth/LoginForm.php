@@ -28,6 +28,6 @@ class LoginForm extends Component
     public function render(): View
     {
         return view('livewire.auth.login-form')
-            ->layout('components.layouts.guest');
+            ->layout('layouts.guest');
     }
 }

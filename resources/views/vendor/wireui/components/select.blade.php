@@ -229,8 +229,7 @@
 
             @unless ($hideEmptyMessage)
                 <div class="py-12 px-3 sm:py-2 sm:px-3 text-center sm:text-left text-secondary-500 cursor-pointer"
-                    x-show="displayOptions.length === 0"
-                    x-on:click="close">
+                    x-show="displayOptions.length === 0">
                     {{ $emptyMessage ?? __('wireui::messages.empty_options') }}
                 </div>
             @endunless
