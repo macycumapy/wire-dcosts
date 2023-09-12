@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace App\Livewire\Nomenclature;
+namespace App\Livewire\Category;
 
 use App\Livewire\Traits\AsModal;
 use Illuminate\View\View;
 use Livewire\Component;
 
-class NomenclatureModal extends Component
+class CategoryModal extends Component
 {
     use AsModal;
 
     public $listeners = [
-        NomenclatureForm::NOMENCLATURE_SAVED_EVENT => 'closeModal'
+        CategoryForm::CATEGORY_SAVED_EVENT => 'closeModal'
     ];
 
     public function render(): View
     {
-        return view('livewire.nomenclature.nomenclature-modal');
+        return view('livewire.category.category-modal');
     }
 }

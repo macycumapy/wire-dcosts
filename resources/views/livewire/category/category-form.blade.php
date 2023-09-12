@@ -5,8 +5,19 @@
         label="Название"
     ></x-input>
 
+    <x-select
+        wire:model="data.type"
+        name="type"
+        label="Тип"
+        :options="\App\Enums\CashFlowType::valuesWithTitles()"
+        option-label="title"
+        option-value="value"
+        option-description="-"
+        autocomplete="off" autocorrect="off"
+    ></x-select>
+
     <div class="flex justify-end">
-        @if($nomenclatureType)
+        @if($category)
             <x-button
                 primary
                 wire:click="update"
