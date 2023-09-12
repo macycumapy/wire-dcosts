@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\NomenclatureTypeController;
 use App\Livewire\Auth\LoginForm;
 use App\Livewire\Auth\RegisterForm;
+use App\Livewire\Nomenclature\NomenclatureForm;
 use App\Livewire\NomenclatureType\NomenclatureTypeForm;
 use Illuminate\Support\Facades\Route;
 
@@ -26,5 +27,10 @@ Route::middleware([
         Route::get('/search', [NomenclatureTypeController::class, 'search'])->name('nomenclature-type.search');
         Route::get('/create', NomenclatureTypeForm::class)->name('nomenclature-type.create');
         Route::get('/{id}', NomenclatureTypeForm::class)->name('nomenclature-type.edit');
+    });
+
+    Route::prefix('nomenclatures')->group(function () {
+        Route::get('/create', NomenclatureForm::class)->name('nomenclature.create');
+        Route::get('/{id}', NomenclatureForm::class)->name('nomenclature.edit');
     });
 });

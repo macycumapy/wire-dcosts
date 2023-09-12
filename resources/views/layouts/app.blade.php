@@ -34,6 +34,8 @@
             <main>
                 {{ $slot }}
             </main>
+
+            <div id="footer"></div>
         </div>
 
         <x-notifications z-index="z-50"></x-notifications>

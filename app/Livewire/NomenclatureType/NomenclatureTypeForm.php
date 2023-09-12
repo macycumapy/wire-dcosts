@@ -28,17 +28,23 @@ class NomenclatureTypeForm extends Component
             $this->nomenclatureType = NomenclatureType::findOrFail($id);
             $this->data = NomenclatureTypeData::from($this->nomenclatureType);
         } else {
-            $this->data = NomenclatureTypeData::from([
-                'user_id' => Auth::id(),
-            ]);
+            $this->resetData();
         }
+    }
+
+    private function resetData(): void
+    {
+        $this->data = NomenclatureTypeData::from([
+            'user_id' => Auth::id(),
+        ]);
     }
 
     public function create(CreateNomenclatureTypeAction $action): void
     {
-        $this->nomenclatureType = $action->exec(NomenclatureTypeData::validateAndCreate($this->data));
+        $action->exec(NomenclatureTypeData::validateAndCreate($this->data));
         $this->dispatch(self::NOMENCLATURE_TYPE_SAVED_EVENT);
         $this->notification()->success('Тип номенклатуры', 'Создан');
+        $this->resetData();
     }
 
     public function update(UpdateNomenclatureTypeAction $action): void
