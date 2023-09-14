@@ -12,6 +12,6 @@ class UpdateCashFlowAction
     {
         $cashFlow = $data->cashFlow;
 
-        return $cashFlow->update($data->toArray());
+        return $cashFlow->update($data->except('cashFlow')->toArray());
     }
 }

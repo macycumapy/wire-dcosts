@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Builders\CashFlowBuilder;
 use App\Enums\CashFlowType;
 use App\Models\Scopes\SampleByUser;
 use App\Models\Traits\HasUser;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property CashFlowType $type Тип движения
  * @property-read Category|null $category Статья затрат
  * @property-read Partner|null $partner Контрагент
- * @mixin Builder
+ * @mixin CashFlowBuilder
  */
 class CashFlow extends Model
 {
@@ -52,6 +52,11 @@ class CashFlow extends Model
     {
         parent::boot();
         static::addGlobalScope(new SampleByUser());
+    }
+
+    public function newEloquentBuilder($query): CashFlowBuilder
+    {
+        return new CashFlowBuilder($query);
     }
 
     public function category(): BelongsTo

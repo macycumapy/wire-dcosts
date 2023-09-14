@@ -6,12 +6,15 @@ namespace App\Livewire\CashFlow\Inflow;
 
 use App\Actions\CashFlow\CreateCashFlowAction;
 use App\Actions\CashFlow\Data\CashFlowData;
+use App\Actions\CashFlow\Data\UpdateCashFlowData;
+use App\Actions\CashFlow\UpdateCashFlowAction;
 use App\Enums\CashFlowType;
 use App\Livewire\Category\CategoryForm;
 use App\Livewire\Partner\PartnerForm;
 use App\Models\CashFlow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 
@@ -22,6 +25,8 @@ class CashInflowCard extends Component
     public const CASH_INFLOW_CREATED_EVENT = 'cash-inflow-created';
     public ?CashFlow $cashFlow = null;
     public CashFlowData $data;
+    #[Url]
+    public bool $clone = false;
     public $listeners = [
         CategoryForm::CATEGORY_SAVED_EVENT => 'onCreatedNewCategory',
         PartnerForm::PARTNER_SAVED_EVENT => 'onCreatedNewPartner',
@@ -32,6 +37,10 @@ class CashInflowCard extends Component
         if ($id) {
             $this->cashFlow = CashFlow::findOrFail($id);
             $this->data = CashFlowData::from($this->cashFlow);
+            if ($this->clone) {
+                $this->cashFlow = null;
+                $this->data->date = now();
+            }
         } else {
             $this->resetData();
         }
@@ -65,9 +74,15 @@ class CashInflowCard extends Component
         $this->redirectRoute('dashboard', navigate: true);
     }
 
-    public function update(): void
+    public function update(UpdateCashFlowAction $action): void
     {
-
+        $action->exec(UpdateCashFlowData::validateAndCreate([
+            'cashFlow' => $this->cashFlow,
+            ...$this->data->toArray(),
+        ]));
+        $this->dispatch(self::CASH_INFLOW_CREATED_EVENT, $this->cashFlow->id);
+        $this->notification()->success('Поступление денежных средств', 'Обновлено');
+        $this->redirectRoute('dashboard', navigate: true);
     }
 
     public function cancel(): void

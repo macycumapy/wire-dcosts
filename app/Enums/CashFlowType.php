@@ -20,4 +20,12 @@ enum CashFlowType: string
             self::Outflow => 'Расход',
         };
     }
+
+    public function color(): string
+    {
+        return match ($this) {
+            self::Inflow => 'positive',
+            self::Outflow => 'negative',
+        };
+    }
 }

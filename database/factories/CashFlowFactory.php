@@ -18,12 +18,14 @@ class CashFlowFactory extends Factory
 {
     public function definition(): array
     {
+        $user = User::factory()->create();
+
         return [
             'date' => now(),
             'sum' => 500,
-            'category_id' => Category::factory()->create(),
-            'partner_id' => Partner::factory()->create(),
-            'user_id' => User::factory()->create(),
+            'category_id' => Category::factory()->for($user)->create(),
+            'partner_id' => Partner::factory()->for($user)->create(),
+            'user_id' => $user,
             'type' => $this->faker->randomElement(CashFlowType::values()),
         ];
     }
@@ -33,7 +35,12 @@ class CashFlowFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'type' => CashFlowType::Outflow,
-                'category_id' => Category::factory()->outflow()->create(),
+                'category_id' => Category::factory()->outflow()->create([
+                    'user_id' => $attributes['user_id'],
+                ]),
+                'partner_id' => Partner::factory()->create([
+                    'user_id' => $attributes['user_id'],
+                ]),
             ];
         });
     }
@@ -43,7 +50,12 @@ class CashFlowFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'type' => CashFlowType::Inflow,
-                'category_id' => Category::factory()->inflow()->create(),
+                'category_id' => Category::factory()->inflow()->create([
+                    'user_id' => $attributes['user_id'],
+                ]),
+                'partner_id' => Partner::factory()->create([
+                    'user_id' => $attributes['user_id'],
+                ]),
             ];
         });
     }
