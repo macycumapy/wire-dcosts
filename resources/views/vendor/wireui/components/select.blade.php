@@ -16,7 +16,13 @@
         readonly:    @boolean($readonly || $disabled),
         placeholder: @toJs($placeholder),
         template:    @toJs($template),
-    }">
+        qq: @boolean($qq ?? false)
+    }"
+    x-init="
+        $watch('wireModel', (value) => { if (value) $refs.input.click(); search = ''})
+        $watch('search', (value) => Alpine.store('selectSearch', value))
+    "
+>
     <div hidden x-ref="json">@toJs($optionsToArray())</div>
     <div hidden x-ref="slot">{{ $slot }}</div>
 
@@ -154,17 +160,21 @@
                         </button>
                     @endif
 
-                    <button tabindex="-1" x-on:click="toggle" type="button">
-                        <x-dynamic-component
-                            :component="WireUi::component('icon')"
-                            class="w-5 h-5
-                            {{ $name && $errors->has($name)
-                                ? 'text-negative-400 dark:text-negative-600'
-                                : 'text-secondary-400'
-                            }}"
-                            :name="$rightIcon"
-                        />
-                    </button>
+                    @isset($openButton)
+                        {{ $openButton }}
+                    @else
+                        <button tabindex="-1" x-on:click="toggle" type="button">
+                            <x-dynamic-component
+                                :component="WireUi::component('icon')"
+                                class="w-5 h-5
+                        {{ $name && $errors->has($name)
+                            ? 'text-negative-400 dark:text-negative-600'
+                            : 'text-secondary-400'
+                        }}"
+                                :name="$rightIcon"
+                            />
+                        </button>
+                    @endisset
                 </div>
             </x-slot>
         </x-dynamic-component>

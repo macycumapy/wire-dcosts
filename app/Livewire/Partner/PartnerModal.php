@@ -12,6 +12,9 @@ class PartnerModal extends Component
 {
     use AsModal;
 
+    public ?string $name = null;
+    public ?int $id = null;
+
     public $listeners = [
         PartnerForm::PARTNER_SAVED_EVENT => 'closeModal',
     ];

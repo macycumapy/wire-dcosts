@@ -19,7 +19,7 @@ class CategoryFormTest extends TestCase
         $this->actingAs($user = User::factory()->create());
         Livewire::test(CategoryForm::class)
             ->set('data.name', $name)
-            ->set('data.type', $type)
+            ->set('data.type', $type->value)
             ->call('create')
             ->assertHasNoErrors()
             ->assertDispatched(CategoryForm::CATEGORY_SAVED_EVENT);

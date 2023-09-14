@@ -37,9 +37,10 @@
 
             <div id="footer"></div>
         </div>
-
-        <x-notifications z-index="z-50"></x-notifications>
-        <x-dialog z-index="z-50" blur="md" align="center"></x-dialog>
+        @persist('notifications')
+            <x-notifications z-index="z-50"></x-notifications>
+            <x-dialog z-index="z-50" blur="md" align="center"></x-dialog>
+        @endpersist
 
         @stack('modals')
     </body>

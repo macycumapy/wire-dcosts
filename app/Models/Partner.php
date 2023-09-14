@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Builders\PartnerBuilder;
 use App\Models\Scopes\SampleByUser;
 use App\Models\Traits\HasUser;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
  * @property string $name
- * @mixin Builder
+ * @mixin PartnerBuilder
  */
 class Partner extends Model
 {
@@ -31,5 +31,10 @@ class Partner extends Model
     {
         parent::boot();
         static::addGlobalScope(new SampleByUser());
+    }
+
+    public function newEloquentBuilder($query): PartnerBuilder
+    {
+        return new PartnerBuilder($query);
     }
 }

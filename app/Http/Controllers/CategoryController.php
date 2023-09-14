@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Models\NomenclatureType;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class NomenclatureTypeController extends Controller
+class CategoryController extends Controller
 {
     public function search(Request $request)
     {
         return $request->exists('selected')
-            ? NomenclatureType::find($request->input('selected', []))
-            : NomenclatureType::searchByName(
+            ? Category::find($request->input('selected', []))
+            : Category::searchByName(
                 $request->query('search', ''),
             );
     }

@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Builders;
 
 use App\Builders\Traits\SearchByName;
-use App\Models\NomenclatureType;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @method searchByName(string $name)
- * @mixin NomenclatureType
+ * @mixin Category
  */
-class NomenclatureTypeBuilder extends Builder
+class CategoryBuilder extends Builder
 {
     use SearchByName;
 }

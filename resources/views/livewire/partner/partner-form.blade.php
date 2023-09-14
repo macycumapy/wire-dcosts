@@ -10,7 +10,7 @@
             <x-button
                 primary
                 wire:click="update"
-                label="Обновить"
+                label="Изменить"
             ></x-button>
         @else
             <x-button

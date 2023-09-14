@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NomenclatureTypeController;
+use App\Http\Controllers\PartnerController;
 use App\Livewire\Auth\LoginForm;
 use App\Livewire\Auth\RegisterForm;
+use App\Livewire\CashFlow\Inflow\CashInflowCard;
 use App\Livewire\Nomenclature\NomenclatureForm;
 use App\Livewire\NomenclatureType\NomenclatureTypeForm;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +33,20 @@ Route::middleware([
     });
 
     Route::prefix('nomenclatures')->group(function () {
-        Route::get('/create', NomenclatureForm::class)->name('nomenclature.create');
-        Route::get('/{id}', NomenclatureForm::class)->name('nomenclature.edit');
+        Route::get('/create', NomenclatureForm::class)->name('nomenclatures.create');
+        Route::get('/{id}', NomenclatureForm::class)->name('nomenclatures.edit');
+    });
+
+    Route::prefix('partners')->group(function () {
+        Route::get('/search', [PartnerController::class, 'search'])->name('partners.search');
+    });
+
+    Route::prefix('categories')->group(function () {
+        Route::get('/search', [CategoryController::class, 'search'])->name('categories.search');
+    });
+
+    Route::prefix('inflows')->group(function () {
+        Route::get('/create', CashInflowCard::class)->name('inflows.create');
+        Route::get('/{id}', CashInflowCard::class)->name('inflows.edit');
     });
 });

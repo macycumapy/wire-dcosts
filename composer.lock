@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "98ac941615e694bd4bbd135cac9fecc1",
+    "content-hash": "46b09bf89e382b67cd9ce7babb5941ab",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2555,29 +2555,29 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.0.0-beta.1",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "ea97977ac080fff70f0a35280bdb7322c246345e"
+                "reference": "7fbe81ce113a17bd92687174cd79a4791bd40764"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/ea97977ac080fff70f0a35280bdb7322c246345e",
-                "reference": "ea97977ac080fff70f0a35280bdb7322c246345e",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/7fbe81ce113a17bd92687174cd79a4791bd40764",
+                "reference": "7fbe81ce113a17bd92687174cd79a4791bd40764",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^9.0|^10.0|^11.0",
-                "illuminate/support": "^9.0|^10.0|^11.0",
-                "illuminate/validation": "^9.0|^10.0|^11.0",
+                "illuminate/database": "^10.0",
+                "illuminate/support": "^10.0",
+                "illuminate/validation": "^10.0",
                 "league/mime-type-detection": "^1.9",
                 "php": "^8.1",
                 "symfony/http-kernel": "^5.0|^6.0"
             },
             "require-dev": {
                 "calebporzio/sushi": "^2.1",
-                "laravel/framework": "^9.0|^10.0",
+                "laravel/framework": "^10.0",
                 "mockery/mockery": "^1.3.1",
                 "orchestra/testbench": "^7.0|^8.0",
                 "orchestra/testbench-dusk": "^7.0|^8.0",
@@ -2591,7 +2591,7 @@
                         "Livewire\\LivewireServiceProvider"
                     ],
                     "aliases": {
-                        "Livewire": "Livewire\\LivewireManager"
+                        "Livewire": "Livewire\\Livewire"
                     }
                 }
             },
@@ -2616,7 +2616,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.0.0-beta.1"
+                "source": "https://github.com/livewire/livewire/tree/v3.0.3"
             },
             "funding": [
                 {
@@ -2624,7 +2624,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-20T14:59:22+00:00"
+            "time": "2023-09-12T15:08:50+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -9785,9 +9785,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "livewire/livewire": 10
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

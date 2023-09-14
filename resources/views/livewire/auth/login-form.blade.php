@@ -42,7 +42,6 @@
         <x-button primary
                   wire:click="login"
                   wire:loading.attr="disabled"
-                  spinner="login"
                   class="w-full"
         >Войти</x-button>
     </div>

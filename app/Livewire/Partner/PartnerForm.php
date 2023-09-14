@@ -18,8 +18,9 @@ class PartnerForm extends Component
 {
     use Actions;
 
-    public const PARTNER_SAVED_EVENT = 'partnerSaved';
+    public const PARTNER_SAVED_EVENT = 'partner-saved';
     public ?Partner $partner = null;
+    public ?string $name = null;
     public PartnerData $data;
 
     public function mount(?int $id = null): void
@@ -36,13 +37,14 @@ class PartnerForm extends Component
     {
         $this->data = PartnerData::from([
             'user_id' => Auth::id(),
+            'name' => $this->name,
         ]);
     }
 
     public function create(CreatePartnerAction $action): void
     {
-        $action->exec(PartnerData::validateAndCreate($this->data));
-        $this->dispatch(self::PARTNER_SAVED_EVENT);
+        $partner = $action->exec(PartnerData::validateAndCreate($this->data));
+        $this->dispatch(self::PARTNER_SAVED_EVENT, $partner->id);
         $this->notification()->success('Контрагент', 'Добавлен');
         $this->resetData();
     }
@@ -53,7 +55,7 @@ class PartnerForm extends Component
             ...$this->data->toArray(),
             'partner' => $this->partner,
         ]));
-        $this->dispatch(self::PARTNER_SAVED_EVENT);
+        $this->dispatch(self::PARTNER_SAVED_EVENT, $this->partner->id);
         $this->notification()->success('Контрагент', 'Изменен');
     }
 

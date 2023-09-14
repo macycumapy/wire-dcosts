@@ -22,7 +22,8 @@ class UpdateCategoryData extends Data
                 'string',
                 'max:255',
                 Rule::unique('categories')
-                    ->where('user_id', $context->payload['user_id']),
+                    ->where('user_id', $context->payload['user_id'])
+                    ->whereNot('id', $context->payload['category']->id),
             ],
         ];
     }

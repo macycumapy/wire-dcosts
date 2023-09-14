@@ -22,4 +22,23 @@ class CategoryFactory extends Factory
             'user_id' => User::factory()->create(),
         ];
     }
+
+    public function withType(CashFlowType $type): Factory
+    {
+        return $this->state(function (array $attributes) use ($type) {
+            return [
+                'type' => $type,
+            ];
+        });
+    }
+
+    public function outflow(): Factory
+    {
+        return $this->withType(CashFlowType::Outflow);
+    }
+
+    public function inflow(): Factory
+    {
+        return $this->withType(CashFlowType::Inflow);
+    }
 }

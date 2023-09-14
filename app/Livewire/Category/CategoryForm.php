@@ -8,6 +8,7 @@ use App\Actions\Category\CreateCategoryAction;
 use App\Actions\Category\Data\CategoryData;
 use App\Actions\Category\Data\UpdateCategoryData;
 use App\Actions\Category\UpdateCategoryAction;
+use App\Enums\CashFlowType;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -18,9 +19,11 @@ class CategoryForm extends Component
 {
     use Actions;
 
-    public const CATEGORY_SAVED_EVENT = 'categorySavedEvent';
+    public const CATEGORY_SAVED_EVENT = 'category-saved';
     public ?Category $category = null;
     public CategoryData $data;
+    public ?CashFlowType $type = null;
+    public ?string $name = null;
 
     public function mount(?int $id = null): void
     {
@@ -36,13 +39,15 @@ class CategoryForm extends Component
     {
         $this->data = CategoryData::from([
             'user_id' => Auth::id(),
+            'type' => $this->type,
+            'name' => $this->name,
         ]);
     }
 
     public function create(CreateCategoryAction $action): void
     {
-        $action->exec(CategoryData::validateAndCreate($this->data));
-        $this->dispatch(self::CATEGORY_SAVED_EVENT);
+        $category = $action->exec(CategoryData::validateAndCreate($this->data));
+        $this->dispatch(self::CATEGORY_SAVED_EVENT, $category->id);
         $this->notification()->success('Категория', 'Добавлена');
         $this->resetData();
     }
@@ -53,7 +58,7 @@ class CategoryForm extends Component
             ...$this->data->toArray(),
             'category' => $this->category,
         ]));
-        $this->dispatch(self::CATEGORY_SAVED_EVENT);
+        $this->dispatch(self::CATEGORY_SAVED_EVENT, $this->category->id);
         $this->notification()->success('Категория', 'Изменена');
     }
 

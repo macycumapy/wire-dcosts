@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Builders\CategoryBuilder;
 use App\Enums\CashFlowType;
 use App\Models\Scopes\SampleByUser;
 use App\Models\Traits\HasUser;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $name
  * @property CashFlowType $type
- * @mixin Builder
+ * @mixin CategoryBuilder
  */
 class Category extends Model
 {
@@ -38,5 +38,10 @@ class Category extends Model
     {
         parent::boot();
         static::addGlobalScope(new SampleByUser());
+    }
+
+    public function newEloquentBuilder($query): CategoryBuilder
+    {
+        return new CategoryBuilder($query);
     }
 }

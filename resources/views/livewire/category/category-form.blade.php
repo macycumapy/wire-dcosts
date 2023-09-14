@@ -7,6 +7,8 @@
 
     <x-select
         wire:model="data.type"
+        wire:key="type"
+        id="type"
         name="type"
         label="Тип"
         :options="\App\Enums\CashFlowType::valuesWithTitles()"
@@ -14,6 +16,7 @@
         option-value="value"
         option-description="-"
         autocomplete="off" autocorrect="off"
+        :disabled="isset($type)"
     ></x-select>
 
     <div class="flex justify-end">
@@ -21,7 +24,7 @@
             <x-button
                 primary
                 wire:click="update"
-                label="Обновить"
+                label="Изменить"
             ></x-button>
         @else
             <x-button
