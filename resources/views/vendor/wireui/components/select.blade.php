@@ -19,7 +19,7 @@
         qq: @boolean($qq ?? false)
     }"
     x-init="
-        $watch('wireModel', (value) => { if (value) $refs.input.click(); search = ''})
+        $watch('wireModel', (value) => { if (value) closeIfNotFocused(); search = ''})
         $watch('search', (value) => Alpine.store('selectSearch', value))
     "
 >

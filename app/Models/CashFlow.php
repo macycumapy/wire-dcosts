@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Движение денежных средств
@@ -19,8 +20,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $id
  * @property float $sum Сумма движения
  * @property Carbon $date Дата движения
- * @property string $created_at Дата создания
- * @property string $updated_at Дата обновления
+ * @property Carbon $created_at Дата создания
+ * @property Carbon $updated_at Дата обновления
+ * @property Carbon $deleted_at Дата удаления
  * @property int|null $category_id ID статьи затрат
  * @property int|null $partner_id ID контрагента
  * @property CashFlowType $type Тип движения
@@ -32,6 +34,7 @@ class CashFlow extends Model
 {
     use HasFactory;
     use HasUser;
+    use SoftDeletes;
 
     protected $casts = [
         'sum' => 'float',

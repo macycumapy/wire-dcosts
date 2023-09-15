@@ -11,7 +11,7 @@
                 <div wire:key="row_{{ $cashFlow->id }}">
                     <div class="p-4 grid grid-cols-3 sm:grid-cols-4 gap-4">
                         <div>
-                            {{ $cashFlow->date->isToday() ? 'Сегодня' : $cashFlow->date->format('d.m.Y H:i') }}
+                            {{ $cashFlow->date->timezone($timezone)->isToday() ? 'Сегодня' : $cashFlow->date->timezone($timezone)->format('d.m.Y H:i') }}
                         </div>
                         <div class="text-{{ $cashFlow->type->color() }}-600">
                             {{ number_format($cashFlow->sum, 2, '.', ' ') }}
@@ -33,6 +33,9 @@
                                     href="{{ route('inflows.edit', ['id' => $cashFlow->id]) }}"
                                     icon="pencil-alt"
                                 ></x-button>
+                                @livewire('cash-flow.cash-flow-delete-button', [
+                                    'cashFlow' => $cashFlow
+                                ], key($cashFlow->id))
                             @endif
                         </div>
                     </div>

@@ -16,6 +16,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $email
  * @property string $password
  * @property string $remember_token
+ * @property string $timezone
  */
 class User extends Authenticatable
 {

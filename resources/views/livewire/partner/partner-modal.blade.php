@@ -12,11 +12,13 @@
         ></x-button>
     @endif
     @if($showModal)
-        <x-modal.card wire:model="showModal" :title="$id ? 'Контрагент' : 'Новый контрагент'">
-            @livewire('partner.partner-form', [
-                'name' => $name,
-                'id' => $id,
-            ])
-        </x-modal.card>
+        @teleport('#footer')
+            <x-modal.card wire:model="showModal" :title="$id ? 'Контрагент' : 'Новый контрагент'">
+                @livewire('partner.partner-form', [
+                    'name' => $name,
+                    'id' => $id,
+                ], key(json_encode([$name, $id])))
+            </x-modal.card>
+        @endteleport
     @endif
 </div>

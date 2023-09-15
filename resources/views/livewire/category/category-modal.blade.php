@@ -12,12 +12,14 @@
         ></x-button>
     @endif
     @if($showModal)
-        <x-modal.card wire:model="showModal" :title="$id ? 'Категория' : 'Новая категория'">
-            @livewire('category.category-form', [
-                'type' => $type,
-                'name' => $name,
-                'id' => $id
-            ])
-        </x-modal.card>
+        @teleport('#footer')
+            <x-modal.card wire:model="showModal" :title="$id ? 'Категория' : 'Новая категория'">
+                @livewire('category.category-form', [
+                    'type' => $type,
+                    'name' => $name,
+                    'id' => $id
+                ], key(json_encode([$type, $name, $id])))
+            </x-modal.card>
+        @endteleport
     @endif
 </div>

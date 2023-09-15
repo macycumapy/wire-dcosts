@@ -21,6 +21,7 @@ return new class () extends Migration {
             $table->float('sum')->default(0.0);
             $table->timestamp('date');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
