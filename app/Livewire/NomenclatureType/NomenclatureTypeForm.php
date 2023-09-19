@@ -21,6 +21,7 @@ class NomenclatureTypeForm extends Component
     public const NOMENCLATURE_TYPE_SAVED_EVENT = 'nomenclatureTypeSaved';
     public ?NomenclatureType $nomenclatureType = null;
     public NomenclatureTypeData $data;
+    public ?string $name = null;
 
     public function mount(?int $id = null): void
     {
@@ -36,13 +37,14 @@ class NomenclatureTypeForm extends Component
     {
         $this->data = NomenclatureTypeData::from([
             'user_id' => Auth::id(),
+            'name' => $this->name,
         ]);
     }
 
     public function create(CreateNomenclatureTypeAction $action): void
     {
-        $action->exec(NomenclatureTypeData::validateAndCreate($this->data));
-        $this->dispatch(self::NOMENCLATURE_TYPE_SAVED_EVENT);
+        $nomenclatureType = $action->exec(NomenclatureTypeData::validateAndCreate($this->data));
+        $this->dispatch(self::NOMENCLATURE_TYPE_SAVED_EVENT, $nomenclatureType->id);
         $this->notification()->success('Тип номенклатуры', 'Добавлен');
         $this->resetData();
     }
@@ -53,7 +55,7 @@ class NomenclatureTypeForm extends Component
             ...$this->data->toArray(),
             'nomenclatureType' => $this->nomenclatureType,
         ]));
-        $this->dispatch(self::NOMENCLATURE_TYPE_SAVED_EVENT);
+        $this->dispatch(self::NOMENCLATURE_TYPE_SAVED_EVENT, $this->nomenclatureType->id);
         $this->notification()->success('Тип номенклатуры', 'Изменен');
     }
 

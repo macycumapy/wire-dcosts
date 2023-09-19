@@ -12,9 +12,12 @@ class NomenclatureTypeModal extends Component
 {
     use AsModal;
 
-    public $listeners = [
+    public ?string $name = null;
+    public ?int $id = null;
+    protected $listeners = [
         NomenclatureTypeForm::NOMENCLATURE_TYPE_SAVED_EVENT => 'closeModal'
     ];
+
     public function render(): View
     {
         return view('livewire.nomenclature-type.nomenclature-type-modal');

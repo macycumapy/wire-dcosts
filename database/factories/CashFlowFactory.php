@@ -6,7 +6,9 @@ namespace Database\Factories;
 
 use App\Enums\CashFlowType;
 use App\Models\CashFlow;
+use App\Models\CashOutflowItem;
 use App\Models\Category;
+use App\Models\Nomenclature;
 use App\Models\Partner;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -30,7 +32,7 @@ class CashFlowFactory extends Factory
         ];
     }
 
-    public function outflow(): Factory
+    public function outflow(int $detailsCount = 3): Factory
     {
         return $this->state(function (array $attributes) {
             return [
@@ -42,6 +44,13 @@ class CashFlowFactory extends Factory
                     'user_id' => $attributes['user_id'],
                 ]),
             ];
+        })->afterCreating(function (CashFlow $cashFlow) use ($detailsCount) {
+            $items = CashOutflowItem::factory($detailsCount)
+                ->for($cashFlow)
+                ->for(Nomenclature::factory()->for($cashFlow->user)->create())
+                ->create();
+            $cashFlow->sum = $items->sum('sum');
+            $cashFlow->save();
         });
     }
 

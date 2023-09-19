@@ -1,6 +1,6 @@
 <div>
     <div x-data class="min-w-full divide-y divide-gray-500">
-        <div class="grid grid-cols-4 p-4 font-semibold gap-4 sticky top-0 bg-gray-800">
+        <div class="grid grid-cols-3 sm:grid-cols-4 p-4 font-semibold gap-4 sticky top-0 bg-gray-800">
             <div>Дата</div>
             <div>Сумма</div>
             <div>Категория</div>
@@ -21,22 +21,35 @@
                         </div>
                         <div class="col-span-3 sm:col-span-1 flex justify-end">
                             @if($cashFlow->type === \App\Enums\CashFlowType::Inflow)
-                                <x-button
+                                <x-button.circle
                                     flat
                                     wire:navigate
                                     href="{{ route('inflows.edit', ['id' => $cashFlow->id, 'clone' => true]) }}"
                                     icon="document-duplicate"
-                                ></x-button>
-                                <x-button
+                                ></x-button.circle>
+                                <x-button.circle
                                     flat
                                     wire:navigate
                                     href="{{ route('inflows.edit', ['id' => $cashFlow->id]) }}"
                                     icon="pencil-alt"
-                                ></x-button>
-                                @livewire('cash-flow.cash-flow-delete-button', [
-                                    'cashFlow' => $cashFlow
-                                ], key($cashFlow->id))
+                                ></x-button.circle>
+                            @else
+                                <x-button.circle
+                                    flat
+                                    wire:navigate
+                                    href="{{ route('outflows.edit', ['id' => $cashFlow->id, 'clone' => true]) }}"
+                                    icon="document-duplicate"
+                                ></x-button.circle>
+                                <x-button.circle
+                                    flat
+                                    wire:navigate
+                                    href="{{ route('outflows.edit', ['id' => $cashFlow->id]) }}"
+                                    icon="pencil-alt"
+                                ></x-button.circle>
                             @endif
+                            @livewire('cash-flow.cash-flow-delete-button', [
+                                'cashFlow' => $cashFlow
+                            ], key($cashFlow->id))
                         </div>
                     </div>
                 </div>

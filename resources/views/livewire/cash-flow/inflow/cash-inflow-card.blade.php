@@ -11,7 +11,12 @@
                     wire:model.live="data.category_id"
                     name="category_id"
                     label="Категория"
-                    :async-data="route('categories.search')"
+                    :async-data="[
+                        'api' => route('categories.search'),
+                        'params' => [
+                            'type' => \App\Enums\CashFlowType::Inflow->value,
+                        ]
+                    ]"
                     option-label="name"
                     option-value="id"
                     option-description="-"

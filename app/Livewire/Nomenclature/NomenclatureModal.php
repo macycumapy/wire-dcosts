@@ -12,6 +12,9 @@ class NomenclatureModal extends Component
 {
     use AsModal;
 
+    public ?string $name = null;
+    public ?int $id = null;
+
     public $listeners = [
         NomenclatureForm::NOMENCLATURE_SAVED_EVENT => 'closeModal'
     ];

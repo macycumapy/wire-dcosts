@@ -16,7 +16,6 @@
         readonly:    @boolean($readonly || $disabled),
         placeholder: @toJs($placeholder),
         template:    @toJs($template),
-        qq: @boolean($qq ?? false)
     }"
     x-init="
         $watch('wireModel', (value) => { if (value) closeIfNotFocused(); search = ''})

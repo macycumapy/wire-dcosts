@@ -12,7 +12,9 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 
 /**
  * Движение денежных средств
@@ -28,6 +30,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property CashFlowType $type Тип движения
  * @property-read Category|null $category Статья затрат
  * @property-read Partner|null $partner Контрагент
+ * @property-read Collection<CashOutflowItem> $details
  * @mixin CashFlowBuilder
  */
 class CashFlow extends Model
@@ -70,5 +73,10 @@ class CashFlow extends Model
     public function partner(): BelongsTo
     {
         return $this->belongsTo(Partner::class);
+    }
+
+    public function details(): HasMany
+    {
+        return $this->hasMany(CashOutflowItem::class);
     }
 }

@@ -9,6 +9,13 @@
                         href="{{ route('inflows.create') }}"
                         label="Добавить поступление"
                     ></x-button>
+
+                    <x-button
+                        primary
+                        wire:navigate
+                        href="{{ route('outflows.create') }}"
+                        label="Добавить расход"
+                    ></x-button>
                 </div>
                 @livewire('cash-flow.cash-flow-list')
             </x-card>

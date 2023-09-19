@@ -6,7 +6,7 @@
     ></x-input>
 
     <x-select
-        wire:model="data.nomenclature_type_id"
+        wire:model.live="data.nomenclature_type_id"
         name="nomenclature_type_id"
         label="Тип номенклатуры"
         :async-data="route('nomenclature-type.search')"
@@ -18,6 +18,14 @@
         <x-slot name="emptyMessage">
             @livewire('nomenclature-type.nomenclature-type-modal')
         </x-slot>
+
+        @if($data->nomenclature_type_id)
+            <x-slot name="openButton">
+                @livewire('nomenclature-type.nomenclature-type-modal', [
+                    'id' => $data->nomenclature_type_id,
+                ], key('nomenclatureType_' . $data->nomenclature_type_id))
+            </x-slot>
+        @endif
     </x-select>
 
     <div class="flex justify-end">

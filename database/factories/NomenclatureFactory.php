@@ -16,10 +16,12 @@ class NomenclatureFactory extends Factory
 {
     public function definition(): array
     {
+        $user = User::factory()->create();
+
         return [
             'name' => $this->faker->name(),
-            'user_id' => User::factory()->create(),
-            'nomenclature_type_id' => NomenclatureType::factory()->create(),
+            'user_id' => $user,
+            'nomenclature_type_id' => NomenclatureType::factory()->for($user)->create(),
         ];
     }
 }

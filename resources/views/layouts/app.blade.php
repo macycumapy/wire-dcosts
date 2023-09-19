@@ -41,6 +41,9 @@
             <x-notifications z-index="z-50"></x-notifications>
             <x-dialog z-index="z-50" blur="md" align="center"></x-dialog>
         @endpersist
+        @persist('dictionaries')
+            <livewire:nomenclature.nomenclature-dictionary lazy></livewire:nomenclature.nomenclature-dictionary>
+        @endpersist
 
         @stack('modals')
     </body>

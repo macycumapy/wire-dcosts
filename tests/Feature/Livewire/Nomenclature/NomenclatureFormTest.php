@@ -35,9 +35,9 @@ class NomenclatureFormTest extends TestCase
     /** @dataProvider dataProvider */
     public function testUpdate(string $name)
     {
-        $this->actingAs($user = User::factory()->create());
-        $nomType = NomenclatureType::factory()->for($user)->create();
-        $nomenclature = Nomenclature::factory()->for($user)->create();
+        $nomenclature = Nomenclature::factory()->create();
+        $this->actingAs($nomenclature->user);
+        $nomType = NomenclatureType::factory()->for($nomenclature->user)->create();
 
         Livewire::test(NomenclatureForm::class, ['id' => $nomenclature->id])
             ->set('data.name', $name)

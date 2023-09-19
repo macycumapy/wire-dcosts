@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Builders\NomenclatureBuilder;
 use App\Models\Scopes\SampleByUser;
 use App\Models\Traits\HasUser;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $name
  * @property int|null $nomenclature_type_id
  * @property-read NomenclatureType $nomenclatureType
- * @mixin Builder
+ * @mixin NomenclatureBuilder
  */
 class Nomenclature extends Model
 {
@@ -35,6 +35,11 @@ class Nomenclature extends Model
     {
         parent::boot();
         static::addGlobalScope(new SampleByUser());
+    }
+
+    public function newEloquentBuilder($query): NomenclatureBuilder
+    {
+        return new NomenclatureBuilder($query);
     }
 
     /**

@@ -1,10 +1,10 @@
 <div x-data="{name:@entangle('name')}" x-init="$watch('$store.selectSearch', value => name = value)">
     @if($id)
-        <x-button
-            flat
+        <x-icon
             wire:click="$toggle('showModal')"
-            icon="pencil-alt"
-        ></x-button>
+            name="pencil-alt"
+            class="w-4 h-4 cursor-pointer hover:text-emerald-700"
+        ></x-icon>
     @else
         <x-button
             wire:click="$toggle('showModal')"
