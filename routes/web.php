@@ -12,6 +12,7 @@ use App\Livewire\CashFlow\Inflow\CashInflowCard;
 use App\Livewire\CashFlow\Outflow\CashOutflowCard;
 use App\Livewire\Nomenclature\NomenclatureForm;
 use App\Livewire\NomenclatureType\NomenclatureTypeForm;
+use App\Livewire\Report\FlowsReport;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -56,5 +57,9 @@ Route::middleware([
     Route::prefix('outflows')->group(function () {
         Route::get('/create', CashOutflowCard::class)->name('outflows.create');
         Route::get('/{id}', CashOutflowCard::class)->name('outflows.edit');
+    });
+
+    Route::prefix('reports')->group(function () {
+        Route::get('/{slug}', FlowsReport::class)->name('report');
     });
 });

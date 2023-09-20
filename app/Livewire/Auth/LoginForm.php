@@ -21,7 +21,7 @@ class LoginForm extends Component
     public function login(AuthUserAction $authUserAction): void
     {
         if ($authUserAction->exec(AuthUserData::validateAndCreate($this->authUserData))) {
-            $this->redirectRoute('dashboard');
+            $this->redirectRoute('dashboard', navigate: true);
         }
     }
 
