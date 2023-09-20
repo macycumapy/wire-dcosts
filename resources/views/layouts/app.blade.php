@@ -17,7 +17,11 @@
         @livewireScriptConfig
         <!-- Styles -->
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased overflow-hidden sm:overflow-auto soft-scrollbar">
+        @persist('dictionaries')
+            <livewire:nomenclature.nomenclature-dictionary lazy></livewire:nomenclature.nomenclature-dictionary>
+        @endpersist
+
         <div class="min-h-screen bg-primary-900">
             @livewire('navigation-menu')
 
@@ -40,9 +44,6 @@
         @persist('notifications')
             <x-notifications z-index="z-50"></x-notifications>
             <x-dialog z-index="z-50" blur="md" align="center"></x-dialog>
-        @endpersist
-        @persist('dictionaries')
-            <livewire:nomenclature.nomenclature-dictionary lazy></livewire:nomenclature.nomenclature-dictionary>
         @endpersist
 
         @stack('modals')

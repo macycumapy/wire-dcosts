@@ -21,7 +21,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireScriptConfig
     </head>
-    <body class="bg-[url('/images/intro.jpg')]">
+    <body class="bg-[url('/images/intro.jpg')] overflow-hidden">
         <div class="fixed flex gap-4 p-6 justify-end w-full">
             @unless(request()->is('login'))
                 <x-button wire:navigate sm emerald flat href="{{ route('login') }}">Войти</x-button>

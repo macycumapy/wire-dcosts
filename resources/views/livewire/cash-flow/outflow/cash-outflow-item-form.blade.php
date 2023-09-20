@@ -25,13 +25,7 @@
             </x-slot>
         @endif
     </x-select>
-    <div class="grid grid-cols-3 gap-4">
-        <x-inputs.currency
-            wire:model="data.count"
-            x-model="count"
-            name="count"
-            label="Количество"
-        ></x-inputs.currency>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
         <x-inputs.currency
             wire:model="data.cost"
             x-model="cost"
@@ -41,16 +35,25 @@
             thousands=" "
         ></x-inputs.currency>
         <x-inputs.currency
-            wire:model="data.sum"
-            x-model="sum"
-            label="Итого"
-            suffix="руб."
-            thousands=" "
-            disabled
+            wire:model="data.count"
+            x-model="count"
+            name="count"
+            label="Количество"
         ></x-inputs.currency>
+        <div class="hidden sm:block">
+            <x-inputs.currency
+                wire:model="data.sum"
+                x-model="sum"
+                label="Итого"
+                suffix="руб."
+                thousands=" "
+                disabled
+            ></x-inputs.currency>
+        </div>
     </div>
 
-    <div class="flex justify-end">
+    <div class="flex justify-between sm:justify-end text-center">
+        <div class="sm:hidden flex">Итого:&nbsp;<span x-text="sum"></span>&nbsp;руб.</div>
         @isset($detailsIndex)
             <x-button
                 primary

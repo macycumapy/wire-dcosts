@@ -1,5 +1,5 @@
-<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 my-12">
-    <x-card :title="$cashFlow ? 'Поступление денежных средств' : 'Новое поступление денежных средств'">
+<div class="max-w-7xl sm:mx-auto sm:px-6 lg:px-8 sm:my-12 m-2">
+    <x-card :title="$cashFlow ? 'Поступление денежных средств' : 'Новое поступление денежных средств'" padding="py-2 sm:py-5 px-2">
         <div class="space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <x-datetime-picker
@@ -21,11 +21,14 @@
                     option-value="id"
                     option-description="-"
                     autocomplete="off" autocorrect="off"
+                    hideEmptyMessage
                 >
-                    <x-slot name="emptyMessage">
-                        @livewire('category.category-modal', [
-                            'type' => \App\Enums\CashFlowType::Inflow,
-                        ])
+                    <x-slot name="afterOptions">
+                        <div class="p-4 w-full">
+                            @livewire('category.category-modal', [
+                                'type' => \App\Enums\CashFlowType::Inflow,
+                            ])
+                        </div>
                     </x-slot>
 
                     @if($data->category_id)

@@ -28,7 +28,7 @@
                 @livewire('cash-flow.outflow.cash-outflow-item-form', [
                     'data' => $data,
                     'detailsIndex' => $detailsIndex,
-                ])
+                ], key('item'.json_encode($data).$detailsIndex))
             </x-modal.card>
         @endteleport
     @endif

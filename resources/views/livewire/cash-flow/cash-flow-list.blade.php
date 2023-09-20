@@ -11,15 +11,15 @@
                 <div wire:key="row_{{ $cashFlow->id }}">
                     <div class="p-4 grid grid-cols-3 sm:grid-cols-4 gap-4">
                         <div>
-                            {{ $cashFlow->date->timezone($timezone)->isToday() ? 'Сегодня' : $cashFlow->date->timezone($timezone)->format('d.m.Y H:i') }}
+                            {{ $cashFlow->date->timezone($timezone)->isToday() ? 'Сегодня' : $cashFlow->date->timezone($timezone)->format('d.m.Y') }}
                         </div>
-                        <div class="text-{{ $cashFlow->type->color() }}-600">
+                        <div class="text-{{ $cashFlow->type->color() }}-600 text-center sm:text-left">
                             {{ number_format($cashFlow->sum, 2, '.', ' ') }}
                         </div>
-                        <div>
+                        <div class="truncate">
                             {{ $cashFlow->category?->name }}
                         </div>
-                        <div class="col-span-3 sm:col-span-1 flex justify-end">
+                        <div class="col-span-3 sm:col-span-1 flex sm:justify-end justify-between">
                             @if($cashFlow->type === \App\Enums\CashFlowType::Inflow)
                                 <x-button.circle
                                     flat

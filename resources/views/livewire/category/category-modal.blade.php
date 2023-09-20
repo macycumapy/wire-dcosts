@@ -6,10 +6,16 @@
             class="w-4 h-4 cursor-pointer hover:text-emerald-700"
         ></x-icon>
     @else
-        <x-button
-            wire:click="$toggle('showModal')"
-            label="Добавить"
-        ></x-button>
+        <div class="flex justify-between items-center w-full">
+            <div>Нет подходящего?</div>
+            <x-button
+                outline
+                primary
+                wire:click="$toggle('showModal')"
+                icon="plus"
+                label="Добавить"
+            ></x-button>
+        </div>
     @endif
     @if($showModal)
         @teleport('#footer')

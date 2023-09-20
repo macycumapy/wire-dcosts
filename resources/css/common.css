@@ -20,5 +20,5 @@ h2 {
 }
 
 h3 {
-    @apply text-xl font-semibold text-gray-900;
+    @apply text-lg font-semibold text-gray-900;
 }
