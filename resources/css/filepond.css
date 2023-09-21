@@ -19,3 +19,11 @@
 .filepond--root .filepond--label-action {
     @apply text-sky-500 no-underline hover:underline decoration-sky-500;
 }
+
+.filepond--file-wrapper {
+    @apply bg-emerald-700 rounded-lg
+}
+
+.filepond--file-action-button.filepond--action-revert-item-processing {
+    @apply bg-emerald-900 cursor-pointer
+}

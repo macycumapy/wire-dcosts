@@ -9,7 +9,7 @@ use Spatie\LaravelData\Support\DataProperty;
 
 class TrimCast implements Cast
 {
-    public function cast(DataProperty $property, mixed $value, array $context): ?string
+    public function cast(DataProperty $property, mixed $value, array $context): mixed
     {
         if (is_string($value)) {
             return trim($value);

@@ -15,6 +15,7 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
         "predis/predis": "^2.1",
+        "shuchkin/simplexlsx": "^1.0",
         "spatie/laravel-data": "^3.1",
         "spatie/laravel-query-builder": "^5.2",
         "stechstudio/laravel-jwt": "^2.1",

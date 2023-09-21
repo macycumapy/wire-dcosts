@@ -10,6 +10,7 @@ use App\Livewire\Auth\LoginForm;
 use App\Livewire\Auth\RegisterForm;
 use App\Livewire\CashFlow\Inflow\CashInflowCard;
 use App\Livewire\CashFlow\Outflow\CashOutflowCard;
+use App\Livewire\InitBalances\InitBalancesForm;
 use App\Livewire\Nomenclature\NomenclatureForm;
 use App\Livewire\NomenclatureType\NomenclatureTypeForm;
 use App\Livewire\Report\FlowsReport;
@@ -62,4 +63,6 @@ Route::middleware([
     Route::prefix('reports')->group(function () {
         Route::get('/{slug}', FlowsReport::class)->name('report');
     });
+
+    Route::get('/init-balances', InitBalancesForm::class)->name('init-balances');
 });
