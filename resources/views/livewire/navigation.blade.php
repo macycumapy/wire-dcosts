@@ -5,8 +5,8 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-
+                    <a wire:navigate href="{{ route('dashboard') }}">
+                        <img src="/images/logo.png" class="w-10 h-10">
                     </a>
                 </div>
             </div>
