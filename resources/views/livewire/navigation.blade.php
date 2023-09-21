@@ -11,6 +11,10 @@
                 </div>
             </div>
 
+            <div class="flex items-center text-primary-700 font-semibold">
+                @livewire('widget.balances-widget')
+            </div>
+
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">

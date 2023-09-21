@@ -59,7 +59,7 @@ readonly class InitialBalancesService
                 }
 
                 /** @var Category $category */
-                $category = Category::firstWhere('name', $inflow->categoryName);
+                $category = Category::where('type', CashFlowType::Inflow)->firstWhere('name', $inflow->categoryName);
                 if (!$category) {
                     $category = $this->createCategoryAction->exec(CategoryData::from([
                         'name' => $inflow->categoryName,
@@ -88,7 +88,7 @@ readonly class InitialBalancesService
         return DB::transaction(function () use ($outflowData) {
             return collect($outflowData)->map(function (OutflowData $outflow) {
                 /** @var Category $category */
-                $category = Category::firstWhere('name', $outflow->categoryName);
+                $category = Category::where('type', CashFlowType::Outflow)->firstWhere('name', $outflow->categoryName);
                 if (!$category) {
                     $category = $this->createCategoryAction->exec(CategoryData::from([
                         'name' => $outflow->categoryName,

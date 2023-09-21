@@ -16,7 +16,7 @@ class OutflowItemData extends Data
 
     public function __construct(
         public ?int    $user_id,
-        public ?int    $count,
+        public ?float  $count,
         public ?float  $cost,
         public ?int    $nomenclature_id = null,
         public ?int    $id = null,

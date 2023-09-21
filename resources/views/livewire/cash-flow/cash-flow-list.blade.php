@@ -61,6 +61,6 @@
         </div>
     </div>
     <div class="pb-4">
-        {{ $items->links() }}
+        {{ $items->onEachSide(1)->links() }}
     </div>
 </div>
