@@ -25,7 +25,13 @@
                                 </x-button>
                             </span>
                         </x-slot>
-
+                        @foreach($reports as $report)
+                            <x-dropdown.item
+                                wire:navigate
+                                href="{{ route('report', ['slug' => $report->slug]) }}"
+                                :label="$report->name"
+                            ></x-dropdown.item>
+                        @endforeach
                         <x-dropdown.item>
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
@@ -35,8 +41,6 @@
                                 </div>
                             </form>
                         </x-dropdown.item>
-
-
                     </x-dropdown>
                 </div>
             </div>
@@ -55,9 +59,16 @@
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden fixed left-0 top-16 z-50 bg-secondary-800 w-full text-gray-400">
             <!-- Responsive Settings Options -->
             <div class="border-b border-t border-emerald-800 space-y-2">
-                <div class="space-y-1 p-4">
+                <div class="space-y-1">
+                    @foreach($reports as $report)
+                        <div class="p-4">
+                            <a wire:navigate href="{{ route('report', ['slug' => $report->slug]) }}">
+                                {{ $report->name }}
+                            </a>
+                        </div>
+                    @endforeach
                     <!-- Authentication -->
-                    <form method="POST" action="{{ route('logout') }}" x-data class="cursor-pointer py-4">
+                    <form method="POST" action="{{ route('logout') }}" x-data class="cursor-pointer p-4">
                         @csrf
                         <div class="flex" @click.prevent="$root.submit();">
                             <x-icon name="logout" class="w-5 h-5"></x-icon>

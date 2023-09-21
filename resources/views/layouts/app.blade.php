@@ -23,7 +23,9 @@
         @endpersist
 
         <div class="min-h-screen bg-primary-900">
-            @livewire('navigation-menu')
+            @persist('navigation')
+                @livewire('navigation')
+            @endpersist
 
             <!-- Page Heading -->
             @if (isset($header))
