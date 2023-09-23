@@ -1,7 +1,7 @@
 <div x-data="{
         count:@entangle('data.count'),
         cost:@entangle('data.cost'),
-        get sum() { return this.count * this.cost}
+        get sum() { return (this.count * this.cost).toFixed(2) }
     }" class="space-y-4">
     <x-select
         wire:model.live="data.nomenclature_id"
@@ -33,12 +33,14 @@
             label="Стоимость"
             suffix="руб."
             thousands=" "
+            inputmode="numeric"
         ></x-inputs.currency>
         <x-inputs.currency
             wire:model="data.count"
             x-model="count"
             name="count"
             label="Количество"
+            inputmode="numeric"
         ></x-inputs.currency>
         <div class="hidden sm:block">
             <x-inputs.currency
