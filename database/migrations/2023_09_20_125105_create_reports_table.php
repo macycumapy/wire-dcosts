@@ -16,7 +16,8 @@ return new class () extends Migration {
             $table->id();
             $table->string('slug', 35)->unique()->index();
             $table->string('name');
-            $table->unsignedInteger('question_id');
+            $table->string('object_type', 25);
+            $table->unsignedInteger('object_id');
             $table->json('params');
         });
     }

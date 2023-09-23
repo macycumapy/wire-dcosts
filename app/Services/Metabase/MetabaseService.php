@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\Metabase;
 
+use App\Services\Enums\MetabaseSharedObjectType;
+use App\Services\Metabase\Exceptions\ObjectRequiredException;
 use App\Services\Metabase\Exceptions\ParamsRequiredException;
-use App\Services\Metabase\Exceptions\QuestionIdRequiredException;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use STS\JWT\Facades\JWT;
@@ -16,7 +17,8 @@ class MetabaseService
     private string $secret;
     private Carbon $expiresAt;
     private array $params = [];
-    private ?int $questionId = null;
+    private ?int $objectId = null;
+    private ?MetabaseSharedObjectType $type;
 
 
     public function __construct()
@@ -27,24 +29,25 @@ class MetabaseService
     }
 
     /**
-     * @throws QuestionIdRequiredException
+     * @throws ObjectRequiredException
      * @throws ParamsRequiredException
      */
     public function getIFrameUrl(): string
     {
         $token = $this->getToken();
+        $type = $this->type->value;
 
-        return "$this->url/embed/question/$token/#theme=night&titled=false";
+        return "$this->url/embed/$type/$token/?params=0#theme=night&titled=false";
     }
 
     /**
-     * @throws QuestionIdRequiredException
+     * @throws ObjectRequiredException
      * @throws ParamsRequiredException
      */
     private function getToken(): string
     {
-        if (!isset($this->questionId)) {
-            throw new QuestionIdRequiredException();
+        if (!isset($this->objectId) || !isset($this->type)) {
+            throw new ObjectRequiredException();
         }
 
         if (empty($this->params)) {
@@ -52,7 +55,9 @@ class MetabaseService
         }
 
         return JWT::signWith($this->secret)->withClaims([
-            'resource' => ['question' => $this->questionId],
+            'resource' => [
+                $this->type->value => $this->objectId,
+            ],
             'params' => $this->params,
         ])->expiresAt($this->expiresAt)->getToken()->toString();
     }
@@ -75,9 +80,16 @@ class MetabaseService
         return $this;
     }
 
-    public function setQuestionId(int $questionId): self
+    public function setObjectType(MetabaseSharedObjectType $type): self
     {
-        $this->questionId = $questionId;
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function setObjectId(int $objectId): self
+    {
+        $this->objectId = $objectId;
 
         return $this;
     }

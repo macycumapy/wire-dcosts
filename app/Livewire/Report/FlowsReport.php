@@ -25,7 +25,8 @@ class FlowsReport extends Component
         $report = Report::findBySlugOrFail($slug);
 
         $this->iframeUrl = $this->metabaseService
-            ->setQuestionId($report->question_id)
+            ->setObjectType($report->object_type)
+            ->setObjectId($report->object_id)
             ->setParams($report->params)
             ->getIFrameUrl();
     }

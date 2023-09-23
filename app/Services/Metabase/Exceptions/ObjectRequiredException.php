@@ -6,6 +6,6 @@ namespace App\Services\Metabase\Exceptions;
 
 use Exception;
 
-class QuestionIdRequiredException extends Exception
+class ObjectRequiredException extends Exception
 {
 }
