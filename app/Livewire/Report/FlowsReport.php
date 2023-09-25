@@ -28,6 +28,7 @@ class FlowsReport extends Component
             ->setObjectType($report->object_type)
             ->setObjectId($report->object_id)
             ->setParams($report->params)
+            ->setTheme($report->theme)
             ->getIFrameUrl();
     }
 

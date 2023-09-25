@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Metabase;
 
-use App\Services\Enums\MetabaseSharedObjectType;
+use App\Services\Metabase\Enums\MetabaseSharedObjectType;
+use App\Services\Metabase\Enums\MetabaseTheme;
 use App\Services\Metabase\Exceptions\ObjectRequiredException;
 use App\Services\Metabase\Exceptions\ParamsRequiredException;
 use Carbon\Carbon;
@@ -18,7 +19,8 @@ class MetabaseService
     private Carbon $expiresAt;
     private array $params = [];
     private ?int $objectId = null;
-    private ?MetabaseSharedObjectType $type;
+    private ?MetabaseSharedObjectType $type = null;
+    private MetabaseTheme $theme;
 
 
     public function __construct()
@@ -26,6 +28,7 @@ class MetabaseService
         $this->url = config('metabase.url');
         $this->secret = config('metabase.secret');
         $this->expiresAt = now()->addMinutes(10);
+        $this->theme = MetabaseTheme::Light;
     }
 
     /**
@@ -36,8 +39,9 @@ class MetabaseService
     {
         $token = $this->getToken();
         $type = $this->type->value;
+        $theme = $this->theme->value;
 
-        return "$this->url/embed/$type/$token/?params=0#theme=night&titled=false";
+        return "$this->url/embed/$type/$token/?params=0#theme=$theme&titled=false";
     }
 
     /**
@@ -90,6 +94,13 @@ class MetabaseService
     public function setObjectId(int $objectId): self
     {
         $this->objectId = $objectId;
+
+        return $this;
+    }
+
+    public function setTheme(?MetabaseTheme $theme): self
+    {
+        $this->theme = $theme ?? MetabaseTheme::Light;
 
         return $this;
     }
