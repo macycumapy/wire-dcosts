@@ -28,7 +28,7 @@ class RegisterForm extends Component
                 'email' => $this->createUserData->email,
                 'password' => $this->createUserData->password,
             ]));
-            $this->redirect(RouteServiceProvider::HOME, navigate: true);
+            $this->redirect(RouteServiceProvider::HOME);
         }
     }
 
