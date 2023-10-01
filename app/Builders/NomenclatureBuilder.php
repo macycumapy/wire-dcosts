@@ -28,6 +28,6 @@ class NomenclatureBuilder extends Builder
 
         return $this
             ->leftJoinSub($sub, 'coi', 'coi.nomenclature_id', '=', 'nomenclatures.id')
-            ->orderByDesc('coi.last_used_id');
+            ->orderByRaw('coalesce(coi.last_used_id, 0) DESC');
     }
 }
