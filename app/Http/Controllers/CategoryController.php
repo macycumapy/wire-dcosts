@@ -16,6 +16,6 @@ class CategoryController extends Controller
             ? Category::find($request->input('selected', []))
             : Category::ofType(CashFlowType::tryFrom($request->query('type', '')))->searchByName(
                 $request->query('search', ''),
-            );
+            )->get();
     }
 }

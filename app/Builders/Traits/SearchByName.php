@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Builders\Traits;
 
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Builder;
 
 trait SearchByName
 {
-    public function searchByName(string $name): Collection
+    public function searchByName(string $name): Builder
     {
-        return $this->where('name', 'like', "%$name%")->get();
+        $name = mb_strtolower($name);
+
+        return $this->whereRaw('lower(name) like ?', ["%$name%"]);
     }
 }

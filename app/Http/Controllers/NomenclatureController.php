@@ -13,8 +13,8 @@ class NomenclatureController extends Controller
     {
         return $request->exists('selected')
             ? Nomenclature::find($request->input('selected', []))
-            : Nomenclature::searchByName(
+            : Nomenclature::sortByLastUsed()->searchByName(
                 $request->query('search', ''),
-            );
+            )->get();
     }
 }

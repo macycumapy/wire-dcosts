@@ -15,6 +15,6 @@ class NomenclatureTypeController extends Controller
             ? NomenclatureType::find($request->input('selected', []))
             : NomenclatureType::searchByName(
                 $request->query('search', ''),
-            );
+            )->get();
     }
 }

@@ -15,6 +15,6 @@ class PartnerController extends Controller
             ? Partner::find($request->input('selected', []))
             : Partner::searchByName(
                 $request->query('search', ''),
-            );
+            )->get();
     }
 }
