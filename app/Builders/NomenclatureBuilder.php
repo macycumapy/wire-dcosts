@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 /**
- * @method searchByName(string $name)
+ * @method NomenclatureBuilder searchByName(string $name)
  * @mixin Nomenclature
  */
 class NomenclatureBuilder extends Builder

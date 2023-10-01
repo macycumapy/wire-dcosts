@@ -9,7 +9,7 @@ use App\Models\NomenclatureType;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * @method searchByName(string $name)
+ * @method NomenclatureTypeBuilder searchByName(string $name)
  * @mixin NomenclatureType
  */
 class NomenclatureTypeBuilder extends Builder

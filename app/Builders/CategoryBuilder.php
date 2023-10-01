@@ -10,7 +10,7 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * @method searchByName(string $name)
+ * @method CategoryBuilder searchByName(string $name)
  * @mixin Category
  */
 class CategoryBuilder extends Builder

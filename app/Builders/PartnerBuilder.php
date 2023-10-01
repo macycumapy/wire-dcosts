@@ -9,7 +9,7 @@ use App\Models\Partner;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * @method searchByName(string $name)
+ * @method PartnerBuilder searchByName(string $name)
  * @mixin Partner
  */
 class PartnerBuilder extends Builder
