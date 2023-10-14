@@ -1,12 +1,26 @@
 <div>
-    <div x-data class="min-w-full divide-y divide-gray-500">
+    <div x-data="{
+            isLoading: @entangle('isLoading'),
+            itemsCount: @entangle('itemsCount'),
+            perPage: @entangle('perPage')
+        }" x-init="
+        let list = document.getElementById('list');
+        let listRect = list.getBoundingClientRect();
+
+        list.onscroll = function () {
+            if (list.scrollTop + listRect.bottom * 1.1 > list.scrollHeight && !isLoading && itemsCount > perPage) {
+                isLoading = true;
+                $wire.loadMore()
+            }
+        }
+    " class="min-w-full divide-y divide-gray-500">
         <div class="grid grid-cols-3 sm:grid-cols-4 p-4 font-semibold gap-4 sticky top-0 bg-gray-800">
             <div>Дата</div>
             <div>Сумма</div>
             <div>Категория</div>
             <div></div>
         </div>
-        <div class="divide-y divide-gray-500 h-[55vh] sm:h-[60vh] overflow-auto soft-scrollbar">
+        <div id="list" class="divide-y divide-gray-500 h-[60vh] sm:h-[65vh] overflow-auto soft-scrollbar">
             @forelse($items as $key => $cashFlow)
                 <div wire:key="row_{{ $cashFlow->id }}">
                     <div class="p-4 grid grid-cols-3 sm:grid-cols-4 gap-4">
@@ -58,9 +72,10 @@
                     Список пуст
                 </div>
             @endforelse
+
+            <div x-show="isLoading" x-transition x-cloak class="p-4 text-center text-lg text-emerald-600">
+                Загрузка...
+            </div>
         </div>
-    </div>
-    <div class="pb-4">
-        {{ $items->onEachSide(1)->links() }}
     </div>
 </div>

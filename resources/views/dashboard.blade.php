@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <x-card card-classes="h-full sm:h-[81vh]">
                 @livewire('cash-flow.cash-flow-list')
-                <div class="flex justify-end space-x-4">
+                <div class="flex justify-end space-x-4 mt-4">
                     <x-button
                         primary
                         wire:navigate
