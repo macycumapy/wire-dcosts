@@ -23,7 +23,7 @@ class CashOutflowData extends Data
     public readonly CashFlowType $type;
 
     public function __construct(
-        public Carbon|string $date,
+        public Carbon|string|null $date,
         public int $user_id,
         public ?int $category_id,
         #[DataCollectionOf(OutflowItemData::class)]

@@ -22,6 +22,8 @@ class LoginForm extends Component
     {
         if ($authUserAction->exec(AuthUserData::validateAndCreate($this->authUserData))) {
             $this->redirectRoute('dashboard');
+        } else {
+            $this->addError('email', 'Неверный логин или пароль');
         }
     }
 

@@ -12,7 +12,7 @@ use Spatie\LaravelData\Support\Validation\ValidationContext;
 
 class CashFlowData extends Data
 {
-    public Carbon|string $date;
+    public Carbon|string|null $date;
     public float $sum;
     public int $user_id;
     public CashFlowType|string|null $type;

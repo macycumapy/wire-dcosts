@@ -11,6 +11,6 @@ class AuthUserAction
 {
     public function exec(AuthUserData $data): bool
     {
-        return Auth::attempt(['email' => $data->email, 'password' => $data->password], $data->remember);
+        return Auth::attempt(['email' => mb_strtolower($data->email), 'password' => $data->password], $data->remember);
     }
 }

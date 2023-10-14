@@ -67,7 +67,7 @@
                         <div class="text-right sm:text-left">Сумма</div>
                         <div></div>
                     </div>
-                    @foreach($data->details as $key => $item)
+                    @forelse($data->details as $key => $item)
                         <div wire:key="row_{{ $key }}" class="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4 flex items-center px-1 sm:px-4 py-2">
                             <div class="col-span-3 sm:col-span-1" x-text="$store.nomenclatures?.getName({{ $item->nomenclature_id }})"></div>
                             <div>{{ number_format($item->cost, 2, '.', ' ') }}</div>
@@ -90,7 +90,9 @@
                                 ></x-button.circle>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <div><x-error name="details"></x-error></div>
+                    @endforelse
                 </div>
             </x-card>
 

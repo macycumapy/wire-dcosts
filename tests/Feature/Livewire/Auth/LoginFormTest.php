@@ -36,7 +36,7 @@ class LoginFormTest extends TestCase
 
         $this->assertNotNull($user = User::firstWhere([
             'name' => trim($createUserData->name),
-            'email' => trim($createUserData->email),
+            'email' => mb_strtolower(trim($createUserData->email)),
         ]));
 
         $this->assertTrue(Hash::check($createUserData->password, trim($user->password)));
@@ -60,7 +60,15 @@ class LoginFormTest extends TestCase
                     'password' => '  pass ',
                     'password_confirmation' => '  pass ',
                 ]),
-            ]
+            ],
+            'data with upper case email' => [
+                fn () => CreateUserData::from([
+                    'name' => 'some name',
+                    'email' => 'Some@Email.ru',
+                    'password' => 'pass',
+                    'password_confirmation' => 'pass',
+                ]),
+            ],
         ];
     }
 }

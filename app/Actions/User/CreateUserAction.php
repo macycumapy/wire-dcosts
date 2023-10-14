@@ -14,7 +14,7 @@ class CreateUserAction
     {
         $newUser = new User();
         $newUser->name = $createUserData->name;
-        $newUser->email = $createUserData->email;
+        $newUser->email = mb_strtolower($createUserData->email);
         $newUser->password = Hash::make($createUserData->password);
         $newUser->save();
 

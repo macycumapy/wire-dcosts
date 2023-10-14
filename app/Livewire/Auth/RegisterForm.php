@@ -25,7 +25,7 @@ class RegisterForm extends Component
     {
         if ($createUserAction->exec(CreateUserData::validateAndCreate($this->createUserData))) {
             $authUserAction->exec(AuthUserData::validateAndCreate([
-                'email' => $this->createUserData->email,
+                'email' => mb_strtolower($this->createUserData->email),
                 'password' => $this->createUserData->password,
             ]));
             $this->redirect(RouteServiceProvider::HOME);
