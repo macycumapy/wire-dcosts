@@ -71,6 +71,7 @@
                     :min="0"
                     suffix="руб."
                     thousands=" "
+                    inputmode="numeric"
                 ></x-inputs.currency>
 
             </div>

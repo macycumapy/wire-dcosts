@@ -28,7 +28,7 @@
     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
         <x-inputs.currency
             wire:model="data.cost"
-            x-model="cost"
+            x-model.number="cost"
             name="cost"
             label="Стоимость"
             suffix="руб."
@@ -37,7 +37,7 @@
         ></x-inputs.currency>
         <x-inputs.currency
             wire:model="data.count"
-            x-model="count"
+            x-model.number="count"
             name="count"
             label="Количество"
             inputmode="numeric"
