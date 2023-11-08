@@ -21,7 +21,7 @@
         </div>
     </div>
     <template x-if="open">
-        <div class="absolute -bottom-[175px] sm:-bottom-[75px] bg-gray-800 w-full border-b-2 border-emerald-800 p-4 z-20">
+        <div class="absolute top-[45px] bg-gray-800 w-full border-b-2 border-emerald-800 p-4 z-20">
             <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-12 gap-x-4 text-sm md:gap-x-6 gap-y-2 md:gap-y-4">
                 {{ $slot }}
             </div>

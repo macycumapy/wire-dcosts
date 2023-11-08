@@ -14,7 +14,7 @@
             }
         }
     " class="min-w-full">
-        <x-filters :count="$filterCount">
+        <x-filters :count="$this->filtersCount">
             <div class="sm:col-span-3">
                 <x-select
                     wire:model.live="searchNomenclature"

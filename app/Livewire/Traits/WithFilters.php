@@ -4,19 +4,36 @@ declare(strict_types=1);
 
 namespace App\Livewire\Traits;
 
+use Livewire\Attributes\Computed;
+
 trait WithFilters
 {
-    public ?int $filterCount = null;
+    abstract protected function queryString(): array;
 
     public function getFilterCount(): int
     {
-        return $this->filterCount = collect($this->queryString())
-            ->map(fn ($v, $k) => !empty($this->$k) && $this->$k !== data_get($v, 'except'))
-            ->sum();
+        return collect($this->queryString())
+            ->filter(fn ($v, $k) => !empty($this->$k) && $this->$k !== data_get($v, 'except'))
+            ->count();
     }
 
     public function resetFilters(): void
     {
-        collect($this->queryString())->each(fn ($k, $v) => $this->$v = null);
+        $this->reset(array_keys($this->queryString()));
+    }
+
+    #[Computed]
+    public function filtersCount(): int
+    {
+        return $this->getFilterCount();
+    }
+
+    public function renderingWithFilters(): void
+    {
+        if (!empty(request()->query())) {
+            collect($this->queryString())
+                ->filter(fn ($k, $v) => $this->$v === 'null')
+                ->each(fn ($k, $v) => $this->$v = null);
+        }
     }
 }

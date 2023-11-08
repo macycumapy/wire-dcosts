@@ -67,7 +67,6 @@ class CashFlowList extends Component
 
         return view('livewire.cash-flow.cash-flow-list', [
             'items' => $items,
-            'filterCount' => $this->getFilterCount()
         ]);
     }
 }

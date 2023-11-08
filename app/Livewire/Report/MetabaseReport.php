@@ -9,7 +9,7 @@ use App\Services\Metabase\MetabaseService;
 use Illuminate\View\View;
 use Livewire\Component;
 
-class FlowsReport extends Component
+class MetabaseReport extends Component
 {
     public string $iframeUrl;
 
@@ -34,6 +34,6 @@ class FlowsReport extends Component
 
     public function render(): View
     {
-        return view('livewire.report.flows-report');
+        return view('livewire.report.metabase-report');
     }
 }

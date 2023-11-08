@@ -13,7 +13,8 @@ use App\Livewire\CashFlow\Outflow\CashOutflowCard;
 use App\Livewire\InitBalances\InitBalancesForm;
 use App\Livewire\Nomenclature\NomenclatureForm;
 use App\Livewire\NomenclatureType\NomenclatureTypeForm;
-use App\Livewire\Report\FlowsReport;
+use App\Livewire\Report\MetabaseReport;
+use App\Livewire\Report\OutflowsReport;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -30,38 +31,39 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::prefix('nomenclature-types')->group(function () {
+    Route::prefix('nomenclature-type')->group(function () {
         Route::get('/search', [NomenclatureTypeController::class, 'search'])->name('nomenclature-type.search');
         Route::get('/create', NomenclatureTypeForm::class)->name('nomenclature-type.create');
         Route::get('/{id}', NomenclatureTypeForm::class)->name('nomenclature-type.edit');
     });
 
-    Route::prefix('nomenclatures')->group(function () {
+    Route::prefix('nomenclature')->group(function () {
         Route::get('/search', [NomenclatureController::class, 'search'])->name('nomenclatures.search');
         Route::get('/create', NomenclatureForm::class)->name('nomenclatures.create');
         Route::get('/{id}', NomenclatureForm::class)->name('nomenclatures.edit');
     });
 
-    Route::prefix('partners')->group(function () {
+    Route::prefix('partner')->group(function () {
         Route::get('/search', [PartnerController::class, 'search'])->name('partners.search');
     });
 
-    Route::prefix('categories')->group(function () {
+    Route::prefix('category')->group(function () {
         Route::get('/search', [CategoryController::class, 'search'])->name('categories.search');
     });
 
-    Route::prefix('inflows')->group(function () {
+    Route::prefix('inflow')->group(function () {
         Route::get('/create', CashInflowCard::class)->name('inflows.create');
         Route::get('/{id}', CashInflowCard::class)->name('inflows.edit');
     });
 
-    Route::prefix('outflows')->group(function () {
+    Route::prefix('outflow')->group(function () {
         Route::get('/create', CashOutflowCard::class)->name('outflows.create');
         Route::get('/{id}', CashOutflowCard::class)->name('outflows.edit');
     });
 
-    Route::prefix('reports')->group(function () {
-        Route::get('/{slug}', FlowsReport::class)->name('report');
+    Route::prefix('report')->group(function () {
+        Route::get('/outflows', OutflowsReport::class)->name('report.outflows');
+        Route::get('/{slug}', MetabaseReport::class)->name('report');
     });
 
     Route::get('/init-balances', InitBalancesForm::class)->name('init-balances');
