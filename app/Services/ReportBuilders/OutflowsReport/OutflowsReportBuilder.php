@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class OutflowsReportBuilder
 {
-    public function get(FilterData $data): Collection
+    public function build(FilterData $data): Collection
     {
         $groupedData = DB::table('cash_outflow_items as coi')
             ->select(
@@ -22,6 +22,8 @@ class OutflowsReportBuilder
                 DB::raw('COALESCE(ci.name, \'Прочее\') as category'),
                 DB::raw('COALESCE(nt.name, \'Прочее\') as nomenclature_type'),
                 'n.name as nomenclature',
+                'n.id as nomenclature_id',
+                'ci.id as category_id',
             )
             ->leftJoin('nomenclatures as n', 'n.id', '=', 'coi.nomenclature_id')
             ->leftJoin('cash_flows as cf', 'cf.id', '=', 'coi.cash_flow_id')
@@ -29,27 +31,27 @@ class OutflowsReportBuilder
             ->leftJoin('nomenclature_types as nt', 'nt.id', '=', 'n.nomenclature_type_id')
             ->when(
                 $data->dateFrom,
-                fn(Builder $q) => $q->where('cf.date', '>=', $data->dateFrom->timezone($data->user->timezone)->startOfDay())
+                fn (Builder $q) => $q->where('cf.date', '>=', $data->dateFrom->timezone($data->user->timezone)->startOfDay())
             )
             ->when(
                 $data->dateTo,
-                fn(Builder $q) => $q->where('cf.date', '<=', $data->dateTo->timezone($data->user->timezone)->endOfDay())
+                fn (Builder $q) => $q->where('cf.date', '<=', $data->dateTo->timezone($data->user->timezone)->endOfDay())
             )
             ->where('cf.type', CashFlowType::Outflow)
             ->where('cf.user_id', $data->user->id)
-            ->groupBy('category', 'nomenclature', 'nomenclature_type')
+            ->groupBy('category', 'nomenclature', 'nomenclature_type', 'n.id', 'ci.id')
             ->orderByDesc('sum')
             ->get()
             ->groupBy(['category', fn ($item) => $item->nomenclature_type]);
 
-        return $this->compareWithSum($groupedData);
+        return $this->asDataCollection($groupedData);
     }
 
-    private function compareWithSum(Collection $collection): Collection
+    private function asDataCollection(Collection $collection): Collection
     {
         return $collection->map(function ($item, $key) {
             if ($item instanceof Collection) {
-                $details = $this->compareWithSum($item);
+                $details = $this->asDataCollection($item);
 
                 return GroupData::from([
                     'name' => $key,

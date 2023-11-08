@@ -14,6 +14,7 @@ use App\Livewire\InitBalances\InitBalancesForm;
 use App\Livewire\Nomenclature\NomenclatureForm;
 use App\Livewire\NomenclatureType\NomenclatureTypeForm;
 use App\Livewire\Report\MetabaseReport;
+use App\Livewire\Report\NomenclatureReport;
 use App\Livewire\Report\OutflowsReport;
 use Illuminate\Support\Facades\Route;
 
@@ -63,6 +64,7 @@ Route::middleware([
 
     Route::prefix('report')->group(function () {
         Route::get('/outflows', OutflowsReport::class)->name('report.outflows');
+        Route::get('/nomenclature/{id}', NomenclatureReport::class)->name('report.nomenclature');
         Route::get('/{slug}', MetabaseReport::class)->name('report');
     });
 

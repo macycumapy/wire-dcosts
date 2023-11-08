@@ -100,7 +100,14 @@
                                             <div class="flex justify-between items-start bg-gray-600 p-2 first:rounded-t-lg last:rounded-b-lg">
                                                 <div>{{ $nomenclature->nomenclature }}</div>
                                                 <div class="min-w-[100px] text-right">
-                                                    {{ number_format($nomenclature->sum, 2, '.', ' ') }}
+                                                    <a href="{{ route('report.nomenclature', [
+                                                            'id' => $nomenclature->nomenclature_id,
+                                                            'date_from' => $searchDateFrom,
+                                                            'date_to' => $searchDateTo,
+                                                            'category' => $nomenclature->category_id,
+                                                            'preload' => false,
+                                                        ]) }}" wire:navigate
+                                                    >{{ number_format($nomenclature->sum, 2, '.', ' ') }}</a>
                                                 </div>
                                             </div>
                                         @endforeach

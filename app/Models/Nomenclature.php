@@ -42,11 +42,6 @@ class Nomenclature extends Model
         return new NomenclatureBuilder($query);
     }
 
-    /**
-     * Тип номенклатуры
-     *
-     * @return BelongsTo
-     */
     public function nomenclatureType(): BelongsTo
     {
         return $this->belongsTo(NomenclatureType::class);

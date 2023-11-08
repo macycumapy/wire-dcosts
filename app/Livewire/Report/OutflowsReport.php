@@ -36,7 +36,7 @@ class OutflowsReport extends Component
 
     public function render(OutflowsReportBuilder $report): View
     {
-        $items = $report->get(FilterData::from([
+        $items = $report->build(FilterData::from([
             'user' => auth()->user(),
             'dateFrom' => $this->searchDateFrom,
             'dateTo' => $this->searchDateTo,
