@@ -32,7 +32,7 @@
             name="cost"
             label="Стоимость"
             suffix="руб."
-            thousands=" "
+            thousands=""
             inputmode="numeric"
         ></x-inputs.currency>
         <x-inputs.currency
@@ -40,6 +40,7 @@
             x-model.number="count"
             name="count"
             label="Количество"
+            thousands=""
             inputmode="numeric"
         ></x-inputs.currency>
         <div class="hidden sm:block">
