@@ -65,11 +65,9 @@
             <div class="border-b border-t border-emerald-800 space-y-2">
                 <div class="space-y-1">
                     @foreach($reports as $report)
-                        <div class="p-4">
-                            <a wire:navigate href="{{ route('report', ['slug' => $report->slug]) }}">
-                                {{ $report->name }}
-                            </a>
-                        </div>
+                        <a wire:navigate href="{{ route('report', ['slug' => $report->slug]) }}">
+                            <div class="p-4">{{ $report->name }}</div>
+                        </a>
                     @endforeach
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}" x-data class="cursor-pointer p-4">
