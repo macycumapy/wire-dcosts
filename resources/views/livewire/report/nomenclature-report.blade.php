@@ -20,6 +20,7 @@
             </div>
             <div class="flex justify-end">
                 <x-button
+                    secondary
                     wire:navigate
                     href="{{ route('report.outflows', [
                         'date_from' => $searchDateFrom,
