@@ -3,7 +3,8 @@
     'actions' => null,
 ])
 
-<section x-data="{ open: false }" aria-labelledby="filter-heading" class="flex justify-between items-center relative"
+<section x-data="{ open: false }" x-on:click.outside="open=false"
+         aria-labelledby="filter-heading" class="flex justify-between items-center relative"
         {{ $attributes->merge(['class' => 'relative z-10 grid items-center']) }}>
     <div class="relative col-start-1 row-start-1">
         <div class="flex space-x-2 divide-x divide-gray-500">

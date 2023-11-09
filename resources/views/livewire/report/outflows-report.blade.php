@@ -1,5 +1,5 @@
 <div class="max-w-7xl sm:mx-auto sm:px-6 lg:px-8 sm:my-12 m-2">
-    <x-card card-classes="h-full sm:h-[85vh]">
+    <x-card card-classes="h-full">
         <div class="min-w-full space-y-2">
             <x-filters :count="$this->filtersCount">
                 <div class="sm:col-span-3">
@@ -50,7 +50,7 @@
                     @endif
                 </x-slot>
             </x-filters>
-            <div id="list" class="h-[65vh] sm:h-[72vh] 2k:h-[76vh] overflow-auto soft-scrollbar divide-y divide-gray-500">
+            <div id="list" class="h-[68vh] sm:h-[71vh] 2k:h-[76vh] overflow-auto soft-scrollbar divide-y divide-gray-500">
                 @forelse($items as $category)
                     <div x-data="{showCategory:true}"
                          x-on:show.window="showCategory=true"

@@ -59,7 +59,7 @@
                     @livewire('cash-flow.outflow.cash-outflow-item-modal', key('new'))
                 </x-slot>
 
-                <div class="divide-y divide-emerald-800 h-[38vh] sm:h-[45vh] overflow-auto soft-scrollbar text-xs sm:text-base">
+                <div class="divide-y divide-emerald-800 h-[38vh] sm:h-[52vh] 2k:h-[62vh] overflow-auto soft-scrollbar text-xs sm:text-base">
                     <div class="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4 font-semibold sticky top-0 bg-gray-800 border-b border-emerald-800 pr-1 sm:p-2">
                         <div class="hidden sm:block">Номенклатура</div>
                         <div>Стоимость</div>

@@ -91,7 +91,7 @@
                 <div>Категория</div>
                 <div></div>
             </div>
-            <div id="list" class="divide-y divide-gray-500 h-[65vh] sm:h-[68vh] overflow-auto soft-scrollbar">
+            <div id="list" class="divide-y divide-gray-500 h-[65vh] sm:h-[71vh] 2k:h-[77vh] overflow-auto soft-scrollbar">
                 @forelse($items as $key => $cashFlow)
                     <div wire:key="row_{{ $cashFlow->id }}">
                         <div class="p-4 grid grid-cols-3 sm:grid-cols-4 gap-4">

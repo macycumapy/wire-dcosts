@@ -1,7 +1,7 @@
 <div class="max-w-7xl sm:mx-auto sm:px-6 lg:px-8 sm:my-12 m-2">
-    <x-card card-classes="h-full sm:h-[85vh]">
+    <x-card card-classes="h-full">
         <div class="min-w-full space-y-2">
-            <div id="list" class="h-[65vh] sm:h-[76vh] 2k:h-[78vh] overflow-auto soft-scrollbar divide-y divide-gray-500">
+            <div id="list" class="h-[72vh] sm:h-[76vh] 2k:h-[78vh] overflow-auto soft-scrollbar divide-y divide-gray-500">
                 @forelse($items as $nomenclature)
                     <div class="grid grid-cols-3 p-2 gap-2">
                         <div>{{ $nomenclature->date->format('d.m.Y') }}</div>

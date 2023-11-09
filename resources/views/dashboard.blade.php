@@ -1,9 +1,7 @@
 <x-app-layout>
-    <div class="p-2 sm:py-12 sm:p-0">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <x-card card-classes="h-full sm:h-[81vh]">
-                @livewire('cash-flow.cash-flow-list')
-            </x-card>
-        </div>
+    <div class="max-w-7xl sm:mx-auto sm:px-6 lg:px-8 sm:my-12 m-2">
+        <x-card card-classes="h-full">
+            @livewire('cash-flow.cash-flow-list')
+        </x-card>
     </div>
 </x-app-layout>
