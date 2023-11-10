@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire\Report;
 
 use App\Livewire\Traits\WithFilters;
+use App\Livewire\Traits\WithSearchPeriod;
 use App\Services\ReportBuilders\OutflowsReport\Data\FilterData;
 use App\Services\ReportBuilders\OutflowsReport\OutflowsReportBuilder;
 use Illuminate\View\View;
@@ -13,25 +14,15 @@ use Livewire\Component;
 class OutflowsReport extends Component
 {
     use WithFilters;
-
-    public const NO_DATA_FOUND_TEXT = 'Результатов не найдено';
-    public ?string $searchDateFrom = null;
-    public ?string $searchDateTo = null;
-
-    public function mount(): void
-    {
-        if (empty(request()->query())) {
-            $this->searchDateFrom = now()->startOfMonth()->format('d.m.Y');
-            $this->searchDateTo = now()->endOfMonth()->format('d.m.Y');
-        }
+    use WithSearchPeriod {
+        queryStringWithSearchPeriod as queryString;
     }
 
-    protected function queryString(): array
+    public const NO_DATA_FOUND_TEXT = 'Результатов не найдено';
+
+    public function resetFilters(): void
     {
-        return [
-            'searchDateFrom' => ['as' => 'date_from'],
-            'searchDateTo' => ['as' => 'date_to'],
-        ];
+        $this->resetFiltersWithSearchPeriod();
     }
 
     public function render(OutflowsReportBuilder $report): View

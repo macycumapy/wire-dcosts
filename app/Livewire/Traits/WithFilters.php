@@ -6,6 +6,9 @@ namespace App\Livewire\Traits;
 
 use Livewire\Attributes\Computed;
 
+/**
+ * @property-read int $filtersCount
+ */
 trait WithFilters
 {
     abstract protected function queryString(): array;

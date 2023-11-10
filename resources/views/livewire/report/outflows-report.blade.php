@@ -2,20 +2,7 @@
     <x-card card-classes="h-full">
         <div class="min-w-full space-y-2">
             <x-filters :count="$this->filtersCount">
-                <div class="sm:col-span-3">
-                    <x-date-picker
-                        wire:model.live="searchDateFrom"
-                        placeholder="Дата начала"
-                        clearable
-                    ></x-date-picker>
-                </div>
-                <div class="sm:col-span-3">
-                    <x-date-picker
-                        wire:model.live="searchDateTo"
-                        placeholder="Дата окончания"
-                        clearable
-                    ></x-date-picker>
-                </div>
+                <x-search-period></x-search-period>
 
                 <x-slot name="actions">
                     @if($items->isNotEmpty())
