@@ -1,7 +1,8 @@
 name: Tests
 on:
   pull_request:
-    branches: [master]
+    branches:
+      - main
 jobs:
   test-build:
     name: Build and test application
