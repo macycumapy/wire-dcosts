@@ -6,12 +6,17 @@ namespace App\Livewire\CashFlow\Outflow;
 
 use App\Actions\CashOutflowItem\Data\OutflowItemData;
 use App\Livewire\Nomenclature\NomenclatureForm;
+use App\Livewire\Traits\WithDisabledButtons;
+use App\Livewire\Traits\WithPreloader;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Component;
 
 class CashOutflowItemForm extends Component
 {
+    use WithDisabledButtons;
+    use WithPreloader;
+
     public const ITEM_ADDED_EVENT = 'outflow-item-added';
     public const ITEM_UPDATED_EVENT = 'outflow-item-updated';
     public ?OutflowItemData $data;
@@ -33,11 +38,13 @@ class CashOutflowItemForm extends Component
     public function addItem(): void
     {
         $this->dispatch(self::ITEM_ADDED_EVENT, OutflowItemData::validateAndCreate($this->data));
+        $this->disableButtons();
     }
 
     public function updateItem(): void
     {
         $this->dispatch(self::ITEM_UPDATED_EVENT, $this->detailsIndex, OutflowItemData::validateAndCreate($this->data));
+        $this->disableButtons();
     }
 
     public function onCreatedNewNomenclature(int $nomenclatureId): void

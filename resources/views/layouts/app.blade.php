@@ -21,6 +21,7 @@
         @persist('dictionaries')
             <livewire:nomenclature.nomenclature-dictionary lazy></livewire:nomenclature.nomenclature-dictionary>
         @endpersist
+        <x-preloader></x-preloader>
 
         <div class="min-h-screen bg-primary-900">
             @persist('navigation')

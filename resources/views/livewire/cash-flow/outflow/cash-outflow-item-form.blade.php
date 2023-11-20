@@ -63,6 +63,7 @@
                 wire:click="updateItem"
                 label="Обновить"
                 class="mb-1"
+                :disabled="$disabledButtons"
             ></x-button>
         @else
             <x-button
@@ -70,6 +71,7 @@
                 wire:click="addItem"
                 label="Добавить"
                 class="mb-1"
+                :disabled="$disabledButtons"
             ></x-button>
         @endif
     </div>

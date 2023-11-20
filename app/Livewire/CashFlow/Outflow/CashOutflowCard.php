@@ -11,6 +11,7 @@ use App\Actions\CashFlow\Outflow\UpdateCashOutflowAction;
 use App\Actions\CashOutflowItem\Data\OutflowItemData;
 use App\Enums\CashFlowType;
 use App\Livewire\Category\CategoryForm;
+use App\Livewire\Traits\WithPreloader;
 use App\Models\CashFlow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -21,6 +22,7 @@ use WireUi\Traits\Actions;
 class CashOutflowCard extends Component
 {
     use Actions;
+    use WithPreloader;
 
     public const CASH_OUTFLOW_SAVED_EVENT = 'cash-outflow-saved';
     public ?CashFlow $cashFlow = null;
@@ -87,7 +89,7 @@ class CashOutflowCard extends Component
         $outflow = $action->exec(CashOutflowData::validateAndCreate($this->data));
         $this->dispatch(self::CASH_OUTFLOW_SAVED_EVENT, $outflow->id);
         $this->notification()->success('Расход денежных средств', 'Добавлен');
-        $this->redirectRoute('dashboard', navigate: true);
+        $this->redirectWithPreloader('dashboard');
     }
 
     public function update(UpdateCashOutflowAction $action): void
@@ -98,7 +100,7 @@ class CashOutflowCard extends Component
         ]));
         $this->dispatch(self::CASH_OUTFLOW_SAVED_EVENT, $this->cashFlow->id);
         $this->notification()->success('Расход денежных средств', 'Обновлен');
-        $this->redirectRoute('dashboard', navigate: true);
+        $this->redirectWithPreloader('dashboard');
     }
 
     public function cancel(): void

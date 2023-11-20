@@ -11,6 +11,7 @@ use App\Actions\CashFlow\UpdateCashFlowAction;
 use App\Enums\CashFlowType;
 use App\Livewire\Category\CategoryForm;
 use App\Livewire\Partner\PartnerForm;
+use App\Livewire\Traits\WithPreloader;
 use App\Models\CashFlow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -21,6 +22,7 @@ use WireUi\Traits\Actions;
 class CashInflowCard extends Component
 {
     use Actions;
+    use WithPreloader;
 
     public const CASH_INFLOW_CREATED_EVENT = 'cash-inflow-created';
     public ?CashFlow $cashFlow = null;
@@ -71,7 +73,7 @@ class CashInflowCard extends Component
         $inflow = $action->exec(CashFlowData::validateAndCreate($this->data));
         $this->dispatch(self::CASH_INFLOW_CREATED_EVENT, $inflow->id);
         $this->notification()->success('Поступление денежных средств', 'Добавлено');
-        $this->redirectRoute('dashboard', navigate: true);
+        $this->redirectWithPreloader('dashboard');
     }
 
     public function update(UpdateCashFlowAction $action): void
@@ -82,7 +84,7 @@ class CashInflowCard extends Component
         ]));
         $this->dispatch(self::CASH_INFLOW_CREATED_EVENT, $this->cashFlow->id);
         $this->notification()->success('Поступление денежных средств', 'Обновлено');
-        $this->redirectRoute('dashboard', navigate: true);
+        $this->redirectWithPreloader('dashboard');
     }
 
     public function cancel(): void

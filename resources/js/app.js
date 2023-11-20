@@ -1,5 +1,6 @@
-import './backOff'
 import './bootstrap';
+import './back-off'
+import './wire-navigate'
 
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 import focus from '@alpinejs/focus';
