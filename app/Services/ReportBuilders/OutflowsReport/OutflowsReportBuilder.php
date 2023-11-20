@@ -37,6 +37,7 @@ class OutflowsReportBuilder
                 $data->dateTo,
                 fn (Builder $q) => $q->where('cf.date', '<=', $data->dateTo->timezone($data->user->timezone)->endOfDay())
             )
+            ->whereNull('cf.deleted_at')
             ->where('cf.type', CashFlowType::Outflow)
             ->where('cf.user_id', $data->user->id)
             ->groupBy('category', 'nomenclature', 'nomenclature_type', 'n.id', 'ci.id')

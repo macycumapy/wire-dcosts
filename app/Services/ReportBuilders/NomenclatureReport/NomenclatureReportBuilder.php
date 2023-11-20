@@ -24,6 +24,7 @@ class NomenclatureReportBuilder
             ->leftJoin('nomenclatures as n', 'n.id', '=', 'coi.nomenclature_id')
             ->leftJoin('cash_flows as cf', 'cf.id', '=', 'coi.cash_flow_id')
             ->leftJoin('categories as ci', 'ci.id', '=', 'cf.category_id')
+            ->whereNull('cf.deleted_at')
             ->when(
                 $data->dateFrom,
                 fn (Builder $q) => $q->where('cf.date', '>=', $data->dateFrom->timezone($data->user->timezone)->startOfDay())
