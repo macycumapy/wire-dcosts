@@ -14,6 +14,7 @@ enum Period: string
     case Day = 'today';
     case Week = 'week';
     case Month = 'month';
+    case PrevMonth = 'prev_month';
     case Year = 'year';
     case AllTime = 'all';
     case Custom = 'custom';
@@ -24,6 +25,7 @@ enum Period: string
             self::Day => 'Сегодня',
             self::Week => 'Эта неделя',
             self::Month => 'Этот месяц',
+            self::PrevMonth => 'Прошлый месяц',
             self::Year => 'Этот год',
             self::AllTime => 'Все время',
             self::Custom => 'Произвольный период',
@@ -37,6 +39,7 @@ enum Period: string
             self::Day => $date->startOfDay(),
             self::Week => $date->startOfWeek(),
             self::Month => $date->startOfMonth(),
+            self::PrevMonth => $date->previous('month')->startOfMonth(),
             self::Year => $date->startOfYear(),
             default => null,
         };
@@ -49,6 +52,7 @@ enum Period: string
             self::Day => $date->endOfDay(),
             self::Week => $date->endOfWeek(),
             self::Month => $date->endOfMonth(),
+            self::PrevMonth => $date->previous('month')->endOfMonth(),
             self::Year => $date->endOfYear(),
             default => null,
         };

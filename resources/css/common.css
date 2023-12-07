@@ -22,3 +22,7 @@ h2 {
 h3 {
     @apply text-lg font-semibold text-gray-900;
 }
+
+[x-cloak] {
+    display: none!important;
+}
