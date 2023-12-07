@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Actions\CashFlow\Outflow;
 
+use App\Actions\Account\UpdateAccountBalanceAction;
 use App\Actions\CashFlow\Outflow\Data\UpdateCashOutflowData;
 use App\Actions\CashOutflowItem\CreateOutflowItemAction;
 use App\Actions\CashOutflowItem\Data\OutflowItemData;
 use App\Actions\CashOutflowItem\UpdateDetailsAction;
+use App\Models\Account;
 use App\Models\CashFlow;
 use App\Models\CashOutflowItem;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 readonly class UpdateCashOutflowAction
@@ -17,6 +20,7 @@ readonly class UpdateCashOutflowAction
     public function __construct(
         private CreateOutflowItemAction $createOutflowItemAction,
         private UpdateDetailsAction     $updateDetailsAction,
+        private UpdateAccountBalanceAction $updateAccountBalanceAction,
     ) {
     }
 
@@ -24,6 +28,9 @@ readonly class UpdateCashOutflowAction
     {
         return DB::transaction(function () use ($data) {
             $cashFlow = $data->cashFlow;
+
+            $this->updateBalance($data->cashFlow, $data->sum);
+
             $cashFlow->date = $data->date;
             $cashFlow->category()->associate($data->category_id);
             $cashFlow->sum = $data->sum;
@@ -60,6 +67,21 @@ readonly class UpdateCashOutflowAction
 
         if ($detailsToRemove->exists()) {
             $detailsToRemove->delete();
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function updateBalance(CashFlow $cashFlow, float $sum): void
+    {
+        /** @var Account $account */
+        $account = $cashFlow->account()->lockForUpdate()->first();
+
+        $diff = ($cashFlow->sum - $sum) * ($cashFlow->isOutflow() ? 1 : -1);
+
+        if ($diff != 0) {
+            $this->updateAccountBalanceAction->exec($account, $diff);
         }
     }
 }

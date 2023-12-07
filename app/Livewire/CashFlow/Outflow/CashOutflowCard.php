@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Attributes\Url;
 use Livewire\Component;
+use Throwable;
 use WireUi\Traits\Actions;
 
 class CashOutflowCard extends Component
@@ -55,6 +56,7 @@ class CashOutflowCard extends Component
             'user_id' => Auth::id(),
             'type' => CashFlowType::Inflow,
             'date' => now(),
+            'account_id' => Auth::user()->mainAccount->id, //todo Вынести в настройки
             'details' => [],
         ]);
     }
@@ -89,21 +91,29 @@ class CashOutflowCard extends Component
 
     public function create(CreateCashOutflowAction $action): void
     {
-        $outflow = $action->exec(CashOutflowData::validateAndCreate($this->data));
-        $this->dispatch(self::CASH_OUTFLOW_SAVED_EVENT, $outflow->id);
-        $this->notification()->success('Расход денежных средств', 'Добавлен');
-        $this->redirectWithPreloader('dashboard');
+        try {
+            $outflow = $action->exec(CashOutflowData::validateAndCreate($this->data));
+            $this->dispatch(self::CASH_OUTFLOW_SAVED_EVENT, $outflow->id);
+            $this->notification()->success('Расход денежных средств', 'Добавлен');
+            $this->redirectWithPreloader('dashboard');
+        } catch (Throwable $e) {
+            $this->notification()->error('Расход денежных средств', $e->getMessage());
+        }
     }
 
     public function update(UpdateCashOutflowAction $action): void
     {
-        $action->exec(UpdateCashOutflowData::validateAndCreate([
-            ...$this->data->toArray(),
-            'cashFlow' => $this->cashFlow,
-        ]));
-        $this->dispatch(self::CASH_OUTFLOW_SAVED_EVENT, $this->cashFlow->id);
-        $this->notification()->success('Расход денежных средств', 'Обновлен');
-        $this->redirectWithPreloader('dashboard');
+        try {
+            $action->exec(UpdateCashOutflowData::validateAndCreate([
+                ...$this->data->toArray(),
+                'cashFlow' => $this->cashFlow,
+            ]));
+            $this->dispatch(self::CASH_OUTFLOW_SAVED_EVENT, $this->cashFlow->id);
+            $this->notification()->success('Расход денежных средств', 'Обновлен');
+            $this->redirectWithPreloader('dashboard');
+        } catch (Throwable $e) {
+            $this->notification()->error('Расход денежных средств', $e->getMessage());
+        }
     }
 
     public function cancel(): void

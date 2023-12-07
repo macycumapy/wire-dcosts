@@ -7,6 +7,7 @@ namespace App\Builders;
 use App\Builders\Data\CashFlowFilter;
 use App\Enums\CashFlowType;
 use App\Models\CashFlow;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
@@ -35,7 +36,7 @@ class CashFlowBuilder extends Builder
             ->orderBy('id');
     }
 
-    public function getBalance(): float
+    public function getBalance(?User $user = null): float
     {
         $outflowType = CashFlowType::Outflow->value;
 
@@ -43,6 +44,10 @@ class CashFlowBuilder extends Builder
             ->select(
                 'user_id',
                 DB::raw("SUM(case when type = '$outflowType' then -sum else sum end) as sum"),
+            )
+            ->when(
+                $user,
+                fn (Builder $q) => $q->where('user_id', $user->id)
             )
             ->groupBy('user_id')
             ->get()

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Enums\CashFlowType;
+use App\Models\Account;
 use App\Models\CashFlow;
 use App\Models\CashOutflowItem;
 use App\Models\Category;
@@ -30,6 +31,21 @@ class CashFlowFactory extends Factory
             'user_id' => $user,
             'type' => $this->faker->randomElement(CashFlowType::values()),
         ];
+    }
+
+    public function configure(): self
+    {
+        return $this->afterMaking(function (CashFlow $cashFlow) {
+            $account = $cashFlow->user->accounts->first() ?? Account::factory()->for($cashFlow->user)->create();
+            $cashFlow->account()->associate($account);
+        })->afterCreating(function (CashFlow $cashFlow) {
+            $account = $cashFlow->account;
+            $account->balance += $cashFlow->sum * match ($cashFlow->type) {
+                CashFlowType::Inflow => 1,
+                CashFlowType::Outflow => -1,
+            };
+            $account->save();
+        });
     }
 
     public function outflow(int $detailsCount = 3): Factory

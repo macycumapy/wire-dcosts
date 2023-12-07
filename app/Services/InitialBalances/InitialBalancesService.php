@@ -75,6 +75,7 @@ readonly class InitialBalancesService
                     'date' => $inflow->date,
                     'sum' => $inflow->sum,
                     'type' => CashFlowType::Inflow,
+                    'account_id' => Auth::user()->accounts->first()?->id,
                 ]));
             });
         });
@@ -102,6 +103,7 @@ readonly class InitialBalancesService
                     'category_id' => $category->id,
                     'date' => $outflow->date,
                     'sum' => $outflow->sum,
+                    'account_id' => Auth::user()->accounts->first()?->id,
                     'details' => $outflow->details
                         ->map(function (OutflowDetailsData $details) {
                             /** @var NomenclatureType $nomenclatureType */

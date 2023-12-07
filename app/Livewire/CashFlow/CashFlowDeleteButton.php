@@ -6,8 +6,10 @@ namespace App\Livewire\CashFlow;
 
 use App\Actions\CashFlow\DeleteCashFlowAction;
 use App\Models\CashFlow;
+use Exception;
 use Illuminate\View\View;
 use Livewire\Component;
+use Throwable;
 use WireUi\Traits\Actions;
 
 class CashFlowDeleteButton extends Component
@@ -32,11 +34,18 @@ class CashFlowDeleteButton extends Component
         ]);
     }
 
+    /**
+     * @throws Exception
+     */
     public function delete(DeleteCashFlowAction $action): void
     {
-        $action->exec($this->cashFlow);
-        $this->notification()->success($this->cashFlow->type->title() . ' денежных средств', 'Удалено');
-        $this->dispatch(self::CASH_FLOW_DELETED_EVENT);
+        try {
+            $action->exec($this->cashFlow);
+            $this->notification()->success($this->cashFlow->type->title() . ' денежных средств', 'Удалено');
+            $this->dispatch(self::CASH_FLOW_DELETED_EVENT);
+        } catch (Throwable $e) {
+            $this->notification()->error('Расход денежных средств', $e->getMessage());
+        }
     }
 
     public function render(): View

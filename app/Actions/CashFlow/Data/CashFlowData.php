@@ -18,6 +18,7 @@ class CashFlowData extends Data
     public CashFlowType|string|null $type;
     public ?int $category_id;
     public ?int $partner_id;
+    public int $account_id;
 
     public static function rules(ValidationContext $context): array
     {
@@ -35,6 +36,11 @@ class CashFlowData extends Data
             'partner_id' => [
                 'required',
                 Rule::exists('partners', 'id')
+                    ->where('user_id', $context->payload['user_id'])
+            ],
+            'account_id' => [
+                'required',
+                Rule::exists('accounts', 'id')
                     ->where('user_id', $context->payload['user_id'])
             ],
         ];

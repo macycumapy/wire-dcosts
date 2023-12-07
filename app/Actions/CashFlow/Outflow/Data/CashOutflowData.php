@@ -10,7 +10,6 @@ use App\Models\CashFlow;
 use App\Models\CashOutflowItem;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
-use Spatie\LaravelData\Attributes\Computed;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
@@ -25,6 +24,7 @@ class CashOutflowData extends Data
         public Carbon|string|null $date,
         public int $user_id,
         public ?int $category_id,
+        public ?int $account_id,
         #[DataCollectionOf(OutflowItemData::class)]
         public ?DataCollection $details,
     ) {
@@ -41,6 +41,11 @@ class CashOutflowData extends Data
                 'required',
                 Rule::exists('categories', 'id')
                     ->where('type', $context->payload['type'])
+                    ->where('user_id', $context->payload['user_id'])
+            ],
+            'account_id' => [
+                'required',
+                Rule::exists('accounts', 'id')
                     ->where('user_id', $context->payload['user_id'])
             ],
             'details' => ['required', 'array', 'min:1']
