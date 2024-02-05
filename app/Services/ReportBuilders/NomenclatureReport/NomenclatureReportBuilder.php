@@ -33,6 +33,10 @@ class NomenclatureReportBuilder
                 $data->dateTo,
                 fn (Builder $q) => $q->where('cf.date', '<=', $data->dateTo->timezone($data->user->timezone)->endOfDay())
             )
+            ->when(
+                $data->categoryId,
+                fn (Builder $q) => $q->where('cf.category_id', $data->categoryId)
+            )
             ->where('n.id', $data->nomenclatureId)
             ->where('cf.user_id', $data->user->id)
             ->orderByDesc('cf.date')

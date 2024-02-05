@@ -23,7 +23,9 @@ trait WithSearchPeriod
 
     public function mountWithSearchPeriod(): void
     {
-        $this->resetFiltersWithSearchPeriod();
+        if ($this->searchPeriod) {
+            $this->updatedSearchPeriod($this->searchPeriod);
+        }
     }
 
     public function updatedSearchPeriod($period): void

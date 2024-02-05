@@ -44,15 +44,15 @@
                          @hide.window="showCategory=false"
                          class="p-2 space-y-2">
                         <div class="flex justify-between items-center">
-                            <div class="flex gap-2 items-center">
+                            <div @click="showCategory=!showCategory" class="flex gap-2 items-center cursor-pointer ">
                                 <template x-if="showCategory">
-                                    <div @click="showCategory=false" class="bg-gray-500 rounded-full">
-                                        <x-icon name="minus" class="w-4 h-4 cursor-pointer text-gray-900"></x-icon>
+                                    <div class="bg-gray-500 rounded-full">
+                                        <x-icon name="minus" class="w-4 h-4 text-gray-900"></x-icon>
                                     </div>
                                 </template>
                                 <template x-if="!showCategory">
-                                    <div @click="showCategory=true" class="bg-gray-500 rounded-full">
-                                        <x-icon name="plus" class="w-4 h-4 cursor-pointer text-gray-900"></x-icon>
+                                    <div class="bg-gray-500 rounded-full">
+                                        <x-icon name="plus" class="w-4 h-4 text-gray-900"></x-icon>
                                     </div>
                                 </template>
                                 {{ $category->name }}
@@ -66,14 +66,14 @@
                                      @hide.window="showType=false"
                                      class="p-2 space-y-2 bg-gray-700 first:rounded-t-lg last:rounded-b-lg">
                                     <div class="flex justify-between items-start">
-                                        <div class="flex gap-2 items-center">
+                                        <div @click="showType=!showType" class="flex gap-2 items-center cursor-pointer ">
                                             <template x-if="showType">
-                                                <div @click="showType=false" class="bg-gray-500 rounded-full">
-                                                    <x-icon name="minus" class="w-4 h-4 cursor-pointer text-gray-900"></x-icon>
+                                                <div class="bg-gray-500 rounded-full">
+                                                    <x-icon name="minus" class="w-4 h-4 text-gray-900"></x-icon>
                                                 </div>
                                             </template>
                                             <template x-if="!showType">
-                                                <div @click="showType=true" class="bg-gray-500 rounded-full">
+                                                <div class="bg-gray-500 rounded-full">
                                                     <x-icon name="plus" class="w-4 h-4 cursor-pointer text-gray-900"></x-icon>
                                                 </div>
                                             </template>
