@@ -45,6 +45,7 @@ class NomenclatureReport extends Component
 
         return view('livewire.report.nomenclature-report', [
             'items' => $items,
+            'sum' => collect($items)->sum('sum'),
         ]);
     }
 }

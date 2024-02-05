@@ -18,14 +18,12 @@
                     </div>
                 @endforelse
             </div>
-            <div class="flex justify-end">
+            <div class="flex justify-between items-center">
+                <div>Итого: {{ number_format($sum ?? 0, 2, '.', ' ') }} </div>
                 <x-button
                     secondary
                     wire:navigate
-                    href="{{ route('report.outflows', [
-                        'date_from' => $searchDateFrom,
-                        'date_to' => $searchDateTo,
-                    ]) }}"
+                    :href="\Illuminate\Support\Facades\URL::previous()"
                     label="Назад"
                 ></x-button>
             </div>
