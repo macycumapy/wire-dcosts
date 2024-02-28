@@ -66,17 +66,20 @@ class CashOutflowCard extends Component
             'count' => 1,
             'cost' => 0,
         ]);
+        $this->data->refreshSum();
     }
 
     public function updateItem(int $index, array $data): void
     {
         $this->data->details[$index] = OutflowItemData::from($data);
+        $this->data->refreshSum();
     }
 
     public function deleteItem(int $key): void
     {
         $this->data->details->offsetUnset($key);
         $this->data->details = $this->data->details->values();
+        $this->data->refreshSum();
     }
 
     public function onCreatedNewCategory(int $categoryId): void

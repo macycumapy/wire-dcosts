@@ -18,8 +18,7 @@ use Spatie\LaravelData\Support\Validation\ValidationContext;
 
 class CashOutflowData extends Data
 {
-    #[Computed]
-    public readonly float $sum;
+    public float $sum;
     public readonly CashFlowType $type;
 
     public function __construct(
@@ -29,7 +28,7 @@ class CashOutflowData extends Data
         #[DataCollectionOf(OutflowItemData::class)]
         public ?DataCollection $details,
     ) {
-        $this->sum = $this->details?->toCollection()->sum('sum') ?? 0.0;
+        $this->refreshSum();
         $this->type = CashFlowType::Outflow;
     }
 
@@ -57,5 +56,10 @@ class CashOutflowData extends Data
                 'user_id' => $cashFlow->user_id,
             ])
         ]);
+    }
+
+    public function refreshSum(): void
+    {
+        $this->sum = $this->details?->toCollection()->sum('sum') ?? 0.0;
     }
 }
