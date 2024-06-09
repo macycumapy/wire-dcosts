@@ -21,7 +21,7 @@ class CashFlowList extends Component
     public int $perPage = 25;
     public bool $isLoading = false;
     public int $itemsCount = 0;
-    public ?int $searchNomenclature = null;
+    public mixed $searchNomenclature = null;
     public ?string $searchDateFrom = null;
     public ?string $searchDateTo = null;
 
