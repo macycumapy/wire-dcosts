@@ -29,7 +29,6 @@ class Account extends Model
     protected $fillable = [
         'name',
         'comment',
-        'balance',
     ];
 
     protected $casts = [

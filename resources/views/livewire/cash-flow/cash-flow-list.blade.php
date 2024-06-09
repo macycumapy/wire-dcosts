@@ -95,13 +95,13 @@
                 @forelse($items as $key => $cashFlow)
                     <div wire:key="row_{{ $cashFlow->id }}">
                         <div class="p-4 grid grid-cols-3 sm:grid-cols-4 gap-4">
-                            <div>
+                            <div class="my-auto">
                                 {{ $cashFlow->date->timezone($timezone)->isToday() ? 'Сегодня' : $cashFlow->date->timezone($timezone)->format('d.m.Y') }}
                             </div>
-                            <div class="text-{{ $cashFlow->type->color() }}-600 text-center sm:text-left">
+                            <div class="my-auto text-{{ $cashFlow->type->color() }}-600 text-center sm:text-left">
                                 {{ number_format($cashFlow->sum, 2, '.', ' ') }}
                             </div>
-                            <div class="truncate">
+                            <div class="my-auto truncate">
                                 {{ $cashFlow->category?->name }}
                             </div>
                             <div class="col-span-3 sm:col-span-1 flex sm:justify-end justify-between">

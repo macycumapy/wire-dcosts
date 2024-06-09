@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NomenclatureController;
 use App\Http\Controllers\NomenclatureTypeController;
 use App\Http\Controllers\PartnerController;
+use App\Livewire\Account\AccountList;
 use App\Livewire\Auth\LoginForm;
 use App\Livewire\Auth\RegisterForm;
 use App\Livewire\CashFlow\Inflow\CashInflowCard;
@@ -31,6 +32,10 @@ Route::middleware([
     Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::prefix('accounts')->group(function () {
+        Route::get('/', AccountList::class)->name('accounts.list');
+    });
 
     Route::prefix('nomenclature-types')->group(function () {
         Route::get('/search', [NomenclatureTypeController::class, 'search'])->name('nomenclature-type.search');
