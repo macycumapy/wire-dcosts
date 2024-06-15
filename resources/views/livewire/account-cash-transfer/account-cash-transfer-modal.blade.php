@@ -14,8 +14,8 @@
     @endif
     @if($showModal)
         @teleport('#footer')
-        <x-modal.card wire:model.live="showModal" :title="$id ? 'Счет' : 'Новый счет'">
-            @livewire('account.account-form', [
+        <x-modal.card wire:model.live="showModal" :title="$id ? 'Перевод' : 'Новый перевод'">
+            @livewire('account-cash-transfer.account-cash-transfer-form', [
                 'id' => $id,
             ], key($id))
         </x-modal.card>

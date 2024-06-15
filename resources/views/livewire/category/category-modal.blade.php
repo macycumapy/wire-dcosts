@@ -19,7 +19,7 @@
     @endif
     @if($showModal)
         @teleport('#footer')
-            <x-modal.card wire:model="showModal" :title="$id ? 'Категория' : 'Новая категория'">
+            <x-modal.card wire:model.live="showModal" :title="$id ? 'Категория' : 'Новая категория'">
                 @livewire('category.category-form', [
                     'type' => $type,
                     'name' => $name,

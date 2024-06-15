@@ -19,6 +19,7 @@ return new class () extends Migration {
             $table->foreignId('to_account_id')->constrained('accounts');
             $table->decimal('sum', 10);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

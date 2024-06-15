@@ -13,7 +13,7 @@
     @endif
     @if($showModal)
         @teleport('#footer')
-            <x-modal.card wire:model="showModal" :title="$id ? 'Контрагент' : 'Новый контрагент'">
+            <x-modal.card wire:model.live="showModal" :title="$id ? 'Контрагент' : 'Новый контрагент'">
                 @livewire('partner.partner-form', [
                     'name' => $name,
                     'id' => $id,

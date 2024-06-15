@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NomenclatureController;
 use App\Http\Controllers\NomenclatureTypeController;
 use App\Http\Controllers\PartnerController;
 use App\Livewire\Account\AccountList;
+use App\Livewire\AccountCashTransfer\AccountCashTransferList;
 use App\Livewire\Auth\LoginForm;
 use App\Livewire\Auth\RegisterForm;
 use App\Livewire\CashFlow\Inflow\CashInflowCard;
@@ -33,8 +35,13 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::prefix('accounts')->group(function () {
-        Route::get('/', AccountList::class)->name('accounts.list');
+    Route::prefix('accounts')->as('accounts.')->group(function () {
+        Route::get('/', AccountList::class)->name('list');
+        Route::get('/search', [AccountController::class, 'search'])->name('search');
+    });
+
+    Route::prefix('account-cash-transfers')->as('account-cash-transfers.')->group(function () {
+        Route::get('/', AccountCashTransferList::class)->name('list');
     });
 
     Route::prefix('nomenclature-types')->group(function () {

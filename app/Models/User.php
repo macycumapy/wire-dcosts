@@ -84,7 +84,8 @@ class User extends Authenticatable
 
     public function mainAccount(): HasOne
     {
-        return $this->hasOne(Account::class);
+        return $this->hasOne(Account::class)
+            ->orderBy('id');
     }
 
     public function isAdmin(): bool

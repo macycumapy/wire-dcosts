@@ -13,7 +13,7 @@
     @endif
     @if($showModal)
         @teleport('#footer')
-            <x-modal.card wire:model="showModal" :title="$id ? 'Номенклатура' : 'Новая номенклатура'">
+            <x-modal.card wire:model.live="showModal" :title="$id ? 'Номенклатура' : 'Новая номенклатура'">
                 @livewire('nomenclature.nomenclature-form', [
                     'name' => $name,
                     'id' => $id,
