@@ -81,7 +81,7 @@
                         <div></div>
                     </div>
                     @forelse($data->details as $key => $item)
-                        <div wire:key="row_{{ $key }}" class="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4 flex items-center px-1 sm:px-4 py-2">
+                        <div wire:key="row_{{ $key }}" class="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4 items-center px-1 sm:px-4 py-2">
                             <div class="col-span-3 sm:col-span-1" x-text="$store.nomenclatures?.getName({{ $item->nomenclature_id }})"></div>
                             <div>{{ number_format($item->cost, 2, '.', ' ') }}</div>
                             <div class="text-center sm:text-left">{{ number_format($item->count, 2, '.', ' ') }}</div>
