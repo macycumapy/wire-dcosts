@@ -31,7 +31,7 @@ class InitialBalancesServiceTest extends TestCase
         parent::setUp();
         $this->initTestDisk();
         $this->service = app(InitialBalancesService::class);
-        $this->actingAs(User::factory()->create());
+        $this->actingAs(User::factory()->withBalance(100_000)->create());
     }
 
     public function testUploadInflows()

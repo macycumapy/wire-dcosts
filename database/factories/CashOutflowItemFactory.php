@@ -16,7 +16,7 @@ class CashOutflowItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'count' => $this->faker->numberBetween(1, 100),
+            'count' => $this->faker->numberBetween(1, 10),
             'cost' => $this->faker->randomFloat(2, 1, 1000),
             'nomenclature_id' => Nomenclature::factory()->create(),
         ];

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\CashFlow\Inflow;
 
+use App\Actions\Account\Exceptions\NotEnoughBalanceException;
 use App\Actions\CashFlow\CreateCashFlowAction;
 use App\Actions\CashFlow\Data\CashFlowData;
 use App\Actions\CashFlow\Data\UpdateCashFlowData;
@@ -55,6 +56,7 @@ class CashInflowCard extends Component
             'type' => CashFlowType::Inflow,
             'date' => now(),
             'sum' => 0.0,
+            'account_id' => Auth::user()->mainAccount->id, //todo Вынести в настройки
         ]);
     }
 
@@ -78,13 +80,17 @@ class CashInflowCard extends Component
 
     public function update(UpdateCashFlowAction $action): void
     {
-        $action->exec(UpdateCashFlowData::validateAndCreate([
-            'cashFlow' => $this->cashFlow,
-            ...$this->data->toArray(),
-        ]));
-        $this->dispatch(self::CASH_INFLOW_CREATED_EVENT, $this->cashFlow->id);
-        $this->notification()->success('Поступление денежных средств', 'Обновлено');
-        $this->redirectWithPreloader('dashboard');
+        try {
+            $action->exec(UpdateCashFlowData::validateAndCreate([
+                'cashFlow' => $this->cashFlow,
+                ...$this->data->toArray(),
+            ]));
+            $this->dispatch(self::CASH_INFLOW_CREATED_EVENT, $this->cashFlow->id);
+            $this->notification()->success('Поступление денежных средств', 'Обновлено');
+            $this->redirectWithPreloader('dashboard');
+        } catch (NotEnoughBalanceException $e) {
+            $this->notification()->error('Поступление денежных средств', $e->getMessage());
+        }
     }
 
     public function cancel(): void

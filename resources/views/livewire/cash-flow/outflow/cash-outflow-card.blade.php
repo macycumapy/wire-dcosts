@@ -1,12 +1,25 @@
 <div class="max-w-7xl sm:mx-auto sm:px-6 lg:px-8 sm:my-12 m-2">
     <x-card :title="$cashFlow ? 'Расход денежных средств' : 'Новый расход денежных средств'" card-classes="h-full" padding="py-2 sm:py-5 px-2">
         <div class="space-y-4">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
                 <x-datetime-picker
                     wire:model="data.date"
                     name="date"
                     label="Дата"
                 ></x-datetime-picker>
+
+                <x-select
+                    wire:model.live="data.account_id"
+                    name="account_id"
+                    label="Счет"
+                    :async-data="route('accounts.search')"
+                    option-label="name"
+                    option-value="id"
+                    option-description="-"
+                    autocomplete="off" autocorrect="off"
+                    hideEmptyMessage
+                ></x-select>
+
                 <x-select
                     wire:model.live="data.category_id"
                     name="category_id"
@@ -68,7 +81,7 @@
                         <div></div>
                     </div>
                     @forelse($data->details as $key => $item)
-                        <div wire:key="row_{{ $key }}" class="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4 flex items-center px-1 sm:px-4 py-2">
+                        <div wire:key="row_{{ $key }}" class="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4 items-center px-1 sm:px-4 py-2">
                             <div class="col-span-3 sm:col-span-1" x-text="$store.nomenclatures?.getName({{ $item->nomenclature_id }})"></div>
                             <div>{{ number_format($item->cost, 2, '.', ' ') }}</div>
                             <div class="text-center sm:text-left">{{ number_format($item->count, 2, '.', ' ') }}</div>

@@ -27,10 +27,12 @@ use Illuminate\Support\Collection;
  * @property Carbon $deleted_at Дата удаления
  * @property int|null $category_id ID статьи затрат
  * @property int|null $partner_id ID контрагента
+ * @property int $account_id ID счета
  * @property CashFlowType $type Тип движения
  * @property-read Category|null $category Статья затрат
  * @property-read Partner|null $partner Контрагент
  * @property-read Collection<CashOutflowItem> $details
+ * @property-read Account $account
  * @mixin CashFlowBuilder
  */
 class CashFlow extends Model
@@ -52,6 +54,7 @@ class CashFlow extends Model
         'partner_id',
         'type',
         'user_id',
+        'account_id',
     ];
 
     protected static function boot(): void
@@ -78,5 +81,15 @@ class CashFlow extends Model
     public function details(): HasMany
     {
         return $this->hasMany(CashOutflowItem::class);
+    }
+
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    public function isOutflow(): bool
+    {
+        return $this->type === CashFlowType::Outflow;
     }
 }

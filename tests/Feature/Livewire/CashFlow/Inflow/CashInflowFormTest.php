@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Feature\Livewire\CashFlow\Inflow;
+namespace Tests\Feature\Livewire\CashFlow\Inflow;
 
 use App\Enums\CashFlowType;
 use App\Livewire\CashFlow\Inflow\CashInflowCard;
@@ -21,9 +21,10 @@ class CashInflowFormTest extends TestCase
         $date = now()->subDay();
         $partner = Partner::factory()->for($user)->create();
         $category = Category::factory()->inflow()->for($user)->create();
+        $sum = 111;
 
         Livewire::test(CashInflowCard::class)
-            ->set('data.sum', 111)
+            ->set('data.sum', $sum)
             ->set('data.date', $date)
             ->set('data.partner_id', $partner->id)
             ->set('data.category_id', $category->id)
@@ -35,6 +36,7 @@ class CashInflowFormTest extends TestCase
             CashFlow::query()
                 ->where('user_id', $user->id)
                 ->where('type', CashFlowType::Inflow)
+                ->where('sum', $sum)
                 ->exists()
         );
     }
@@ -46,9 +48,10 @@ class CashInflowFormTest extends TestCase
         $partner = Partner::factory()->for($user)->create();
         $category = Category::factory()->inflow()->for($user)->create();
         $cashFlow = CashFlow::factory()->inflow()->for($user)->create();
+        $sum = 111;
 
         Livewire::test(CashInflowCard::class, ['id' => $cashFlow->id])
-            ->set('data.sum', 111)
+            ->set('data.sum', $sum)
             ->set('data.date', $date)
             ->set('data.partner_id', $partner->id)
             ->set('data.category_id', $category->id)
@@ -58,10 +61,13 @@ class CashInflowFormTest extends TestCase
 
         $cashFlow->refresh();
 
-        $this->assertEquals(111, $cashFlow->sum);
+        $this->assertEquals($sum, $cashFlow->sum);
         $this->assertEquals($date->toString(), $cashFlow->date->toString());
         $this->assertEquals($partner->id, $cashFlow->partner_id);
         $this->assertEquals($category->id, $cashFlow->category_id);
+        $this->assertEquals($user->mainAccount->id, $cashFlow->account_id);
+        $this->assertEquals($sum, CashFlow::getBalance());
+        $this->assertEquals($sum, $cashFlow->account->balance);
     }
 
     public function testClone()
@@ -83,7 +89,11 @@ class CashInflowFormTest extends TestCase
                 ->where('sum', $cashFlow->sum)
                 ->where('partner_id', $cashFlow->partner_id)
                 ->where('category_id', $cashFlow->category_id)
+                ->where('account_id', $cashFlow->account_id)
                 ->count()
         );
+
+        $this->assertEquals($cashFlow->sum * 2, $cashFlow->account->balance);
+        $this->assertEquals($cashFlow->sum * 2, CashFlow::getBalance());
     }
 }

@@ -24,7 +24,7 @@
     @endisset
     @if($showModal)
         @teleport('#footer')
-            <x-modal.card wire:model="showModal">
+            <x-modal.card wire:model.live="showModal">
                 @livewire('cash-flow.outflow.cash-outflow-item-form', [
                     'data' => $data,
                     'detailsIndex' => $detailsIndex,

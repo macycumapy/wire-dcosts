@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Services\DefaultDataFillers\DefaultDataFiller;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -34,5 +35,21 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'timezone' => '+5',
         ];
+    }
+
+    public function configure(): self
+    {
+        return $this->afterCreating(function (User $user) {
+            app(DefaultDataFiller::class)->fill($user);
+        });
+    }
+
+    public function withBalance(float $sum): self
+    {
+        return $this->afterCreating(function (User $user) use ($sum) {
+            $account = $user->mainAccount;
+            $account->balance = $sum;
+            $account->save();
+        });
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Feature\Livewire\CashFlow;
+namespace Tests\Feature\Livewire\CashFlow;
 
 use App\Livewire\CashFlow\CashFlowDeleteButton;
 use App\Models\CashFlow;
@@ -14,7 +14,7 @@ class CashFlowDeleteButtonTest extends TestCase
 {
     public function testDelete()
     {
-        $this->actingAs($user = User::factory()->create());
+        $this->actingAs($user = User::factory()->withBalance(100_000)->create());
         $cashFlow = CashFlow::factory()->for($user)->create();
         $this->assertNotSoftDeleted($cashFlow);
 

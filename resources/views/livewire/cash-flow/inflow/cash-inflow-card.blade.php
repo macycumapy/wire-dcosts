@@ -7,6 +7,19 @@
                     name="date"
                     label="Дата"
                 ></x-datetime-picker>
+
+                <x-select
+                    wire:model.live="data.account_id"
+                    name="account_id"
+                    label="Счет"
+                    :async-data="route('accounts.search')"
+                    option-label="name"
+                    option-value="id"
+                    option-description="-"
+                    autocomplete="off" autocorrect="off"
+                    hideEmptyMessage
+                ></x-select>
+
                 <x-select
                     wire:model.live="data.category_id"
                     name="category_id"

@@ -31,7 +31,7 @@ trait WithFilters
         return $this->getFilterCount();
     }
 
-    public function renderingWithFilters(): void
+    public function bootWithFilters(): void
     {
         if (!empty(request()->query())) {
             collect($this->queryString())

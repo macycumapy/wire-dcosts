@@ -19,7 +19,7 @@ class CashOutflowFormTest extends TestCase
 {
     public function testCreate()
     {
-        $this->actingAs($user = User::factory()->create());
+        $this->actingAs($user = User::factory()->withBalance(100_000)->create());
         $date = now()->subDay();
         $category = Category::factory()->outflow()->for($user)->create();
         $nomenclature = Nomenclature::factory()->for($user)->create();
@@ -55,7 +55,7 @@ class CashOutflowFormTest extends TestCase
 
     public function testUpdate()
     {
-        $this->actingAs($user = User::factory()->create());
+        $this->actingAs($user = User::factory()->withBalance(100_000)->create());
         $date = now()->subDay();
         $category = Category::factory()->outflow()->for($user)->create();
         $detailsCount = 3;
@@ -89,6 +89,7 @@ class CashOutflowFormTest extends TestCase
         $this->assertEquals(round($cashFlow->details->sum('sum'), 2), $cashFlow->sum);
         $this->assertEquals($date->toString(), $cashFlow->date->toString());
         $this->assertEquals($category->id, $cashFlow->category_id);
+        $this->assertEquals($user->accounts->first()->id, $cashFlow->account_id);
         $this->assertEquals($detailsCount + 1, $cashFlow->details->count());
         $this->assertTrue(
             $cashFlow->details()
@@ -108,7 +109,7 @@ class CashOutflowFormTest extends TestCase
 
     public function testClone()
     {
-        $this->actingAs($user = User::factory()->create());
+        $this->actingAs($user = User::factory()->withBalance(100_000)->create());
         /** @var CashFlow $cashFlow */
         $cashFlow = CashFlow::factory()->for($user)->outflow()->create();
         Livewire::test(CashOutflowCard::class, ['id' => $cashFlow->id, 'clone' => true])
@@ -124,6 +125,7 @@ class CashOutflowFormTest extends TestCase
                 ->where('date', $cashFlow->date)
                 ->where('category_id', $cashFlow->category_id)
                 ->where('type', $cashFlow->type)
+                ->where('account_id', $cashFlow->account_id)
                 ->count()
         );
     }

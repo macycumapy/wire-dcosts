@@ -17,7 +17,7 @@
         @livewireScriptConfig
         <!-- Styles -->
     </head>
-    <body class="font-sans antialiased overflow-hidden sm:overflow-auto soft-scrollbar">
+    <body class="font-sans antialiased sm:overflow-auto soft-scrollbar">
         @persist('dictionaries')
             <livewire:nomenclature.nomenclature-dictionary lazy></livewire:nomenclature.nomenclature-dictionary>
         @endpersist

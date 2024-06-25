@@ -6,8 +6,10 @@ namespace Tests\Feature\Livewire\Auth;
 
 use App\Actions\User\Data\CreateUserData;
 use App\Livewire\Auth\RegisterForm;
+use App\Models\Account;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use App\Services\DefaultDataFillers\AccountFiller;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -42,6 +44,17 @@ class RegisterFormTest extends TestCase
 
         $this->assertTrue(Hash::check($createUserData->password, trim($user->password)));
         $this->assertAuthenticatedAs($user);
+        $this->assertAccountCreated($user);
+    }
+
+    private function assertAccountCreated(User $user): void
+    {
+        $this->assertTrue(
+            Account::query()->where([
+                'user_id' => $user->id,
+                'name' => AccountFiller::ACCOUNT_NAME,
+            ])->exists()
+        );
     }
 
     public static function validRegisterDataProvider(): array

@@ -17,6 +17,7 @@ class UpdateCashFlowData extends Data
     public float $sum;
     public ?int $category_id;
     public ?int $partner_id;
+    public int $account_id;
 
     public static function rules(ValidationContext $context): array
     {
@@ -26,13 +27,18 @@ class UpdateCashFlowData extends Data
             'category_id' => [
                 'required',
                 Rule::exists('categories', 'id')
-                    ->where('type', $context->payload['cashFlow']->type)
-                    ->where('user_id', $context->payload['cashFlow']->user_id)
+                    ->where('type', data_get($context->payload, 'cashFlow')?->type)
+                    ->where('user_id', data_get($context->payload, 'cashFlow')?->user_id)
             ],
             'partner_id' => [
                 'required',
                 Rule::exists('partners', 'id')
-                    ->where('user_id', $context->payload['cashFlow']->user_id)
+                    ->where('user_id', data_get($context->payload, 'cashFlow')?->user_id)
+            ],
+            'account_id' => [
+                'required',
+                Rule::exists('accounts', 'id')
+                    ->where('user_id', data_get($context->payload, 'cashFlow')?->user_id)
             ],
         ];
     }
