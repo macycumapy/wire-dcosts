@@ -25,6 +25,7 @@ class UpdateCashOutflowData extends Data
         public ?int            $category_id,
         #[DataCollectionOf(OutflowItemData::class)]
         public ?DataCollection $details,
+        public ?int            $account_id,
     ) {
         $this->sum = $this->details->toCollection()->sum('sum');
     }
@@ -37,8 +38,13 @@ class UpdateCashOutflowData extends Data
             'category_id' => [
                 'required',
                 Rule::exists('categories', 'id')
-                    ->where('type', $context->payload['cashFlow']->type)
-                    ->where('user_id', $context->payload['cashFlow']->user_id)
+                    ->where('type', data_get($context->payload, 'cashFlow')?->type)
+                    ->where('user_id', data_get($context->payload, 'cashFlow')?->user_id)
+            ],
+            'account_id' => [
+                'required',
+                Rule::exists('accounts', 'id')
+                    ->where('user_id', data_get($context->payload, 'cashFlow')?->user_id)
             ],
             'details' => ['required', 'array', 'min:1']
         ];

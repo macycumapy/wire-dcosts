@@ -29,11 +29,12 @@ readonly class UpdateCashOutflowAction
         return DB::transaction(function () use ($data) {
             $cashFlow = $data->cashFlow;
 
-            $this->updateBalance($data->cashFlow, $data->sum);
+            $this->updateBalance($cashFlow, $data->account_id, $data->sum);
 
             $cashFlow->date = $data->date;
-            $cashFlow->category()->associate($data->category_id);
             $cashFlow->sum = $data->sum;
+            $cashFlow->category()->associate($data->category_id);
+            $cashFlow->account()->associate($data->account_id);
             $cashFlow->save();
 
             $this->updateDetails($cashFlow, $data);
@@ -73,15 +74,20 @@ readonly class UpdateCashOutflowAction
     /**
      * @throws Exception
      */
-    private function updateBalance(CashFlow $cashFlow, float $sum): void
+    private function updateBalance(CashFlow $cashFlow, int $newAccountId, float $sum): void
     {
-        /** @var Account $account */
-        $account = $cashFlow->account()->lockForUpdate()->first();
-
-        $diff = ($cashFlow->sum - $sum) * ($cashFlow->isOutflow() ? 1 : -1);
-
-        if ($diff != 0) {
-            $this->updateAccountBalanceAction->exec($account, $diff);
+        if ($newAccountId !== $cashFlow->account_id) {
+            $newAccount = Account::where('id', $newAccountId)->lockForUpdate()->first();
+            $prevAccount = Account::where('id', $cashFlow->account_id)->lockForUpdate()->first();
+            $this->updateAccountBalanceAction->exec($prevAccount, $cashFlow->sum);
+            $this->updateAccountBalanceAction->exec($newAccount, -$sum);
+        } else {
+            $diff = $cashFlow->sum - $sum;
+            if ($diff != 0) {
+                /** @var Account $account */
+                $account = $cashFlow->account()->lockForUpdate()->first();
+                $this->updateAccountBalanceAction->exec($account, $diff);
+            }
         }
     }
 }

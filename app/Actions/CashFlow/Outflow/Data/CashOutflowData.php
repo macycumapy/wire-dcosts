@@ -40,13 +40,13 @@ class CashOutflowData extends Data
             'category_id' => [
                 'required',
                 Rule::exists('categories', 'id')
-                    ->where('type', $context->payload['type'])
-                    ->where('user_id', $context->payload['user_id'])
+                    ->where('type', data_get($context->payload, 'type'))
+                    ->where('user_id', data_get($context->payload, 'user_id'))
             ],
             'account_id' => [
                 'required',
                 Rule::exists('accounts', 'id')
-                    ->where('user_id', $context->payload['user_id'])
+                    ->where('user_id', data_get($context->payload, 'user_id'))
             ],
             'details' => ['required', 'array', 'min:1']
         ];

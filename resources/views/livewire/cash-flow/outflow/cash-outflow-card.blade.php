@@ -1,12 +1,25 @@
 <div class="max-w-7xl sm:mx-auto sm:px-6 lg:px-8 sm:my-12 m-2">
     <x-card :title="$cashFlow ? 'Расход денежных средств' : 'Новый расход денежных средств'" card-classes="h-full" padding="py-2 sm:py-5 px-2">
         <div class="space-y-4">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
                 <x-datetime-picker
                     wire:model="data.date"
                     name="date"
                     label="Дата"
                 ></x-datetime-picker>
+
+                <x-select
+                    wire:model.live="data.account_id"
+                    name="account_id"
+                    label="Счет"
+                    :async-data="route('accounts.search')"
+                    option-label="name"
+                    option-value="id"
+                    option-description="-"
+                    autocomplete="off" autocorrect="off"
+                    hideEmptyMessage
+                ></x-select>
+
                 <x-select
                     wire:model.live="data.category_id"
                     name="category_id"

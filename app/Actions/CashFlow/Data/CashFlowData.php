@@ -26,22 +26,22 @@ class CashFlowData extends Data
             'user_id' => ['required', Rule::exists('users', 'id')],
             'sum' => ['required', 'numeric', 'min:0'],
             'date' => ['required', 'date'],
-            'type' => ['required', 'string', Rule::in(CashFlowType::values())],
+            'type' => ['required', 'string', Rule::enum(CashFlowType::class)],
             'category_id' => [
                 'required',
                 Rule::exists('categories', 'id')
-                    ->where('type', $context->payload['type'])
-                    ->where('user_id', $context->payload['user_id'])
+                    ->where('type', data_get($context->payload, 'type'))
+                    ->where('user_id', data_get($context->payload, 'user_id'))
             ],
             'partner_id' => [
                 'required',
                 Rule::exists('partners', 'id')
-                    ->where('user_id', $context->payload['user_id'])
+                    ->where('user_id', data_get($context->payload, 'user_id'))
             ],
             'account_id' => [
                 'required',
                 Rule::exists('accounts', 'id')
-                    ->where('user_id', $context->payload['user_id'])
+                    ->where('user_id', data_get($context->payload, 'user_id'))
             ],
         ];
     }

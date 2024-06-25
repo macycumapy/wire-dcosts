@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\CashFlow\Outflow;
 
+use App\Actions\Account\Exceptions\NotEnoughBalanceException;
 use App\Actions\CashFlow\Outflow\CreateCashOutflowAction;
 use App\Actions\CashFlow\Outflow\Data\CashOutflowData;
 use App\Actions\CashFlow\Outflow\Data\UpdateCashOutflowData;
@@ -17,7 +18,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Attributes\Url;
 use Livewire\Component;
-use Throwable;
 use WireUi\Traits\Actions;
 
 class CashOutflowCard extends Component
@@ -96,7 +96,7 @@ class CashOutflowCard extends Component
             $this->dispatch(self::CASH_OUTFLOW_SAVED_EVENT, $outflow->id);
             $this->notification()->success('Расход денежных средств', 'Добавлен');
             $this->redirectWithPreloader('dashboard');
-        } catch (Throwable $e) {
+        } catch (NotEnoughBalanceException $e) {
             $this->notification()->error('Расход денежных средств', $e->getMessage());
         }
     }
@@ -111,7 +111,7 @@ class CashOutflowCard extends Component
             $this->dispatch(self::CASH_OUTFLOW_SAVED_EVENT, $this->cashFlow->id);
             $this->notification()->success('Расход денежных средств', 'Обновлен');
             $this->redirectWithPreloader('dashboard');
-        } catch (Throwable $e) {
+        } catch (NotEnoughBalanceException $e) {
             $this->notification()->error('Расход денежных средств', $e->getMessage());
         }
     }
