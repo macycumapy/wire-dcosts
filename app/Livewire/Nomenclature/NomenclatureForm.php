@@ -13,11 +13,11 @@ use App\Models\Nomenclature;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Component;
-use WireUi\Traits\Actions;
+use WireUi\Traits\WireUiActions;
 
 class NomenclatureForm extends Component
 {
-    use Actions;
+    use WireUiActions;
 
     public const NOMENCLATURE_SAVED_EVENT = 'nomenclatureSaved';
     public ?Nomenclature $nomenclature = null;

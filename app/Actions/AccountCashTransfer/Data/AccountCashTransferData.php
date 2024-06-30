@@ -11,7 +11,7 @@ use Spatie\LaravelData\Support\Validation\ValidationContext;
 class AccountCashTransferData extends Data
 {
     public int $user_id;
-    public float $sum;
+    public ?float $sum = null;
     public ?int $from_account_id = null;
     public ?int $to_account_id = null;
 

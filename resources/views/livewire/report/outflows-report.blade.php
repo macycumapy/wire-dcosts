@@ -22,16 +22,16 @@
                                 ></x-button>
                             </div>
                             <div class="flex sm:hidden gap-2">
-                                <x-button.circle
+                                <x-mini-button rounded
                                     xs
                                     icon="minus"
                                     @click="$dispatch('hide')"
-                                ></x-button.circle>
-                                <x-button.circle
+                                ></x-mini-button>
+                                <x-mini-button rounded
                                     xs
                                     icon="plus"
                                     @click="$dispatch('show')"
-                                ></x-button.circle>
+                                ></x-mini-button>
                             </div>
                         </div>
                     @endif

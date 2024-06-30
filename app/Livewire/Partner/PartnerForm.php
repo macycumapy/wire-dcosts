@@ -12,11 +12,11 @@ use App\Models\Partner;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Component;
-use WireUi\Traits\Actions;
+use WireUi\Traits\WireUiActions;
 
 class PartnerForm extends Component
 {
-    use Actions;
+    use WireUiActions;
 
     public const PARTNER_SAVED_EVENT = 'partner-saved';
     public ?Partner $partner = null;

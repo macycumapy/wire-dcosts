@@ -10,11 +10,11 @@ use App\Models\AccountCashTransfer;
 use Exception;
 use Illuminate\View\View;
 use Livewire\Component;
-use WireUi\Traits\Actions;
+use WireUi\Traits\WireUiActions;
 
 class AccountCashTransferDeleteButton extends Component
 {
-    use Actions;
+    use WireUiActions;
 
     public const ACCOUNT_CASH_TRANSFER_DELETED = 'account-cash-transfer-deleted';
     public AccountCashTransfer $cashTransfer;

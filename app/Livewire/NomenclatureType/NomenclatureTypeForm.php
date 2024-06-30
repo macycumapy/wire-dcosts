@@ -12,11 +12,11 @@ use App\Models\NomenclatureType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Component;
-use WireUi\Traits\Actions;
+use WireUi\Traits\WireUiActions;
 
 class NomenclatureTypeForm extends Component
 {
-    use Actions;
+    use WireUiActions;
 
     public const NOMENCLATURE_TYPE_SAVED_EVENT = 'nomenclatureTypeSaved';
     public ?NomenclatureType $nomenclatureType = null;

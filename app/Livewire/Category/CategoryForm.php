@@ -13,11 +13,11 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Component;
-use WireUi\Traits\Actions;
+use WireUi\Traits\WireUiActions;
 
 class CategoryForm extends Component
 {
-    use Actions;
+    use WireUiActions;
 
     public const CATEGORY_SAVED_EVENT = 'category-saved';
     public ?Category $category = null;

@@ -1,11 +1,12 @@
 <div class="max-w-7xl sm:mx-auto sm:px-6 lg:px-8 sm:my-12 m-2">
-    <x-card :title="$cashFlow ? 'Поступление денежных средств' : 'Новое поступление денежных средств'" padding="py-2 sm:py-5 px-2">
+    <x-card :title="$cashFlow ? 'Поступление денежных средств' : 'Новое поступление денежных средств'" borderless padding="py-2 sm:py-5 px-2">
         <div class="h-[72vh] sm:h-[74vh] 2k:h-[80vh] flex flex-col">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <x-datetime-picker
                     wire:model="data.date"
                     name="date"
                     label="Дата"
+                    start-of-week="1"
                 ></x-datetime-picker>
 
                 <x-select
@@ -64,8 +65,10 @@
                     option-description="-"
                     autocomplete="off" autocorrect="off"
                 >
-                    <x-slot name="emptyMessage">
-                        @livewire('partner.partner-modal')
+                    <x-slot name="afterOptions">
+                        <div class="p-2">
+                            @livewire('partner.partner-modal')
+                        </div>
                     </x-slot>
 
                     @if($data->partner_id)
@@ -77,7 +80,7 @@
                     @endif
                 </x-select>
 
-                <x-inputs.currency
+                <x-currency
                     wire:model="data.sum"
                     name="sum"
                     label="Сумма"
@@ -85,7 +88,7 @@
                     suffix="руб."
                     thousands=" "
                     inputmode="numeric"
-                ></x-inputs.currency>
+                ></x-currency>
 
             </div>
             <div class="flex justify-end space-x-4 mt-auto">

@@ -46,7 +46,7 @@
         <x-slot name="append">
             <div class="absolute inset-y-0 right-0 pr-2.5 flex items-center gap-3 text-gray-400 pointer-events-none">
                 @if ($clearable && !$disabled)
-                    <x-icon name="x"
+                    <x-icon name="x-mark"
                             x-show="value"
                             x-on:click="value = null"
                             class="w-4 h-4 hover:text-rose-700 cursor-pointer pointer-events-auto"

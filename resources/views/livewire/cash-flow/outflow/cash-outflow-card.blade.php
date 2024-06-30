@@ -1,11 +1,12 @@
 <div class="max-w-7xl sm:mx-auto sm:px-6 lg:px-8 sm:my-12 m-2">
-    <x-card :title="$cashFlow ? 'Расход денежных средств' : 'Новый расход денежных средств'" card-classes="h-full" padding="py-2 sm:py-5 px-2">
+    <x-card :title="$cashFlow ? 'Расход денежных средств' : 'Новый расход денежных средств'" borderless card-classes="h-full text-lg" padding="py-2 sm:py-5 px-2">
         <div class="space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
                 <x-datetime-picker
                     wire:model="data.date"
                     name="date"
                     label="Дата"
+                    start-of-week="1"
                 ></x-datetime-picker>
 
                 <x-select
@@ -40,7 +41,7 @@
                         <div class="p-4 w-full">
                             @livewire('category.category-modal', [
                                 'type' => \App\Enums\CashFlowType::Outflow,
-                            ])
+                            ], key('new'))
                         </div>
                     </x-slot>
 
@@ -55,7 +56,7 @@
                 </x-select>
 
                 <div class="hidden sm:block">
-                    <x-inputs.currency
+                    <x-currency
                         wire:model="data.sum"
                         name="sum"
                         label="Сумма"
@@ -63,7 +64,7 @@
                         suffix="руб."
                         thousands=" "
                         disabled
-                    ></x-inputs.currency>
+                    ></x-currency>
                 </div>
             </div>
 
@@ -94,13 +95,12 @@
                                     'data' => $item,
                                     'detailsIndex' => $key,
                                 ], key('edit'.$key . $item->toJson()))
-                                <x-button.circle
+                                <x-mini-button rounded secondary flat
                                     id="delete_{{$key}}"
-                                    flat
                                     wire:click="deleteItem({{$key}})"
                                     icon="trash"
                                     class="p-4"
-                                ></x-button.circle>
+                                ></x-mini-button>
                             </div>
                         </div>
                     @empty

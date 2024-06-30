@@ -1,5 +1,5 @@
-<x-button.circle
+<x-mini-button rounded
     flat
     wire:click="confirmDelete"
     icon="trash"
-></x-button.circle>
+></x-mini-button>

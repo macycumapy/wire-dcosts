@@ -28,18 +28,24 @@
                 ></x-select>
             </div>
             <div class="sm:col-span-3">
-                <x-date-picker
+                <x-datetime-picker
                     wire:model.live="searchDateFrom"
                     placeholder="Дата начала"
                     clearable
-                ></x-date-picker>
+                    without-time
+                    without-timezone
+                    start-of-week="1"
+                ></x-datetime-picker>
             </div>
             <div class="sm:col-span-3">
-                <x-date-picker
+                <x-datetime-picker
                     wire:model.live="searchDateTo"
                     placeholder="Дата окончания"
                     clearable
-                ></x-date-picker>
+                    without-time
+                    without-timezone
+                    start-of-week="1"
+                ></x-datetime-picker>
             </div>
 
             <x-slot name="actions">
@@ -106,31 +112,27 @@
                             </div>
                             <div class="col-span-3 sm:col-span-1 flex sm:justify-end justify-between">
                                 @if($cashFlow->type === \App\Enums\CashFlowType::Inflow)
-                                    <x-button.circle
-                                        flat
+                                    <x-mini-button rounded secondary flat
                                         wire:navigate
                                         href="{{ route('inflows.edit', ['id' => $cashFlow->id, 'clone' => true]) }}"
                                         icon="document-duplicate"
-                                    ></x-button.circle>
-                                    <x-button.circle
-                                        flat
+                                    ></x-mini-button>
+                                    <x-mini-button rounded secondary flat
                                         wire:navigate
                                         href="{{ route('inflows.edit', ['id' => $cashFlow->id]) }}"
-                                        icon="pencil-alt"
-                                    ></x-button.circle>
+                                        icon="pencil-square"
+                                    ></x-mini-button>
                                 @else
-                                    <x-button.circle
-                                        flat
+                                    <x-mini-button rounded secondary flat
                                         wire:navigate
                                         href="{{ route('outflows.edit', ['id' => $cashFlow->id, 'clone' => true]) }}"
                                         icon="document-duplicate"
-                                    ></x-button.circle>
-                                    <x-button.circle
-                                        flat
+                                    ></x-mini-button>
+                                    <x-mini-button rounded secondary flat
                                         wire:navigate
                                         href="{{ route('outflows.edit', ['id' => $cashFlow->id]) }}"
-                                        icon="pencil-alt"
-                                    ></x-button.circle>
+                                        icon="pencil-square"
+                                    ></x-mini-button>
                                 @endif
                                 @livewire('cash-flow.cash-flow-delete-button', [
                                     'cashFlow' => $cashFlow

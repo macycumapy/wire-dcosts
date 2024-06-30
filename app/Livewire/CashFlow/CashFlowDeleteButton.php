@@ -10,11 +10,11 @@ use Exception;
 use Illuminate\View\View;
 use Livewire\Component;
 use Throwable;
-use WireUi\Traits\Actions;
+use WireUi\Traits\WireUiActions;
 
 class CashFlowDeleteButton extends Component
 {
-    use Actions;
+    use WireUiActions;
 
     public const CASH_FLOW_DELETED_EVENT = 'cash-flow-deleted';
     public CashFlow $cashFlow;

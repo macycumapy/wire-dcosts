@@ -10,7 +10,7 @@
         <div class="flex space-x-2 divide-x divide-gray-500">
             <div class="flex">
                 <x-button @click="open = !open" label="Фильтры: {{ $count }}"
-                          flat icon="filter"
+                          flat icon="funnel"
                           class="group font-medium text-xs flex items-center {{ $count ? '!text-orange-700' : 'text-gray-700' }}">
                 </x-button>
             </div>

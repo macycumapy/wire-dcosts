@@ -1,17 +1,15 @@
 <div>
     @isset($detailsIndex)
-        <x-button.circle
-            flat
+        <x-mini-button rounded secondary flat
             wire:click="$toggle('showModal')"
-            icon="pencil-alt"
-        ></x-button.circle>
+            icon="pencil-square"
+        ></x-mini-button>
     @else
         @isset($data->nomenclature_id)
-            <x-button.circle
-                flat
+            <x-mini-button rounded secondary flat
                 wire:click="$toggle('showModal')"
                 icon="document-duplicate"
-            ></x-button.circle>
+            ></x-mini-button>
         @else
             <x-button
                 primary
@@ -24,12 +22,12 @@
     @endisset
     @if($showModal)
         @teleport('#footer')
-            <x-modal.card wire:model.live="showModal">
+            <x-modal-card wire:model.live="showModal">
                 @livewire('cash-flow.outflow.cash-outflow-item-form', [
                     'data' => $data,
                     'detailsIndex' => $detailsIndex,
                 ], key('item'.json_encode($data).$detailsIndex))
-            </x-modal.card>
+            </x-modal-card>
         @endteleport
     @endif
 </div>

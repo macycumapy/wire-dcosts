@@ -12,9 +12,12 @@
         option-value="id"
         option-description="-"
         autocomplete="off" autocorrect="off"
+        hideEmptyMessage
     >
-        <x-slot name="emptyMessage">
-            @livewire('nomenclature.nomenclature-modal')
+        <x-slot name="afterOptions">
+            <div class="p-2">
+                @livewire('nomenclature.nomenclature-modal')
+            </div>
         </x-slot>
 
         @if($data->nomenclature_id)
@@ -25,8 +28,8 @@
             </x-slot>
         @endif
     </x-select>
-    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-        <x-inputs.currency
+    <div class="grid grid-cols-3 gap-4">
+        <x-currency
             wire:model="data.cost"
             x-model.number="cost"
             name="cost"
@@ -34,29 +37,20 @@
             suffix="руб."
             thousands=""
             inputmode="numeric"
-        ></x-inputs.currency>
-        <x-inputs.currency
+            class="col-span-2"
+        ></x-currency>
+        <x-currency
             wire:model="data.count"
             x-model.number="count"
             name="count"
             label="Количество"
             thousands=""
             inputmode="numeric"
-        ></x-inputs.currency>
-        <div class="hidden sm:block">
-            <x-inputs.currency
-                wire:model="data.sum"
-                x-model="sum"
-                label="Итого"
-                suffix="руб."
-                thousands=" "
-                disabled
-            ></x-inputs.currency>
-        </div>
+        ></x-currency>
     </div>
 
-    <div class="flex justify-between sm:justify-end text-center">
-        <div class="sm:hidden flex">Итого:&nbsp;<span x-text="sum"></span>&nbsp;руб.</div>
+    <div class="flex justify-between text-center">
+        <div class="flex my-auto">Итого:&nbsp;<span x-text="sum"></span>&nbsp;руб.</div>
         @isset($detailsIndex)
             <x-button
                 primary

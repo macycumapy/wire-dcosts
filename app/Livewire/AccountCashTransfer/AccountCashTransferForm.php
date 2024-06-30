@@ -11,11 +11,11 @@ use App\Models\AccountCashTransfer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Component;
-use WireUi\Traits\Actions;
+use WireUi\Traits\WireUiActions;
 
 class AccountCashTransferForm extends Component
 {
-    use Actions;
+    use WireUiActions;
 
     public const ACCOUNT_CASH_TRANSFER_SAVED = 'account_cash_transfer_saved';
     public ?AccountCashTransfer $cashTransfer = null;

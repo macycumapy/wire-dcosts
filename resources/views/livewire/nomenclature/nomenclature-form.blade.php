@@ -15,8 +15,10 @@
         option-description="-"
         autocomplete="off" autocorrect="off"
     >
-        <x-slot name="emptyMessage">
-            @livewire('nomenclature-type.nomenclature-type-modal')
+        <x-slot name="afterOptions">
+            <div class="p-4 w-full">
+                @livewire('nomenclature-type.nomenclature-type-modal')
+            </div>
         </x-slot>
 
         @if($data->nomenclature_type_id)

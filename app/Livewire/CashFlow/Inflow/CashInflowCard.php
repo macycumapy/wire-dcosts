@@ -18,11 +18,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Attributes\Url;
 use Livewire\Component;
-use WireUi\Traits\Actions;
+use WireUi\Traits\WireUiActions;
 
 class CashInflowCard extends Component
 {
-    use Actions;
+    use WireUiActions;
     use WithPreloader;
 
     public const CASH_INFLOW_CREATED_EVENT = 'cash-inflow-created';

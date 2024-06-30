@@ -2,7 +2,7 @@
     @if($id)
         <x-icon
             wire:click="$toggle('showModal')"
-            name="pencil-alt"
+            name="pencil-square"
             class="w-4 h-4 cursor-pointer hover:text-emerald-700"
         ></x-icon>
     @else
@@ -19,13 +19,13 @@
     @endif
     @if($showModal)
         @teleport('#footer')
-            <x-modal.card wire:model.live="showModal" :title="$id ? 'Категория' : 'Новая категория'">
+            <x-modal-card wire:model.live="showModal" :title="$id ? 'Категория' : 'Новая категория'">
                 @livewire('category.category-form', [
                     'type' => $type,
                     'name' => $name,
                     'id' => $id
                 ], key(json_encode([$type, $name, $id])))
-            </x-modal.card>
+            </x-modal-card>
         @endteleport
     @endif
 </div>

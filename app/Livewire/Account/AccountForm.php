@@ -12,11 +12,11 @@ use App\Models\Account;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Component;
-use WireUi\Traits\Actions;
+use WireUi\Traits\WireUiActions;
 
 class AccountForm extends Component
 {
-    use Actions;
+    use WireUiActions;
 
     public const ACCOUNT_SAVED_EVENT = 'accountSaved';
     public ?Account $account = null;

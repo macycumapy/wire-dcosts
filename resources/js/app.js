@@ -1,5 +1,5 @@
 import './bootstrap';
-import './back-off'
+// import './back-off'
 import './wire-navigate'
 
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';

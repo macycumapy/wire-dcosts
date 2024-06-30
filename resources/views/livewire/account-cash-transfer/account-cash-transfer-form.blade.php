@@ -1,15 +1,4 @@
 <div class="space-y-4">
-    <x-inputs.currency
-        wire:model="data.sum"
-        name="sum"
-        label="Сумма"
-        :min="0"
-        suffix="руб."
-        thousands=" "
-        inputmode="numeric"
-        :disabled="$cashTransfer"
-    ></x-inputs.currency>
-
     <x-select
         wire:model.live="data.from_account_id"
         name="from_account_id"
@@ -35,6 +24,17 @@
         hideEmptyMessage
         :disabled="$cashTransfer"
     ></x-select>
+
+    <x-currency
+        wire:model="data.sum"
+        name="sum"
+        label="Сумма"
+        :min="0"
+        suffix="руб."
+        thousands=" "
+        inputmode="numeric"
+        :disabled="$cashTransfer"
+    ></x-currency>
 
     @unless($cashTransfer)
         <div class="flex justify-end">

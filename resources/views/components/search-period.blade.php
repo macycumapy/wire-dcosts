@@ -17,17 +17,23 @@
 </div>
 @if(in_array($this->$periodName, [\App\Enums\Period::Custom->value, \App\Enums\Period::Custom]))
     <div class="sm:col-span-3">
-        <x-date-picker
+        <x-datetime-picker
             wire:model.live="searchDateFrom"
             placeholder="Дата начала"
             clearable
-        ></x-date-picker>
+            without-time
+            without-timezone
+            start-of-week="1"
+        ></x-datetime-picker>
     </div>
     <div class="sm:col-span-3">
-        <x-date-picker
+        <x-datetime-picker
             wire:model.live="searchDateTo"
             placeholder="Дата окончания"
             clearable
-        ></x-date-picker>
+            without-time
+            without-timezone
+            start-of-week="1"
+        ></x-datetime-picker>
     </div>
 @endif

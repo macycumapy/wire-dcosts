@@ -10,11 +10,11 @@ use App\Models\CashFlow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Component;
-use WireUi\Traits\Actions;
+use WireUi\Traits\WireUiActions;
 
 class CashFlowList extends Component
 {
-    use Actions;
+    use WireUiActions;
     use WithFilters;
 
     public string $timezone;

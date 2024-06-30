@@ -9,11 +9,11 @@ use App\Services\InitialBalances\InitialBalancesService;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use WireUi\Traits\Actions;
+use WireUi\Traits\WireUiActions;
 
 class InitBalancesForm extends Component
 {
-    use Actions;
+    use WireUiActions;
     use WithFileUploads;
 
     public mixed $file = null;

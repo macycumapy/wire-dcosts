@@ -2,7 +2,7 @@
     @if($id)
         <x-icon
             wire:click="$toggle('showModal')"
-            name="pencil-alt"
+            name="pencil-square"
             class="w-4 h-4 cursor-pointer hover:text-emerald-700"
         ></x-icon>
     @else
@@ -12,11 +12,11 @@
         ></x-button>
     @endif
     @teleport('#footer')
-        <x-modal.card wire:model.live="showModal" :title="$id ? 'Тип номенклатуры' : 'Новый тип номенклатуры'">
+        <x-modal-card wire:model.live="showModal" :title="$id ? 'Тип номенклатуры' : 'Новый тип номенклатуры'">
             @livewire('nomenclature-type.nomenclature-type-form', [
                 'name' => $name,
                 'id' => $id,
             ], key(json_encode([$id, $name])))
-        </x-modal.card>
+        </x-modal-card>
     @endteleport
 </div>
