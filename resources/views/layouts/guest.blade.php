@@ -20,6 +20,8 @@
         @wireUiScripts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireScriptConfig
+
+        @laravelPWA
     </head>
     <body class="bg-[url('/images/intro.jpg')] overflow-hidden">
         <div class="fixed flex gap-4 p-6 justify-end w-full">

@@ -16,6 +16,8 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireScriptConfig
         <!-- Styles -->
+
+        @laravelPWA
     </head>
     <body class="font-sans antialiased sm:overflow-auto soft-scrollbar">
         @persist('dictionaries')
