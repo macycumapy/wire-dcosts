@@ -17,7 +17,7 @@
 
 <!-- Tile for Win8 -->
 <meta name="msapplication-TileColor" content="{{ $config['background_color'] }}">
-<meta name="msapplication-TileImage" content="{{ data_get(end($config['icons']), 'src') }}">
+<meta name="msapplication-TileImage" content="{{ asset('images/logo.png') }}">
 
 <script type="text/javascript">
     // Initialize the service worker
