@@ -41,6 +41,7 @@
             <x-button
                 primary
                 wire:click="create"
+                wire:loading.attr="disabled"
                 label="Создать"
             ></x-button>
         </div>
