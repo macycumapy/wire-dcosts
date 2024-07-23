@@ -43,7 +43,7 @@
                          x-on:show.window="showCategory=true"
                          @hide.window="showCategory=false"
                          class="p-2 space-y-2">
-                        <div class="flex justify-between items-center sticky top-16 bg-secondary-800 py-1 z-20">
+                        <div class="flex justify-between items-center sticky top-16 bg-secondary-800 py-1 z-10">
                             <div @click="showCategory=!showCategory" class="flex gap-2 items-center cursor-pointer">
                                 <template x-if="showCategory">
                                     <div class="bg-gray-500 rounded-full">
@@ -110,7 +110,7 @@
                 @endforelse
             </div>
             @if($items->isNotEmpty())
-                <div class="flex justify-between sticky bottom-0 bg-secondary-800 p-2">
+                <div class="flex justify-between sticky bottom-0 bg-secondary-800 p-2 z-10">
                     <div>Итого</div>
                     <div>
                         {{ number_format($total, 2, '.', ' ') }}
