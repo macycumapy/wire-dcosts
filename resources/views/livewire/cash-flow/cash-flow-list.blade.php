@@ -91,7 +91,7 @@
         </div>
 
         <div class="divide-y divide-secondary-500">
-            <div class="grid grid-cols-3 sm:grid-cols-4 p-2 sm:p-4 font-semibold gap-x-4 sticky top-24 sm:top-28 shadow-md bg-secondary-800 text-xs sm:text-base">
+            <div class="grid grid-cols-3 sm:grid-cols-4 p-2 sm:p-4 font-semibold gap-x-4 sticky top-[6.5rem] sm:top-28 shadow-md bg-secondary-800 text-xs sm:text-base">
                 <div>Дата</div>
                 <div class="text-center sm:text-left">Сумма</div>
                 <div class="text-right sm:text-left">Категория</div>
