@@ -22,8 +22,8 @@ class UpdatePartnerData extends Data
                 'string',
                 'max:255',
                 Rule::unique('partners')
-                    ->where('user_id', $context->payload['partner']->user_id)
-                    ->whereNot('id', $context->payload['partner']->id),
+                    ->where('user_id', data_get($context->payload, 'partner.user_id'))
+                    ->ignore(data_get($context->payload, 'partner'))
             ],
         ];
     }

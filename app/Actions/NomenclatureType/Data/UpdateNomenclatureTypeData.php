@@ -22,8 +22,8 @@ class UpdateNomenclatureTypeData extends Data
                 'string',
                 'max:255',
                 Rule::unique('nomenclature_types')
-                    ->where('user_id', $context->payload['nomenclatureType']->user_id)
-                    ->whereNot('id', $context->payload['nomenclatureType']->id),
+                    ->where('user_id', data_get($context->payload, 'nomenclatureType.user_id'))
+                    ->ignore(data_get($context->payload, 'nomenclatureType')),
             ],
         ];
     }

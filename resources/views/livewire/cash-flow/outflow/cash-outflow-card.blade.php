@@ -1,5 +1,5 @@
-<div class="max-w-7xl sm:mx-auto sm:px-6 lg:px-8 sm:my-12 p-2">
-    <x-card :title="$cashFlow ? 'Расход денежных средств' : 'Новый расход денежных средств'" borderless card-classes="h-full text-lg" padding="p-2 sm:p-4">
+<div class="max-w-7xl sm:mx-auto sm:p-4 p-2">
+    <x-card :title="$cashFlow ? 'Расход денежных средств' : 'Новый расход денежных средств'" borderless card-classes="h-full" padding="p-2 sm:p-4">
         <div class="space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
                 <x-datetime-picker
@@ -68,7 +68,7 @@
                 </div>
             </div>
 
-            <x-card padding="p-0">
+            <x-card padding="p-0" shadowless>
                 <div class="divide-y divide-emerald-800 text-xs sm:text-base min-h-[200px]">
                     <div class="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4 font-semibold bg-gray-800 pb-2 sm:p-2">
                         <div class="hidden sm:block">Номенклатура</div>
@@ -98,7 +98,6 @@
                                 ></x-mini-button>
                             </div>
                         </div>
-                        <div>Добавь</div>
                     @endforeach
                     <div class="flex justify-between py-2">
                         <div><x-error name="details" class="!mt-0"></x-error></div>

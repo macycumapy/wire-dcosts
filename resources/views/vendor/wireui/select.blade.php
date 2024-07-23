@@ -21,6 +21,11 @@
         'wireModel'         => WireUi::wireModel(isset($__livewire) ? $this : null, $attributes),
         'alpineModel'       => WireUi::alpineModel($attributes),
     ])"
+
+    x-init="
+        $watch('search', (value) => Alpine.store('selectSearch', value))
+    "
+
     x-bind:class="{
         'ring-2 ring-primary-600': positionable.isOpen(),
     }"

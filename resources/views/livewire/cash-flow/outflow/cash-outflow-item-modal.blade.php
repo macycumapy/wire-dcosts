@@ -1,7 +1,7 @@
 <div>
     @isset($detailsIndex)
         <x-mini-button rounded secondary flat
-            wire:click="$toggle('showModal')"
+            wire:click.stop="$toggle('showModal')"
             icon="pencil-square"
         ></x-mini-button>
     @else

@@ -1,6 +1,6 @@
 <div>
     @if($id)
-        <div wire:click="$toggle('showModal')" class="p-2 cursor-pointer hover:text-emerald-700">
+        <div wire:click.stop="$toggle('showModal')" class="p-2 cursor-pointer hover:text-emerald-700">
             <x-icon
                 name="pencil-square"
                 class="w-4 h-4"
