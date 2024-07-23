@@ -1,6 +1,6 @@
-<nav x-data="{ open: false }" class="bg-secondary-800 border-b border-secondary-800">
+<nav x-data="{ open: false }" class="bg-secondary-800 shadow-md">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="max-w-7xl m-auto px-4 relative">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -62,7 +62,7 @@
         <!-- Responsive Navigation Menu -->
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden fixed left-0 top-16 z-50 bg-secondary-800 w-full text-gray-400">
             <!-- Responsive Settings Options -->
-            <div class="border-b border-t border-emerald-800 space-y-2">
+            <div class="border-b border-t border-primary-800 space-y-2 shadow-2xl">
                 <div class="space-y-1">
                     @foreach($reports as $report)
                         <a wire:navigate href="{{ route('report', ['slug' => $report->slug]) }}">

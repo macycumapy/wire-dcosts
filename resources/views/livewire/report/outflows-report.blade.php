@@ -1,6 +1,6 @@
-<div class="max-w-7xl sm:mx-auto sm:px-6 lg:px-8 sm:my-12 m-2">
-    <x-card card-classes="h-full">
-        <div class="min-w-full space-y-2">
+<div class="max-w-7xl sm:mx-auto sm:p-4 p-2">
+    <x-card card-classes="h-full" padding="sm:p-4 p-2">
+        <div class="min-w-full">
             <x-filters :count="$this->filtersCount">
                 <x-search-period></x-search-period>
 
@@ -37,14 +37,14 @@
                     @endif
                 </x-slot>
             </x-filters>
-            <div id="list" class="h-[68vh] sm:h-[71vh] 2k:h-[76vh] overflow-auto soft-scrollbar divide-y divide-gray-500">
+            <div id="list" class="min-h-[60vh] divide-y divide-gray-500">
                 @forelse($items as $category)
                     <div x-data="{showCategory:true}"
                          x-on:show.window="showCategory=true"
                          @hide.window="showCategory=false"
                          class="p-2 space-y-2">
-                        <div class="flex justify-between items-center">
-                            <div @click="showCategory=!showCategory" class="flex gap-2 items-center cursor-pointer ">
+                        <div class="flex justify-between items-center sticky top-16 bg-secondary-800 py-1 z-20">
+                            <div @click="showCategory=!showCategory" class="flex gap-2 items-center cursor-pointer">
                                 <template x-if="showCategory">
                                     <div class="bg-gray-500 rounded-full">
                                         <x-icon name="minus" class="w-4 h-4 text-gray-900"></x-icon>
@@ -64,8 +64,8 @@
                                 <div x-data="{showType:true}"
                                      x-on:show.window="showType=true"
                                      @hide.window="showType=false"
-                                     class="p-2 space-y-2 bg-gray-700 first:rounded-t-lg last:rounded-b-lg">
-                                    <div class="flex justify-between items-start">
+                                     class="p-2 space-y-2 bg-secondary-700 first:rounded-t-lg last:rounded-b-lg">
+                                    <div class="flex justify-between items-start sticky top-24 bg-secondary-700 py-1">
                                         <div @click="showType=!showType" class="flex gap-2 items-center cursor-pointer ">
                                             <template x-if="showType">
                                                 <div class="bg-gray-500 rounded-full">
@@ -84,7 +84,7 @@
                                     </div>
                                     <div x-show="showType" class="pl-4 divide-y divide-gray-500">
                                         @foreach($type->details as $nomenclature)
-                                            <div class="flex justify-between items-start bg-gray-600 p-2 first:rounded-t-lg last:rounded-b-lg">
+                                            <div class="flex justify-between items-start bg-secondary-600 p-2 first:rounded-t-lg last:rounded-b-lg">
                                                 <div>{{ $nomenclature->nomenclature }}</div>
                                                 <div class="min-w-[100px] text-right">
                                                     <a href="{{ route('report.nomenclature', [
@@ -110,7 +110,7 @@
                 @endforelse
             </div>
             @if($items->isNotEmpty())
-                <div class="flex justify-between">
+                <div class="flex justify-between sticky bottom-0 bg-secondary-800 p-2">
                     <div>Итого</div>
                     <div>
                         {{ number_format($total, 2, '.', ' ') }}

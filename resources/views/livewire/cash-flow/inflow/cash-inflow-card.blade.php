@@ -1,6 +1,6 @@
 <div class="max-w-7xl sm:mx-auto sm:px-6 lg:px-8 sm:my-12 m-2">
-    <x-card :title="$cashFlow ? 'Поступление денежных средств' : 'Новое поступление денежных средств'" borderless padding="py-2 sm:py-5 px-2">
-        <div class="h-[72vh] sm:h-[74vh] 2k:h-[80vh] flex flex-col">
+    <x-card :title="$cashFlow ? 'Поступление денежных средств' : 'Новое поступление денежных средств'" borderless padding="p-2 sm:p-4">
+        <div class="min-h-[60vh] flex flex-col">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <x-datetime-picker
                     wire:model="data.date"
@@ -91,7 +91,7 @@
                 ></x-currency>
 
             </div>
-            <div class="flex justify-end space-x-4 mt-auto">
+            <div class="flex justify-end space-x-4 mt-auto pt-4">
                 @if($cashFlow)
                     <x-button
                         primary

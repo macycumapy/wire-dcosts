@@ -1,7 +1,7 @@
-<div class="max-w-7xl sm:mx-auto sm:px-6 lg:px-8 sm:my-12 m-2">
-    <x-card card-classes="h-full">
-        <div class="min-w-full space-y-2">
-            <div id="list" class="h-[72vh] sm:h-[76vh] 2k:h-[78vh] overflow-auto soft-scrollbar divide-y divide-gray-500">
+<div class="max-w-7xl sm:mx-auto sm:p-4 p-2">
+    <x-card card-classes="h-full" padding="sm:p-4 p-2">
+        <div class="min-w-full">
+            <div id="list" class="min-h-[60vh] divide-y divide-gray-500">
                 @forelse($items as $nomenclature)
                     <div class="grid grid-cols-3 p-2 gap-2">
                         <div>{{ $nomenclature->date->format('d.m.Y') }}</div>
@@ -18,7 +18,7 @@
                     </div>
                 @endforelse
             </div>
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center sticky bottom-0 bg-secondary-800 p-2">
                 <div>Итого: {{ number_format($sum ?? 0, 2, '.', ' ') }} </div>
                 <x-button
                     secondary

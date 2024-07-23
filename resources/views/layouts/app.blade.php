@@ -19,16 +19,18 @@
 
         @laravelPWA
     </head>
-    <body class="font-sans antialiased sm:overflow-auto soft-scrollbar">
+    <body class="font-sans antialiased soft-scrollbar">
         @persist('dictionaries')
             <livewire:nomenclature.nomenclature-dictionary lazy></livewire:nomenclature.nomenclature-dictionary>
         @endpersist
         <x-preloader></x-preloader>
 
         <div class="min-h-screen bg-primary-900">
-            @persist('navigation')
-                @livewire('navigation')
-            @endpersist
+            <div class="sticky top-0 z-50">
+                @persist('navigation')
+                    @livewire('navigation')
+                @endpersist
+            </div>
 
             <!-- Page Heading -->
             @if (isset($header))
