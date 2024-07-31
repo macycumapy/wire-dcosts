@@ -11,7 +11,6 @@ return [
         'background_color' => '#064E3B',
         'theme_color' => '#000000',
         'display' => 'standalone',
-        'orientation' => 'any',
         'status_bar' => 'black',
         'icons' => [],
         'shortcuts' => [
