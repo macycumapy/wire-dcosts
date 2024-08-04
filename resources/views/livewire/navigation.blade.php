@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-secondary-800 shadow-md">
+<nav x-data="{ open: false }" class="bg-white dark:bg-secondary-800 shadow-md">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl m-auto px-4 relative">
         <div class="flex justify-between h-16">
@@ -46,9 +46,9 @@
             </div>
         </div>
         <!-- Responsive Navigation Menu -->
-        <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden fixed left-0 top-16 z-50 bg-secondary-800 w-full text-gray-400">
+        <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden fixed left-0 top-16 z-50 bg-white dark:bg-secondary-800 w-full text-gray-400">
             <!-- Responsive Settings Options -->
-            <div class="border-b border-t border-secondary-700 space-y-2 shadow-2xl">
+            <div class="border-b border-t dark:border-secondary-700 space-y-2 shadow-2xl">
                 <div class="space-y-1 p-1">
                     <x-menu-dropdown-items :reports="$reports"/>
                 </div>

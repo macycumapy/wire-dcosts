@@ -43,16 +43,16 @@
                          x-on:show.window="showCategory=true"
                          @hide.window="showCategory=false"
                          class="p-2 space-y-2">
-                        <div class="flex justify-between items-center sticky top-16 bg-secondary-800 py-1 z-10">
+                        <div class="flex justify-between items-center sticky top-16 bg-white dark:bg-secondary-800 py-1 z-10">
                             <div @click="showCategory=!showCategory" class="flex gap-2 items-center cursor-pointer">
                                 <template x-if="showCategory">
                                     <div class="bg-gray-500 rounded-full">
-                                        <x-icon name="minus" class="w-4 h-4 text-gray-900"></x-icon>
+                                        <x-icon name="minus" class="w-4 h-4 text-secondary-900"></x-icon>
                                     </div>
                                 </template>
                                 <template x-if="!showCategory">
                                     <div class="bg-gray-500 rounded-full">
-                                        <x-icon name="plus" class="w-4 h-4 text-gray-900"></x-icon>
+                                        <x-icon name="plus" class="w-4 h-4 text-secondary-900"></x-icon>
                                     </div>
                                 </template>
                                 {{ $category->name }}
@@ -64,17 +64,17 @@
                                 <div x-data="{showType:true}"
                                      x-on:show.window="showType=true"
                                      @hide.window="showType=false"
-                                     class="p-2 space-y-2 bg-secondary-700 first:rounded-t-lg last:rounded-b-lg">
-                                    <div class="flex justify-between items-start sticky top-24 bg-secondary-700 py-1">
+                                     class="p-2 space-y-2 bg-gray-200 dark:bg-secondary-700 first:rounded-t-lg last:rounded-b-lg">
+                                    <div class="flex justify-between items-start sticky top-24 bg-gray-200 dark:bg-secondary-700 py-1">
                                         <div @click="showType=!showType" class="flex gap-2 items-center cursor-pointer ">
                                             <template x-if="showType">
                                                 <div class="bg-gray-500 rounded-full">
-                                                    <x-icon name="minus" class="w-4 h-4 text-gray-900"></x-icon>
+                                                    <x-icon name="minus" class="w-4 h-4 text-secondary-900"></x-icon>
                                                 </div>
                                             </template>
                                             <template x-if="!showType">
                                                 <div class="bg-gray-500 rounded-full">
-                                                    <x-icon name="plus" class="w-4 h-4 cursor-pointer text-gray-900"></x-icon>
+                                                    <x-icon name="plus" class="w-4 h-4 cursor-pointer text-secondary-900"></x-icon>
                                                 </div>
                                             </template>
                                             {{ $type->name }}
@@ -84,7 +84,7 @@
                                     </div>
                                     <div x-show="showType" class="pl-4 divide-y divide-gray-500">
                                         @foreach($type->details as $nomenclature)
-                                            <div class="flex justify-between items-start bg-secondary-600 p-2 first:rounded-t-lg last:rounded-b-lg">
+                                            <div class="flex justify-between items-start bg-gray-300 dark:bg-secondary-600 p-2 first:rounded-t-lg last:rounded-b-lg">
                                                 <div>{{ $nomenclature->nomenclature }}</div>
                                                 <div class="min-w-[100px] text-right">
                                                     <a href="{{ route('report.nomenclature', [
@@ -110,7 +110,7 @@
                 @endforelse
             </div>
             @if($items->isNotEmpty())
-                <div class="flex justify-between sticky bottom-0 bg-secondary-800 p-2 z-10">
+                <div class="flex justify-between sticky bottom-0 bg-white dark:bg-secondary-800 p-2 z-10">
                     <div>Итого</div>
                     <div>
                         {{ number_format($total, 2, '.', ' ') }}

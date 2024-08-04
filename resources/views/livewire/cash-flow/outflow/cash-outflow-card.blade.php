@@ -69,8 +69,8 @@
             </div>
 
             <x-card padding="p-0" shadowless>
-                <div class="divide-y divide-emerald-800 text-xs sm:text-base min-h-[200px]">
-                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4 font-semibold bg-gray-800 pb-2 sm:p-2">
+                <div class="divide-y divide-primary-600 dark:divide-secondary-500 text-xs sm:text-base min-h-[200px]">
+                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4 font-semibold bg-white dark:bg-secondary-800 pb-2 sm:p-2">
                         <div class="hidden sm:block">Номенклатура</div>
                         <div>Стоимость</div>
                         <div class="text-center sm:text-left">Количество</div>

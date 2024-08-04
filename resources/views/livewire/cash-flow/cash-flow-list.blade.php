@@ -12,7 +12,7 @@
             }
         }
     " class="min-w-full">
-        <div class="sticky top-16 bg-secondary-800 z-10">
+        <div class="sticky top-16 bg-white dark:bg-secondary-800 z-10">
             <x-filters :count="$this->filtersCount">
                 <div class="sm:col-span-3">
                     <x-select
@@ -90,13 +90,13 @@
             </x-filters>
         </div>
 
-        <div class="divide-y divide-secondary-500">
-            <div class="grid grid-cols-3 sm:grid-cols-4 p-2 sm:p-4 font-semibold gap-x-4 sticky top-[6.5rem] sm:top-28 shadow-md bg-secondary-800 text-xs sm:text-base">
+        <div class="divide-y divide-primary-600 dark:divide-secondary-500">
+            <div class="grid grid-cols-3 sm:grid-cols-4 p-2 sm:p-4 font-semibold gap-x-4 sticky top-[6.5rem] sm:top-28 shadow-[0_10px_10px_-15px_rgba(0,0,0,0.3)] dark:shadow-md bg-white dark:bg-secondary-800 text-xs sm:text-base">
                 <div>Дата</div>
                 <div class="text-center sm:text-left">Сумма</div>
                 <div class="text-right sm:text-left">Категория</div>
             </div>
-            <div id="list" class="divide-y divide-gray-500 min-h-[60vh]">
+            <div id="list" class="divide-y divide-primary-600 dark:divide-secondary-500 min-h-[60vh]">
                 @forelse($items as $key => $cashFlow)
                     <div wire:key="row_{{ $cashFlow->id }}">
                         <div class="p-4 grid grid-cols-3 sm:grid-cols-4 gap-4">

@@ -18,7 +18,7 @@
                     </div>
                 @endforelse
             </div>
-            <div class="flex justify-between items-center sticky bottom-0 bg-secondary-800 p-2">
+            <div class="flex justify-between items-center sticky bottom-0 bg-white dark:bg-secondary-800 p-2">
                 <div>Итого: {{ number_format($sum ?? 0, 2, '.', ' ') }} </div>
                 <x-button
                     secondary

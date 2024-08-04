@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark h-[100vh]">
+<html x-data lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-[100vh] {{ session('theme') }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,11 +21,11 @@
     </head>
     <body class="font-sans antialiased soft-scrollbar">
         @persist('dictionaries')
-            <livewire:nomenclature.nomenclature-dictionary lazy></livewire:nomenclature.nomenclature-dictionary>
+            <livewire:nomenclature.nomenclature-dictionary lazy/>
         @endpersist
         <x-preloader></x-preloader>
 
-        <div class="min-h-screen bg-primary-900">
+        <div class="min-h-screen bg-primary-100 dark:bg-primary-900">
             <div class="sticky top-0 z-50">
                 @persist('navigation')
                     @livewire('navigation')

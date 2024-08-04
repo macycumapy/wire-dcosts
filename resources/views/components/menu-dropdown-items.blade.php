@@ -2,6 +2,12 @@
 'reports' => [],
 ])
 
+<div class="p-2">
+    @livewire('widget.theme-widget')
+</div>
+
+<hr class="my-1 dark:border-secondary-600">
+
 <x-dropdown.header label="Журналы">
     <x-dropdown.item
         wire:navigate
@@ -10,7 +16,7 @@
     />
 </x-dropdown.header>
 
-<hr class="my-1 border-secondary-600">
+<hr class="my-1 dark:border-secondary-600">
 
 <x-dropdown.header label="Справочники">
     <x-dropdown.item
@@ -21,7 +27,7 @@
 </x-dropdown.header>
 
 @unless(empty($reports))
-    <hr class="my-1 border-secondary-600">
+    <hr class="my-1 dark:border-secondary-600">
 
     <x-dropdown.header label="Отчеты">
         @foreach($reports as $report)
