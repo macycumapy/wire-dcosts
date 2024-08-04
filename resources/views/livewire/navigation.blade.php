@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a wire:navigate href="{{ route('dashboard') }}">
-                        <img src="/images/logo.png" class="w-10 h-10">
+                        <img src="{{ asset('/images/logo.png') }}" class="w-10 h-10">
                     </a>
                 </div>
             </div>
@@ -18,7 +18,7 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
-                    <x-dropdown align="right" width="48">
+                    <x-dropdown align="left" width="48" height="7xl">
                         <x-slot name="trigger">
                             <span class="inline-flex rounded-md">
                                 <x-button primary outline>
@@ -29,22 +29,8 @@
                                 </x-button>
                             </span>
                         </x-slot>
-                        @foreach($reports as $report)
-                            <x-dropdown.item
-                                wire:navigate
-                                href="{{ route('report', ['slug' => $report->slug]) }}"
-                                :label="$report->name"
-                            ></x-dropdown.item>
-                        @endforeach
-                        <x-dropdown.item>
-                            <form method="POST" action="{{ route('logout') }}" x-data>
-                                @csrf
-                                <div class="flex" @click.prevent="$root.submit();">
-                                    <x-icon name="arrow-left-start-on-rectangle" class="w-4 h-4"></x-icon>
-                                    <span class="ml-4 my-auto">{{ __('Log Out') }}</span>
-                                </div>
-                            </form>
-                        </x-dropdown.item>
+
+                        <x-menu-dropdown-items :reports="$reports"/>
                     </x-dropdown>
                 </div>
             </div>
@@ -62,21 +48,9 @@
         <!-- Responsive Navigation Menu -->
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden fixed left-0 top-16 z-50 bg-secondary-800 w-full text-gray-400">
             <!-- Responsive Settings Options -->
-            <div class="border-b border-t border-primary-800 space-y-2 shadow-2xl">
-                <div class="space-y-1">
-                    @foreach($reports as $report)
-                        <a wire:navigate href="{{ route('report', ['slug' => $report->slug]) }}">
-                            <div class="p-4">{{ $report->name }}</div>
-                        </a>
-                    @endforeach
-                    <!-- Authentication -->
-                    <form method="POST" action="{{ route('logout') }}" x-data class="cursor-pointer p-4">
-                        @csrf
-                        <div class="flex" @click.prevent="$root.submit();">
-                            <x-icon name="arrow-left-start-on-rectangle" class="w-5 h-5"></x-icon>
-                            <span class="ml-4 my-auto">{{ __('Log Out') }}</span>
-                        </div>
-                    </form>
+            <div class="border-b border-t border-secondary-700 space-y-2 shadow-2xl">
+                <div class="space-y-1 p-1">
+                    <x-menu-dropdown-items :reports="$reports"/>
                 </div>
             </div>
         </div>
