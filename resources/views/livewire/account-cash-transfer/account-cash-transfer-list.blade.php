@@ -1,12 +1,12 @@
 <div class="max-w-7xl sm:mx-auto sm:p-4 p-2">
     <x-card card-classes="h-full" padding="sm:p-4 p-2">
         <div class="min-w-full">
-            <div class="flex justify-end py-2">
+            <div class="flex justify-end py-2 sticky top-16 bg-white dark:bg-secondary-800">
                 @livewire('account-cash-transfer.account-cash-transfer-modal')
             </div>
 
             <div class="divide-y divide-primary-600 dark:divide-secondary-500">
-                <div class="grid grid-cols-3 sm:grid-cols-4 p-2 sm:p-4 font-semibold gap-x-4 sticky top-24 sm:top-28 shadow-[0_10px_10px_-15px_rgba(0,0,0,0.3)] dark:shadow-md bg-white dark:bg-secondary-800 text-xs sm:text-base">
+                <div class="grid grid-cols-3 sm:grid-cols-4 p-2 sm:p-4 font-semibold gap-x-4 sticky top-28 shadow-[0_10px_10px_-15px_rgba(0,0,0,0.3)] dark:shadow-md bg-white dark:bg-secondary-800 text-xs sm:text-base">
                     <div>Со счета</div>
                     <div class="text-center sm:text-left">Сумма</div>
                     <div class="text-right sm:text-left">На счет</div>
