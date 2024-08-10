@@ -134,5 +134,8 @@ return [
         'label' => [
             'class' => \App\WireUI\Label::class,
         ],
+        'currency' => [
+            'class' => \App\WireUI\Currency::class,
+        ],
     ]),
 ];

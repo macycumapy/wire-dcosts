@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Widget;
 
 use Illuminate\Support\Facades\Session;
