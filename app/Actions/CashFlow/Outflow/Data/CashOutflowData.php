@@ -65,6 +65,6 @@ class CashOutflowData extends Data
 
     public function refreshSum(): void
     {
-        $this->sum = $this->details?->toCollection()->sum('sum') ?? 0.0;
+        $this->sum = round($this->details?->toCollection()->sum('sum') ?? 0.0, 2);
     }
 }
