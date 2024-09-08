@@ -26,19 +26,21 @@
     />
 </x-dropdown.header>
 
-@unless(empty($reports))
-    <hr class="my-1 dark:border-secondary-600">
+<hr class="my-1 dark:border-secondary-600">
 
-    <x-dropdown.header label="Отчеты">
-        @foreach($reports as $report)
-            <x-dropdown.item
-                wire:navigate
-                href="{{ route('report', ['slug' => $report->slug]) }}"
-                :label="$report->name"
-            ></x-dropdown.item>
-        @endforeach
-    </x-dropdown.header>
-@endunless
+<x-dropdown.header label="Отчеты">
+    <x-dropdown.item
+        wire:navigate
+        href="{{ route('report.inflows') }}"
+        label="Отчет о поступлениях"
+    ></x-dropdown.item>
+
+    <x-dropdown.item
+        wire:navigate
+        href="{{ route('report.outflows') }}"
+        label="Отчет о затратах"
+    ></x-dropdown.item>
+</x-dropdown.header>
 
 <x-dropdown.item separator>
     <form method="POST" action="{{ route('logout') }}" x-data>
