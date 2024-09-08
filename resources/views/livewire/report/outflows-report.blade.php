@@ -46,12 +46,12 @@
                         <div class="flex justify-between items-center sticky top-16 bg-white dark:bg-secondary-800 py-1 z-10">
                             <div @click="showCategory=!showCategory" class="flex gap-2 items-center cursor-pointer">
                                 <template x-if="showCategory">
-                                    <div class="bg-gray-500 rounded-full">
+                                    <div class="bg-gray-300 dark:bg-gray-500 rounded-full">
                                         <x-icon name="minus" class="w-4 h-4 text-secondary-900"></x-icon>
                                     </div>
                                 </template>
                                 <template x-if="!showCategory">
-                                    <div class="bg-gray-500 rounded-full">
+                                    <div class="bg-gray-300 dark:bg-gray-500 rounded-full">
                                         <x-icon name="plus" class="w-4 h-4 text-secondary-900"></x-icon>
                                     </div>
                                 </template>
@@ -68,19 +68,20 @@
                                     <div class="flex justify-between items-start sticky top-24 bg-gray-200 dark:bg-secondary-700 py-1">
                                         <div @click="showType=!showType" class="flex gap-2 items-center cursor-pointer ">
                                             <template x-if="showType">
-                                                <div class="bg-gray-500 rounded-full">
+                                                <div class="bg-gray-300 dark:bg-gray-500 rounded-full">
                                                     <x-icon name="minus" class="w-4 h-4 text-secondary-900"></x-icon>
                                                 </div>
                                             </template>
                                             <template x-if="!showType">
-                                                <div class="bg-gray-500 rounded-full">
+                                                <div class="bg-gray-300 dark:bg-gray-500 rounded-full">
                                                     <x-icon name="plus" class="w-4 h-4 cursor-pointer text-secondary-900"></x-icon>
                                                 </div>
                                             </template>
                                             {{ $type->name }}
                                         </div>
-                                        <div
-                                            class="min-w-[100px] text-right">{{ number_format($type->sum, 2, '.', ' ') }}</div>
+                                        <div class="min-w-[100px] text-right">
+                                            {{ number_format($type->sum, 2, '.', ' ') }}
+                                        </div>
                                     </div>
                                     <div x-show="showType" class="pl-4 divide-y divide-gray-500">
                                         @foreach($type->details as $nomenclature)

@@ -38,39 +38,36 @@
                 </x-slot>
             </x-filters>
             <div id="list" class="min-h-[60vh] divide-y divide-gray-500">
-                @forelse($items as $category)
-                    <div x-data="{showCategory:true}"
-                         x-on:show.window="showCategory=true"
-                         @hide.window="showCategory=false"
+                @forelse($items as $partner)
+                    <div x-data="{showPartner:true}"
+                         x-on:show.window="showPartner=true"
+                         @hide.window="showPartner=false"
                          class="p-2 space-y-2">
                         <div class="flex justify-between items-center sticky top-16 bg-white dark:bg-secondary-800 py-1 z-10">
-                            <div @click="showCategory=!showCategory" class="flex gap-2 items-center cursor-pointer">
-                                <template x-if="showCategory">
-                                    <div class="bg-gray-500 rounded-full">
+                            <div @click="showPartner=!showPartner" class="flex gap-2 items-center cursor-pointer">
+                                <template x-if="showPartner">
+                                    <div class="bg-gray-300 dark:bg-gray-500 rounded-full">
                                         <x-icon name="minus" class="w-4 h-4 text-secondary-900"></x-icon>
                                     </div>
                                 </template>
-                                <template x-if="!showCategory">
-                                    <div class="bg-gray-500 rounded-full">
+                                <template x-if="!showPartner">
+                                    <div class="bg-gray-300 dark:bg-gray-500 rounded-full">
                                         <x-icon name="plus" class="w-4 h-4 text-secondary-900"></x-icon>
                                     </div>
                                 </template>
-                                {{ $category?->name }}
+                                {{ $partner->name }}
                             </div>
-                            <div class="min-w-[100px] text-right">{{ number_format($category->sum, 2, '.', ' ') }}</div>
+                            <div class="min-w-[100px] text-right">{{ number_format($partner->sum, 2, '.', ' ') }}</div>
                         </div>
-                        <div x-show="showCategory" class="divide-y divide-gray-500">
-                            @foreach($category->details as $type)
-                                <div x-data="{showType:true}"
-                                     x-on:show.window="showType=true"
-                                     @hide.window="showType=false"
-                                     class="p-2 space-y-2 bg-gray-200 dark:bg-secondary-700 first:rounded-t-lg last:rounded-b-lg">
+                        <div x-show="showPartner" class="divide-y divide-gray-500">
+                            @foreach($partner->details as $category)
+                                <div class="p-2 space-y-2 bg-gray-200 dark:bg-secondary-700 first:rounded-t-lg last:rounded-b-lg">
                                     <div class="flex justify-between items-start sticky top-24 bg-gray-200 dark:bg-secondary-700 py-1">
-                                        <div class="flex gap-2 items-center cursor-pointer ">
-                                            {{ $type->name }}
+                                        <div class="flex gap-2 items-center ">
+                                            {{ $category->name }}
                                         </div>
                                         <div class="min-w-[100px] text-right">
-                                            {{ number_format($type->sum, 2, '.', ' ') }}
+                                            {{ number_format($category->sum, 2, '.', ' ') }}
                                         </div>
                                     </div>
                                 </div>
