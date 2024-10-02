@@ -85,4 +85,4 @@ jobs:
           private_key: ${{secrets.SSH_PRIVATE_KEY}}
           command: |
             cd ${{ secrets.PROJECT_FOLDER }};
-            deploy.sh;
+            ./deploy.sh;
