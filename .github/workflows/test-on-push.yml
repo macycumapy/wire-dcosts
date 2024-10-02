@@ -22,7 +22,7 @@ jobs:
         ports:
           - 55432:5432
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Configure PHP 8.2
         uses: shivammathur/setup-php@master
@@ -73,3 +73,16 @@ jobs:
           DB_PASSWORD: postgres
           DB_PORT: 55432
         run: ./vendor/bin/phpunit
+  deploy:
+    needs: test-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run command on remote server
+        uses: D3rHase/ssh-command-action@v0.2.2
+        with:
+          host: ${{secrets.SSH_HOST}}
+          user: ${{secrets.SSH_USER}}
+          private_key: ${{secrets.SSH_PRIVATE_KEY}}
+          command: |
+            cd ${{ secrets.PROJECT_FOLDER }};
+            deploy.sh;
