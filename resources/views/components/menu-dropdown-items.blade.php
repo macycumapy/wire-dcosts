@@ -40,6 +40,12 @@
         href="{{ route('report.outflows') }}"
         label="Отчет о затратах"
     ></x-dropdown.item>
+
+    <x-dropdown.item
+        wire:navigate
+        href="{{ route('report.summary-flows') }}"
+        label="Сводный отчет"
+    ></x-dropdown.item>
 </x-dropdown.header>
 
 <x-dropdown.item separator>

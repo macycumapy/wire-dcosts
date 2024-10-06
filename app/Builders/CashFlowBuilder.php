@@ -8,6 +8,7 @@ use App\Builders\Data\CashFlowFilter;
 use App\Enums\CashFlowType;
 use App\Models\CashFlow;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
@@ -38,19 +39,18 @@ class CashFlowBuilder extends Builder
 
     public function getBalance(?User $user = null): float
     {
-        $outflowType = CashFlowType::Outflow->value;
-
-        return (float) CashFlow::query()
-            ->select(
-                'user_id',
-                DB::raw("SUM(case when type = '$outflowType' then -sum else sum end) as sum"),
-            )
-            ->when(
-                $user,
-                fn (Builder $q) => $q->where('user_id', $user->id)
-            )
-            ->groupBy('user_id')
+        return (float) CashFlow::balance()
+            ->when($user, fn (Builder $q) => $q->where('user_id', $user->id))
             ->get()
             ->sum('sum');
+    }
+
+    public function balance(?Carbon $date = null): self
+    {
+        return $this
+            ->select(
+                DB::raw(sprintf("SUM(case when type = '%s' then -sum else sum end) as sum", CashFlowType::Outflow->value)),
+            )
+            ->when($date, fn (self $q) => $q->where('date', '<=', $date->endOfDay()));
     }
 }

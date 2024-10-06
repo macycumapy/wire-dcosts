@@ -16,7 +16,7 @@ enum CashFlowType: string
     public function title(): string
     {
         return match ($this) {
-            self::Inflow => 'Поступление',
+            self::Inflow => 'Приход',
             self::Outflow => 'Расход',
         };
     }

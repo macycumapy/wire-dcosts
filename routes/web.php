@@ -20,6 +20,7 @@ use App\Livewire\Report\InflowsReport;
 use App\Livewire\Report\MetabaseReport;
 use App\Livewire\Report\NomenclatureReport;
 use App\Livewire\Report\OutflowsReport;
+use App\Livewire\Report\SummaryFlowsReport;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -78,6 +79,7 @@ Route::middleware([
     Route::prefix('reports')->group(function () {
         Route::get('/outflows', OutflowsReport::class)->name('report.outflows');
         Route::get('/inflows', InflowsReport::class)->name('report.inflows');
+        Route::get('/summary-flows', SummaryFlowsReport::class)->name('report.summary-flows');
         Route::get('/nomenclature/{id}', NomenclatureReport::class)->name('report.nomenclature');
         Route::get('/{slug}', MetabaseReport::class)->name('report');
     });

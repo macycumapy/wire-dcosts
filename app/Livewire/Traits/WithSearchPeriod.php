@@ -8,7 +8,7 @@ use App\Enums\Period;
 
 trait WithSearchPeriod
 {
-    public string|Period|null $searchPeriod = Period::Month;
+    public string|Period|null $searchPeriod = null;
     public ?string $searchDateFrom = null;
     public ?string $searchDateTo = null;
 
@@ -23,9 +23,8 @@ trait WithSearchPeriod
 
     public function mountWithSearchPeriod(): void
     {
-        if ($this->searchPeriod) {
-            $this->updatedSearchPeriod($this->searchPeriod);
-        }
+        $this->searchPeriod = $this->searchPeriod ?? $this->defaultSearchPeriod();
+        $this->updatedSearchPeriod($this->searchPeriod);
     }
 
     public function updatedSearchPeriod($period): void
