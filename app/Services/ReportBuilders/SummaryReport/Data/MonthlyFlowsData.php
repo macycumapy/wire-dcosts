@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Services\ReportBuilders\SummaryReport\Data;
 
+use App\Enums\CashFlowType;
 use Illuminate\Support\Collection;
 use Spatie\LaravelData\Attributes\Computed;
-use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 
-class GroupData extends Data
+class MonthlyFlowsData extends Data
 {
     #[Computed]
     public float $sum;
@@ -21,14 +21,13 @@ class GroupData extends Data
     public float $percent;
 
     public function __construct(
-        public string $group_type,
-        #[DataCollectionOf(MonthlyFlowsData::class)]
+        public string $month,
         public Collection $items,
     ) {
-        $this->sum = $items->sum('sum');
-        $inflows = $items->sum('inflowsSum');
-        $outflows = $items->sum('outflowsSum');
+        $this->inflowsSum = $items->where('type', CashFlowType::Inflow)->sum('sum');
+        $this->outflowsSum = $items->where('type', CashFlowType::Outflow)->sum('sum');
 
-        $this->percent = $inflows > 0 ? 100 - abs(round($outflows / $inflows * 100)) : 0;
+        $this->sum = $this->inflowsSum + $this->outflowsSum;
+        $this->percent = $this->inflowsSum > 0 ? 100 - abs(round($this->outflowsSum / $this->inflowsSum * 100)) : 0;
     }
 }

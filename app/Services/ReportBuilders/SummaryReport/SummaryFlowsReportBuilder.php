@@ -7,6 +7,7 @@ namespace App\Services\ReportBuilders\SummaryReport;
 use App\Models\CashFlow;
 use App\Services\ReportBuilders\SummaryReport\Data\FilterData;
 use App\Services\ReportBuilders\SummaryReport\Data\GroupData;
+use App\Services\ReportBuilders\SummaryReport\Data\MonthlyFlowsData;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -51,7 +52,7 @@ class SummaryFlowsReportBuilder
             ->union($startBalance)
             ->union($endBalance)
             ->orderBy('group_num')
-            ->orderByDesc('month')
+            ->orderBy('month')
             ->orderBy('type')
             ->get()
             ->groupBy(['group_num']);
@@ -69,8 +70,8 @@ class SummaryFlowsReportBuilder
             return GroupData::from([
                 'group_type' => 'Движения',
                 'items' => $items->groupBy('month')->map(function ($items, $month) {
-                    return GroupData::from([
-                        'group_type' => Carbon::parse($month)->translatedFormat('F Y'),
+                    return MonthlyFlowsData::from([
+                        'month' => Carbon::parse($month)->translatedFormat('F Y'),
                         'items' => $items
                     ]);
                 }),
