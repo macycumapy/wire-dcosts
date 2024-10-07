@@ -52,7 +52,7 @@ class SummaryFlowsReportBuilder
             ->union($startBalance)
             ->union($endBalance)
             ->orderBy('group_num')
-            ->orderBy('month')
+            ->orderByDesc('month')
             ->orderBy('type')
             ->get()
             ->groupBy(['group_num']);

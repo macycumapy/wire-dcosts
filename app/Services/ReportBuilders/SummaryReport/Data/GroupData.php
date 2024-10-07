@@ -26,9 +26,9 @@ class GroupData extends Data
         public Collection $items,
     ) {
         $this->sum = $items->sum('sum');
-        $inflows = $items->sum('inflowsSum');
-        $outflows = $items->sum('outflowsSum');
+        $this->inflowsSum = $items->sum('inflowsSum');
+        $this->outflowsSum = $items->sum('outflowsSum');
 
-        $this->percent = $inflows > 0 ? 100 - abs(round($outflows / $inflows * 100)) : 0;
+        $this->percent = $this->inflowsSum > 0 ? 100 - abs(round($this->outflowsSum / $this->inflowsSum * 100)) : 0;
     }
 }
