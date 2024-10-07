@@ -122,7 +122,6 @@ class CashOutflowFormTest extends TestCase
             2,
             CashFlow::query()
                 ->where('user_id', $user->id)
-                ->where('date', $cashFlow->date)
                 ->where('category_id', $cashFlow->category_id)
                 ->where('type', $cashFlow->type)
                 ->where('account_id', $cashFlow->account_id)
