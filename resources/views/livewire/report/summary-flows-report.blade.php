@@ -4,7 +4,7 @@
             <x-filters :count="$this->filtersCount">
                 <x-search-period></x-search-period>
             </x-filters>
-            <div id="list" class="min-h-[60vh] divide-y divide-gray-500">
+            <div id="list" class="min-h-[60vh]">
                 @foreach($items as $group)
                     <div class="p-2 space-y-2">
                         @if($group->group_type === 'Движения')

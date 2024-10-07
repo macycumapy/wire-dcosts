@@ -28,4 +28,12 @@ enum CashFlowType: string
             self::Outflow => 'negative',
         };
     }
+
+    public function textColorStyle(): string
+    {
+        return match ($this) {
+            self::Outflow => "text-{$this->color()}-400",
+            default => "text-{$this->color()}-600",
+        };
+    }
 }

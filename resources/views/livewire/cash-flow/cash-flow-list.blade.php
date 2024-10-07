@@ -103,7 +103,7 @@
                             <div class="my-auto">
                                 {{ $cashFlow->date->timezone($timezone)->isToday() ? 'Сегодня' : $cashFlow->date->timezone($timezone)->format('d.m.Y') }}
                             </div>
-                            <div class="my-auto text-{{ $cashFlow->type->color() }}-600 text-center sm:text-left">
+                            <div class="my-auto {{ $cashFlow->type->textColorStyle() }} text-center sm:text-left">
                                 {{ number_format($cashFlow->sum, 2, '.', ' ') }}
                             </div>
                             <div class="my-auto truncate">
