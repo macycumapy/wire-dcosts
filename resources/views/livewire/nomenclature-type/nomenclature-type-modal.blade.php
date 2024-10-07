@@ -11,12 +11,14 @@
             label="Добавить"
         ></x-button>
     @endif
-    @teleport('#footer')
-        <x-modal-card wire:model.live="showModal" :title="$id ? 'Тип номенклатуры' : 'Новый тип номенклатуры'">
-            @livewire('nomenclature-type.nomenclature-type-form', [
-                'name' => $name,
-                'id' => $id,
-            ], key(json_encode([$id, $name])))
-        </x-modal-card>
-    @endteleport
+    @if($showModal)
+        @teleport('#footer')
+            <x-modal-card wire:model.live="showModal" :title="$id ? 'Тип номенклатуры' : 'Новый тип номенклатуры'">
+                @livewire('nomenclature-type.nomenclature-type-form', [
+                    'name' => $name,
+                    'id' => $id,
+                ], key(json_encode([$id, $name])))
+            </x-modal-card>
+        @endteleport
+    @endif
 </div>
