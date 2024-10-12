@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire\CashFlow;
 
 use App\Builders\Data\CashFlowFilter;
+use App\Jobs\TestJob;
 use App\Livewire\Traits\WithFilters;
 use App\Models\CashFlow;
 use Illuminate\Support\Facades\Auth;
@@ -68,5 +69,10 @@ class CashFlowList extends Component
         return view('livewire.cash-flow.cash-flow-list', [
             'items' => $items,
         ]);
+    }
+
+    public function rabbit()
+    {
+        TestJob::dispatch()->onQueue('qqq');
     }
 }

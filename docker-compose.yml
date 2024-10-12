@@ -44,8 +44,7 @@ services:
             - postgres
             - postgres_test
             - redis
-            - metabase
-            - postgres_metabase
+            - rabbitmq
     postgres:
         image: postgres:14.0
         container_name: ${APP_NAME}_postgres
@@ -89,40 +88,18 @@ services:
             test: ["CMD", "redis-cli", "ping"]
             retries: 3
             timeout: 5s
-    metabase:
-        image: metabase/metabase:latest
+    rabbitmq:
+        image: rabbitmq:3.10.7-management
+        hostname: rabbitmq
         restart: always
-        ports:
-            - "3001:3000"
-        volumes:
-            - ./docker/metabase/metabase-data:/var/lib/metabase-data
         environment:
-            MB_DB_TYPE: postgres
-            MB_DB_DBNAME: ${METABASE_DB_NAME}
-            MB_DB_PORT: 5432
-            MB_DB_USER: ${DB_USERNAME}
-            MB_DB_PASS: ${DB_PASSWORD}
-            MB_DB_HOST: postgres_metabase
-        depends_on:
-            - postgres_metabase
-        links:
-            - postgres_metabase
-        networks:
-            - sail
-    postgres_metabase:
-        image: postgres:14.0
-        container_name: metabase_postgres
-        restart: unless-stopped
-        tty: true
-        ports:
-            - "${METABASE_DB_PORT:-5432}:5432"
-        environment:
-            POSTGRES_DB: ${METABASE_DB_NAME}
-            POSTGRES_USER: ${DB_USERNAME}
-            POSTGRES_PASSWORD: ${DB_PASSWORD}
-            PGDATA: /var/lib/postgresql/data/pgdata
+            - RABBITMQ_DEFAULT_USER=rmuser
+            - RABBITMQ_DEFAULT_PASS=rmpassword
         volumes:
-            - ./docker/databases/${METABASE_DB_NAME}:/var/lib/postgresql/data
+            - ./docker/rabbitmq:/var/lib/rabbitmq
+        ports:
+            - 15672:15672
+            - 5672:5672
         networks:
             - sail
 networks:

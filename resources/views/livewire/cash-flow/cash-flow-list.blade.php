@@ -51,6 +51,13 @@
                     <div class="hidden sm:block flex justify-end space-x-4">
                         <x-button
                             primary
+                            wire:click="rabbit"
+                            label="Rabbit"
+                            class="w-full sm:w-40"
+                        ></x-button>
+
+                        <x-button
+                            primary
                             wire:navigate
                             href="{{ route('inflows.create') }}"
                             icon="plus"
