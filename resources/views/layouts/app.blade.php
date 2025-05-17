@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html x-data lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-[100vh] {{ session('theme', 'dark') }}">
+<html x-data="{darkMode: JSON.parse(localStorage.getItem('dcostsDarkMode')) ?? true}"
+      x-init="$watch('$store.darkMode', value => darkMode = value)"
+      lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-[100vh] dark" :class="{dark: darkMode}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -1,16 +1,17 @@
 <div x-data="{
-    theme:@entangle('theme')
-}" x-init="
-    Alpine.store('theme', theme)
-    $watch('theme', (value) => Alpine.store('theme', value))
-" class="w-100 relative flex items-center cursor-pointer">
-    @if($isDark)
-        <x-icon name="sun" class="w-4 h-4 text-white absolute left-1 z-10" wire:click="$toggle('isDark')"></x-icon>
-    @endif
+    darkMode: JSON.parse(localStorage.getItem('dcostsDarkMode')) ?? true,
+    toggle() {this.darkMode = !this.darkMode}
+}" x-init="$watch('darkMode', (value) => {
+    Alpine.store('darkMode', value)
+    localStorage.setItem('dcostsDarkMode', value)
+})" class="w-100 relative flex items-center cursor-pointer">
+    <template x-if="darkMode">
+        <x-icon name="sun" class="w-4 h-4 text-white absolute left-1 z-10" @click="toggle()"></x-icon>
+    </template>
 
-    <x-toggle wire:model="isDark" name="toggle" xl wire:click="$toggle('isDark')"/>
+    <x-toggle x-model="darkMode" name="toggle" xl />
 
-    @unless($isDark)
-        <x-icon name="moon" class="w-4 h-4 text-gray-400 absolute left-6 z-10" wire:click="$toggle('isDark')"></x-icon>
-    @endunless
+    <template x-if="!darkMode">
+        <x-icon name="moon" class="w-4 h-4 text-gray-400 absolute left-6 z-10" @click="toggle()"></x-icon>
+    </template>
 </div>
