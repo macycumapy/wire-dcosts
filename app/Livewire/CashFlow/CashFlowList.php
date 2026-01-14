@@ -43,9 +43,9 @@ class CashFlowList extends Component
     protected function queryString(): array
     {
         return [
-            'searchNomenclature' => ['except' => '', 'as' => 'nomenclature'],
-            'searchDateFrom' => ['except' => '', 'as' => 'date_from'],
-            'searchDateTo' => ['except' => '', 'as' => 'date_to'],
+            'searchNomenclature' => ['as' => 'nomenclature'],
+            'searchDateFrom' => ['as' => 'date_from'],
+            'searchDateTo' => ['as' => 'date_to'],
         ];
     }
 

@@ -35,7 +35,7 @@ trait WithFilters
     {
         if (!empty(request()->query())) {
             collect($this->queryString())
-                ->filter(fn ($k, $v) => $this->$v === 'null')
+                ->filter(fn ($k, $v) => in_array($this->$v, ['null', ''], true))
                 ->each(fn ($k, $v) => $this->$v = null);
         }
     }
