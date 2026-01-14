@@ -24,29 +24,34 @@
             name="form.wrapper.header"
         >
             @if ($label)
-                <x-label
+                <x-dynamic-component
+                    :component="WireUi::component('label')"
                     :attributes="WireUi::extractAttributes($label)"
                     :for="$id"
-                >{{ $label }}</x-label>
+                >
+                    {{ $label }}
+                </x-dynamic-component>
             @endif
 
             @if ($corner)
-                <x-label
+                <x-dynamic-component
+                    :component="WireUi::component('label')"
                     :attributes="WireUi::extractAttributes($corner)"
                     :for="$id"
-                >{{ $corner }}</x-label>
+                >
+                    {{ $corner }}
+                </x-dynamic-component>
             @endif
         </div>
     @endif
 
     <label
         {{ $attributes
-            ->whereDoesntStartWith(['x-model', 'wire:model'])
-            ->except(['class', 'wire:key', 'form-wrapper', 'x-data', 'x-props'])
+            ->whereStartsWith(['x-ref', 'x-on:', 'x-bind:', 'tabindex'])
             ->merge(['for' => $id])
             ->class([
-                Arr::get($roundedClasses, 'input', ''),
-                Arr::get($colorClasses, 'input', ''),
+                data_get($roundedClasses, 'input', ''),
+                data_get($colorClasses, 'input', ''),
                 $shadowClasses => !$shadowless,
 
                 'bg-background-white dark:bg-background-dark',
@@ -64,16 +69,16 @@
                 'invalidated:bg-negative-50 invalidated:ring-negative-500 invalidated:dark:ring-negative-500',
             ])
         }}
-        name="form.wrapper.container"
+        data-name="form.wrapper.container"
     >
         @if (!isset($prepend) && ($prefix || $icon))
             <div
                 name="form.wrapper.container.prefix"
                 {{ WireUi::extractAttributes($prefix)->class([
                     'text-gray-400 pointer-events-none select-none flex items-center whitespace-nowrap',
-                    'invalidated:text-negative-500 invalidated:input-focus:text-negative-500',
-                    Arr::get($roundedClasses, 'prepend', ''),
-                    Arr::get($colorClasses, 'prepend', ''),
+                    'invalidated:text-negative-500 input-focus:invalidated:text-negative-500',
+                    data_get($roundedClasses, 'prepend', ''),
+                    data_get($colorClasses, 'prepend', ''),
                 ]) }}
             >
                 @if ($icon)
@@ -104,9 +109,9 @@
                 name="form.wrapper.container.suffix"
                 {{ WireUi::extractAttributes($suffix)->class([
                     'text-gray-500 pointer-events-none select-none flex items-center whitespace-nowrap',
-                    'invalidated:text-negative-500 invalidated:input-focus:text-negative-500',
-                    Arr::get($roundedClasses, 'append', ''),
-                    Arr::get($colorClasses, 'append', ''),
+                    'invalidated:text-negative-500 input-focus:invalidated:text-negative-500',
+                    data_get($roundedClasses, 'append', ''),
+                    data_get($colorClasses, 'append', ''),
                 ]) }}
             >
                 @if ($rightIcon)
@@ -139,17 +144,23 @@
     </label>
 
     @if ($description && !$invalidated)
-        <x-wireui-wrapper::form.description
-            class="mt-2"
+        <x-dynamic-component
+            :component="WireUi::component('description')"
             :for="$id"
+            class="mt-2"
             name="form.wrapper.description"
         >
             {{ $description }}
-        </x-wireui-wrapper::form.description>
+        </x-dynamic-component>
     @elseif (!$errorless && $invalidated)
-        <label :for="$id" class="text-sm text-negative-500 mt-2" >
-            {{ $errors->first($name) }}
-        </label>
+        <x-dynamic-component
+            :component="WireUi::component('error')"
+            :for="$id"
+            class="mt-2"
+            :name="$name"
+        >
+            {{ $error }}
+        </x-dynamic-component>
     @endif
 
     @isset($after)
