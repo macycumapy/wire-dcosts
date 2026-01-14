@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Data\SpatieDataSynth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
-use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,7 +28,5 @@ class AppServiceProvider extends ServiceProvider
         }
 
         Model::shouldBeStrict(!$this->app->isProduction());
-
-        Livewire::propertySynthesizer(SpatieDataSynth::class);
     }
 }

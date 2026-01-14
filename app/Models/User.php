@@ -63,15 +63,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array<int, string>
-     */
-    protected $appends = [
-        'profile_photo_url',
-    ];
-
     public function cashFlows(): HasMany
     {
         return $this->hasMany(CashFlow::class);
