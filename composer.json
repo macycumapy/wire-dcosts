@@ -8,7 +8,7 @@
         "php": "^8.2",
         "doctrine/dbal": "^3.6",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^12.0",
         "laravel/horizon": "^5.14",
         "laravel/jetstream": "^5.0",
         "laravel/pulse": "^1.0@beta",
@@ -19,7 +19,7 @@
         "shuchkin/simplexlsx": "^1.0",
         "silviolleite/laravelpwa": "^2.0",
         "spatie/laravel-data": "^4.18",
-        "spatie/laravel-query-builder": "^5.2",
+        "spatie/laravel-query-builder": "^6.4",
         "stechstudio/laravel-jwt": "^2.1",
         "wireui/wireui": "^2.0"
     },
@@ -30,8 +30,7 @@
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^8.1",
-        "nunomaduro/larastan": "^2.6",
-        "phpunit/phpunit": "^10.0",
+        "phpunit/phpunit": "^11.0",
         "ryoluo/sail-ssl": "^1.3",
         "spatie/laravel-ignition": "^2.0"
     },
