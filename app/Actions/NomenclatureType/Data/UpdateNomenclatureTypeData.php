@@ -6,11 +6,15 @@ namespace App\Actions\NomenclatureType\Data;
 
 use App\Models\NomenclatureType;
 use Illuminate\Validation\Rule;
+use Livewire\Wireable;
+use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 
-class UpdateNomenclatureTypeData extends Data
+class UpdateNomenclatureTypeData extends Data implements Wireable
 {
+    use WireableData;
+
     public NomenclatureType $nomenclatureType;
     public string $name;
 

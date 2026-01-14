@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\WireUI;
 
 use Illuminate\Contracts\View\View;
-use WireUi\Components\Label\Index;
+use WireUi\Components\Label\Base;
 
-class Label extends Index
+class Label extends Base
 {
     public function blade(): View
     {

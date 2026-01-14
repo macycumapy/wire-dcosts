@@ -30,7 +30,7 @@ class LoginFormTest extends TestCase
         $createUserData = $data();
 
         Livewire::test(RegisterForm::class)
-            ->set('createUserData', $createUserData)
+            ->set('createUserData', $createUserData->toArray())
             ->call('register')
             ->assertHasNoErrors();
 

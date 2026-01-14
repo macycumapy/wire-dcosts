@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\View;
 
 class TextField extends \WireUi\Components\Wrapper\TextField
 {
-    public function render(): View
+    public function blade(): View
     {
         return view('vendor.wireui.text-field');
     }

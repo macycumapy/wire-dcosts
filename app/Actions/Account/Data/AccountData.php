@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace App\Actions\Account\Data;
 
 use Illuminate\Validation\Rule;
+use Livewire\Wireable;
+use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 
-class AccountData extends Data
+class AccountData extends Data implements Wireable
 {
+    use WireableData;
+
     public int $user_id;
     public ?string $name = null;
     public ?string $comment = null;

@@ -6,11 +6,15 @@ namespace App\Actions\Partner\Data;
 
 use App\Models\Partner;
 use Illuminate\Validation\Rule;
+use Livewire\Wireable;
+use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 
-class UpdatePartnerData extends Data
+class UpdatePartnerData extends Data implements Wireable
 {
+    use WireableData;
+
     public Partner $partner;
     public string $name;
 

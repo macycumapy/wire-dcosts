@@ -7,6 +7,7 @@ namespace App\Data\Casts;
 use Carbon\Carbon;
 use DateTimeInterface;
 use Spatie\LaravelData\Casts\Cast;
+use Spatie\LaravelData\Support\Creation\CreationContext;
 use Spatie\LaravelData\Support\DataProperty;
 use Throwable;
 
@@ -20,7 +21,7 @@ class CarbonCast implements Cast
     ) {
     }
 
-    public function cast(DataProperty $property, mixed $value, array $context): ?DateTimeInterface
+    public function cast(DataProperty $property, mixed $value, array $properties, CreationContext $context): ?DateTimeInterface
     {
         try {
             return Carbon::make($value);

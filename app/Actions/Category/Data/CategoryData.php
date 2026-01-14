@@ -6,11 +6,15 @@ namespace App\Actions\Category\Data;
 
 use App\Enums\CashFlowType;
 use Illuminate\Validation\Rule;
+use Livewire\Wireable;
+use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 
-class CategoryData extends Data
+class CategoryData extends Data implements Wireable
 {
+    use WireableData;
+
     public int $user_id;
     public CashFlowType|string|null $type = null;
     public ?string $name = null;

@@ -1,7 +1,7 @@
 <x-dynamic-component
     :component="WireUi::component('text-field')"
-    :data="$wrapperData"
-    :attributes="$attrs->only(['wire:key', 'class'])"
+    :config="$config"
+    :attributes="$wrapper"
     x-data="wireui_inputs_currency"
     :x-props="WireUi::toJs([
         'emitFormatted' => $emitFormatted,
@@ -14,10 +14,11 @@
 >
     @include('wireui-wrapper::components.slots')
 
-    <div class="hidden">
-        <x-wireui-wrapper::element
+    <div class="hidden" hidden>
+        <x-wireui-wrapper::hidden
             x-bind:value="value"
             x-ref="rawInput"
+            :id="$id"
             :name="$name"
             :value="$value"
         />
@@ -27,6 +28,6 @@
         x-model="input"
         x-ref="input"
         x-on:blur="onBlur"
-        :attributes="$attrs->whereStartsWith(['placeholder', 'dusk', 'cy', 'readonly', 'disabled', 'inputmode'])"
+        :attributes="$input"
     />
 </x-dynamic-component>

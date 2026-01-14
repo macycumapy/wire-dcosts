@@ -8,14 +8,18 @@ use App\Actions\CashOutflowItem\Data\OutflowItemData;
 use App\Models\CashFlow;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
+use Livewire\Wireable;
 use Spatie\LaravelData\Attributes\Computed;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
+use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 
-class UpdateCashOutflowData extends Data
+class UpdateCashOutflowData extends Data implements Wireable
 {
+    use WireableData;
+
     #[Computed]
     public readonly float $sum;
 

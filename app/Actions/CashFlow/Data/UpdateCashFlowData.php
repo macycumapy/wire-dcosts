@@ -7,11 +7,15 @@ namespace App\Actions\CashFlow\Data;
 use App\Models\CashFlow;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
+use Livewire\Wireable;
+use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 
-class UpdateCashFlowData extends Data
+class UpdateCashFlowData extends Data implements Wireable
 {
+    use WireableData;
+
     public CashFlow $cashFlow;
     public Carbon|string $date;
     public float $sum;

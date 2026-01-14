@@ -18,7 +18,7 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
-                    <x-dropdown align="left" width="48" height="7xl">
+                    <x-dropdown align="left" width="5xl" height="8xl">
                         <x-slot name="trigger">
                             <span class="inline-flex rounded-md">
                                 <x-button primary outline>

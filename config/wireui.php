@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use WireUi\Enum\Packs;
 use WireUi\{Components, WireUiConfig as Config};
+use WireUi\Enum\Packs;
 
 return [
 
