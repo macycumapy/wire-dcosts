@@ -12,4 +12,11 @@ class Currency extends \WireUi\Components\TextField\Currency
     {
         return view('vendor.wireui.currency');
     }
+
+    protected function include(): array
+    {
+        return array_merge(parent::include(), [
+            'inputmode',
+        ]);
+    }
 }
