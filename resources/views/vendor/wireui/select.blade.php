@@ -21,9 +21,6 @@
         'wireModel'         => WireUi::wireModel(isset($__livewire) ? $this : null, $attributes),
         'alpineModel'       => WireUi::alpineModel($attributes),
     ])"
-    x-init="
-        $watch('search', (value) => Alpine.store('selectSearch', value))
-    "
     x-bind:class="{
         'ring-2 ring-primary-600': positionable.isOpen(),
     }"
@@ -177,6 +174,9 @@
                 class="px-2 my-2"
                 wire:key="search.options.{{ $name }}"
                 x-show="asyncData.api || (config.searchable && options.length >= @js($minItemsForSearch))"
+                x-init="
+                    $watch('search', (value) => Alpine.store('selectSearch', value))
+                "
             >
                 <x-dynamic-component
                     :component="WireUi::component('input')"

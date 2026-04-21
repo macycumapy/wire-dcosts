@@ -1,4 +1,4 @@
-<x-dropdown width="6xl" position="bottom">
+<x-dropdown width="6xl" class="sm:w-96" position="bottom">
     <x-slot name="trigger">
         <div class="flex text-sm md:text-base">
             <div class="max-w-[150px] md:max-w-auto truncate">{{ $mainAccount->name }}</div>:&nbsp;

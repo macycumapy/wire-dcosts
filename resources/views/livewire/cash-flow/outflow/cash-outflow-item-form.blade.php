@@ -35,7 +35,7 @@
             name="cost"
             label="Стоимость"
             suffix="руб."
-            thousands=""
+            thousands=" "
             inputmode="numeric"
             class="col-span-2"
         ></x-currency>
