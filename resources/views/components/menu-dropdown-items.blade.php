@@ -2,7 +2,7 @@
 'reports' => [],
 ])
 
-<div class="p-2">
+<div class="p-2" @click.stop>
     @livewire('widget.theme-widget')
 </div>
 
