@@ -15,7 +15,12 @@
                     @forelse($items as $key => $account)
                         <div wire:key="row_{{ $account->id }}">
                             <div class="p-4 grid grid-cols-3 sm:grid-cols-4 gap-4">
-                                <div class="my-auto truncate">{{ $account->name }}</div>
+                                <div class="my-auto truncate flex gap-2 items-center">
+                                    @if($account->hidden)
+                                        <x-icon name="eye-slash" class="w-4 h-4"/>
+                                    @endif
+                                    {{ $account->name }}
+                                </div>
                                 <div class="my-auto text-sm">{{ number_format($account->balance, 2, '.', ' ') }}</div>
                                 <div class="my-auto truncate">{{ $account->comment }}</div>
                                 <div class="my-auto col-span-3 sm:col-span-1 flex justify-end">

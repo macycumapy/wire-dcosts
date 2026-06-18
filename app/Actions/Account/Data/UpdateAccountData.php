@@ -18,6 +18,7 @@ class UpdateAccountData extends Data implements Wireable
     public ?int $user_id = null;
     public ?string $name = null;
     public ?string $comment = null;
+    public ?bool $hidden = null;
 
     public static function rules(ValidationContext $context): array
     {
@@ -29,6 +30,7 @@ class UpdateAccountData extends Data implements Wireable
                 ->ignore(data_get($context->payload, 'id'))
             ],
             'comment' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'hidden' => ['boolean'],
         ];
     }
 }

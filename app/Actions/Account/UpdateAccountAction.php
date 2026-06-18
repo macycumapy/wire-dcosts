@@ -13,6 +13,7 @@ class UpdateAccountAction
     {
         $account->name = $data->name;
         $account->comment = $data->comment;
+        $account->hidden = $data->hidden;
 
         return $account->save();
     }

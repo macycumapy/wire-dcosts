@@ -17,7 +17,7 @@ class AccountList extends Component
     public function render(): View
     {
         return view('livewire.account.account-list', [
-            'items' => Account::query()->orderBy('id')->get(),
+            'items' => Account::getList(),
         ]);
     }
 }

@@ -7,6 +7,7 @@ namespace App\Builders;
 use App\Builders\Traits\SearchByName;
 use App\Models\Account;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 /**
  * @method AccountBuilder searchByName(string $name)
@@ -15,4 +16,12 @@ use Illuminate\Database\Eloquent\Builder;
 class AccountBuilder extends Builder
 {
     use SearchByName;
+
+    public function getList(): Collection
+    {
+        return $this
+            ->orderBy('hidden')
+            ->orderBy('id')
+            ->get();
+    }
 }

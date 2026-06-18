@@ -11,6 +11,14 @@
         label="Комментарий"
     ></x-textarea>
 
+    @if($account)
+        <x-toggle
+            wire:model="data.hidden"
+            name="hidden"
+            label="Скрытый"
+        />
+    @endif
+
     <div class="flex justify-end">
         @if($account)
             <x-button
