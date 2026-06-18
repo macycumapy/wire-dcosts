@@ -10,11 +10,11 @@
         <x-dropdown.header class="!pt-0 !px-2">
             <div class="flex justify-between p-1 gap-2">
                 <div>Всего</div>
-                <div>{{number_format($totalBalance, 2, '.', ' ')}}</div>
+                <div>{{number_format($this->accounts->sum('balance'), 2, '.', ' ')}}</div>
             </div>
         </x-dropdown.header>
 
-        @foreach ($accounts as $account)
+        @foreach ($this->accounts as $account)
             <x-dropdown.header class="!pt-0 !px-2">
                 <div class="flex justify-between p-1 gap-2">
                     <div class="max-w-[200px] md:max-w-auto truncate">{{ $account->name }}</div>

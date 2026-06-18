@@ -24,4 +24,12 @@ class AccountBuilder extends Builder
             ->orderBy('id')
             ->get();
     }
+
+    public function getBalanceList(): Collection
+    {
+        return $this
+            ->where('hidden', false)
+            ->orderByDesc('balance')
+            ->get();
+    }
 }

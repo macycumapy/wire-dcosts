@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace App\Livewire\Widget;
 
+use App\Livewire\Account\AccountForm;
 use App\Livewire\AccountCashTransfer\AccountCashTransferDeleteButton;
 use App\Livewire\AccountCashTransfer\AccountCashTransferForm;
 use App\Livewire\CashFlow\CashFlowDeleteButton;
 use App\Livewire\CashFlow\Inflow\CashInflowCard;
 use App\Livewire\CashFlow\Outflow\CashOutflowCard;
 use App\Models\Account;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class BalancesWidget extends Component
@@ -24,6 +27,7 @@ class BalancesWidget extends Component
         CashFlowDeleteButton::CASH_FLOW_DELETED_EVENT => '$refresh',
         AccountCashTransferDeleteButton::ACCOUNT_CASH_TRANSFER_DELETED => '$refresh',
         AccountCashTransferForm::ACCOUNT_CASH_TRANSFER_SAVED => '$refresh',
+        AccountForm::ACCOUNT_SAVED_EVENT => '$refresh',
     ];
 
     public function mount(): void
@@ -31,13 +35,14 @@ class BalancesWidget extends Component
         $this->mainAccount = Auth::user()->mainAccount;
     }
 
+    #[Computed]
+    public function accounts(): Collection
+    {
+        return Account::getBalanceList();
+    }
+
     public function render(): View
     {
-        $accounts = Account::query()->orderByDesc('balance')->get();
-
-        return view('livewire.widget.balances-widget', [
-            'accounts' => $accounts,
-            'totalBalance' => $accounts->sum('balance'),
-        ]);
+        return view('livewire.widget.balances-widget');
     }
 }
