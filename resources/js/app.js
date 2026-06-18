@@ -1,6 +1,7 @@
 import './bootstrap';
 // import './back-off'
 import './wire-navigate'
+import './theme-init'
 
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 import focus from '@alpinejs/focus';
