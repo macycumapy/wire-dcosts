@@ -9,6 +9,15 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <script>
+            (() => {
+                const darkMode = JSON.parse(localStorage.getItem('dcostsDarkMode')) ?? true
+
+                document.documentElement.classList.toggle('dark', darkMode)
+                document.documentElement.style.colorScheme = darkMode ? 'dark' : 'light'
+            })()
+        </script>
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
