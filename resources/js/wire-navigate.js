@@ -1,4 +1,4 @@
-import {applyDarkMode} from "./theme-init"
+import {applyDarkMode} from "./theme"
 
 window.addEventListener('dcosts-dark-mode-updated', (event) => {
     applyDarkMode(event.detail)
