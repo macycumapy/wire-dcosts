@@ -1,4 +1,10 @@
-const getDarkMode = () => JSON.parse(localStorage.getItem('dcostsDarkMode')) ?? true
+const getDarkMode = () => {
+    try {
+        return JSON.parse(localStorage.getItem('dcostsDarkMode')) ?? true
+    } catch {
+        return true
+    }
+}
 
 const applyDarkMode = (value = getDarkMode()) => {
     document.documentElement.classList.toggle('dark', value)

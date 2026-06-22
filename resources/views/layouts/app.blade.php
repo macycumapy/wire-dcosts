@@ -12,6 +12,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
+        <script src="{{ Vite::asset('resources/js/theme-init.js') }}"></script>
         @wireUiScripts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireScriptConfig
