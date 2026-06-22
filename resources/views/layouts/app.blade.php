@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html x-data="{darkMode: JSON.parse(localStorage.getItem('dcostsDarkMode')) ?? true}"
-      x-init="window.addEventListener('dcosts-dark-mode-updated', event => darkMode = event.detail)"
-      lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-[100vh]" :class="{dark: darkMode}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-[100vh]">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
