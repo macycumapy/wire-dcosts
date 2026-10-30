@@ -23,7 +23,6 @@ services:
             - sail
         depends_on:
             - postgres
-            - postgres_test
             - redis
     nginx:
         image: nginx:stable-alpine
