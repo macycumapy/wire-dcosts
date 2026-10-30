@@ -1,11 +1,18 @@
-name: Tests
+name: CI
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
 concurrency:
-  group: main-ci-deploy
-  cancel-in-progress: false
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test-build:
@@ -13,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres
+        image: postgres:14.0
         env:
           POSTGRES_DB: postgres
           POSTGRES_USER: postgres
@@ -26,20 +33,20 @@ jobs:
         ports:
           - 55432:5432
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Configure PHP 8.2
-        uses: shivammathur/setup-php@master
+      - name: Configure PHP 8.5
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
-          extensions: mbstring, dom, fileinfo, mysql, libxml, xml, xmlwriter, dom, tokenizer, filter, json, phar, pcre, openssl, pdo, intl, curl
+          php-version: '8.5'
+          extensions: mbstring, dom, fileinfo, libxml, xml, xmlwriter, tokenizer, filter, json, phar, pcre, openssl, pdo, pdo_pgsql, pgsql, intl, curl
 
       - name: Get composer cache directory
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
 
       - name: Cache composer dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -55,7 +62,7 @@ jobs:
         run: php artisan key:generate
 
       - name: Directory permissions
-        run: chmod -R 777 storage bootstrap/cache
+        run: chmod -R u+rwX storage bootstrap/cache
 
       - name: Clear Config
         run: php artisan config:clear
@@ -76,6 +83,7 @@ jobs:
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         env:
           DB_CONNECTION: pgsql
+          DB_HOST: 127.0.0.1
           DB_DATABASE: postgres
           DB_USERNAME: postgres
           DB_PASSWORD: postgres
@@ -88,35 +96,3 @@ jobs:
           path: public/build
           if-no-files-found: error
           retention-days: 7
-
-  deploy:
-    needs: test-build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download frontend build
-        uses: actions/download-artifact@v4
-        with:
-          name: frontend-build
-          path: public/build
-
-      - name: Copy frontend build to server
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: public/build
-          target: ${{ secrets.PROJECT_FOLDER }}
-
-      - name: Run command on remote server
-        uses: D3rHase/ssh-command-action@v0.2.2
-        with:
-          host: ${{secrets.SSH_HOST}}
-          user: ${{secrets.SSH_USER}}
-          private_key: ${{secrets.SSH_PRIVATE_KEY}}
-          command: |
-            set -eu
-            cd "${{ secrets.PROJECT_FOLDER }}"
-            git fetch origin main
-            git merge --ff-only "${{ github.sha }}"
-            bash ./deploy.sh

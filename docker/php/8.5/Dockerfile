@@ -4,7 +4,6 @@ LABEL maintainer="Taylor Otwell"
 
 ARG WWWGROUP
 ARG NODE_VERSION=24
-ARG MYSQL_CLIENT="mysql-client"
 ARG POSTGRES_VERSION=18
 
 WORKDIR /var/www/html
@@ -38,7 +37,6 @@ RUN apt-get update && apt-get upgrade -y \
         php8.5-curl \
         php8.5-mongodb \
         php8.5-imap \
-        php8.5-mysql \
         php8.5-mbstring \
         php8.5-xml \
         php8.5-zip \
@@ -70,7 +68,6 @@ RUN apt-get update && apt-get upgrade -y \
     && echo "deb [signed-by=/etc/apt/keyrings/pgdg.gpg] http://apt.postgresql.org/pub/repos/apt noble-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
     && apt-get update \
     && apt-get install -y yarn \
-    && apt-get install -y $MYSQL_CLIENT \
     && apt-get install -y postgresql-client-$POSTGRES_VERSION \
     && apt-get -y autoremove \
     && apt-get clean \
